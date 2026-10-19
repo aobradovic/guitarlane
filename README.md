@@ -24,8 +24,12 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
    * Step-by-step 90-minute structural bonding & solderless assembly manual
 4. **[`docs/04_USPTO_NAME_CLEARANCE_AND_DOMAINS.md`](docs/04_USPTO_NAME_CLEARANCE_AND_DOMAINS.md)** — Complete **USPTO Nice Class 015 (Musical Instruments)** & **Class 009** trademark clearance report + live Verisign RDAP `.com` domain availability (`UNISPAR`, `MONOSPAR`, `ZEROSPINE`, `SPINEBLADE`, `RACHIS`, `ESTOC`, `VEXRA`, `KRYPTAR`, `HEXASPINE`).
 5. **[`docs/05_ONBOARD_NAM_SCREAMER_WIRELESS_SPEC.md`](docs/05_ONBOARD_NAM_SCREAMER_WIRELESS_SPEC.md)** — Complete engineering specification for embedding an **Analog SMD Green Screamer + Sidechain-Keyed NS-1/Zuul Noise Suppressor + Neural Amp Modeler (`NAM`) & Cab IR Player + `1.8 ms` 5.8 GHz Wireless Transmitter + Wi-Fi WebUI Control + Dual-`18650` (`7,000 mAh`) Battery Cradle + 3-Mode Zero-Battery Passive/Bus-Powered Fail-Safe Relay** directly inside the `82 mm × 38 mm` CNC spine.
-6. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D PBR Model Viewer** with sliders to explode the Method 2 CNC layers (including the `2x 18650` battery cradle, `Green Screamer + NS-1` PCB, `NAM` module, and magnetic rear hatch), detach the `3A`/`3B` wings, and toggle X-Ray internal lattice view.
-7. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
+6. **[`docs/06_MODULAR_CUSTOMIZATION_PICKUPS_HARDWARE_AND_UPGRADES.md`](docs/06_MODULAR_CUSTOMIZATION_PICKUPS_HARDWARE_AND_UPGRADES.md)** — Complete **Custom Shop & Modular Hot-Swap Upgrade Architecture**:
+   * **Universal 6-Pin Hot-Swap Pickup Bay (`71 × 39 mm`) + Adapter Bezels:** Accepts active **EMG (`81`/`85`/`57`)**, **Fishman Fluence Modern**, and passive **Bare Knuckle (`Ragnarok`/`Aftermath`/`Juggernaut`)**, **Lundgren (`M6`)**, **Seymour Duncan**, and **DiMarzio** pickups with automatic `Pin 6` active (`9V`/`18V` at `25 kΩ`) vs. zero-battery passive (`0.0V` at `500 kΩ`) switching.
+   * **Swappable M.2-Style Analog Overdrive & Gate Daughterboard Cartridges:** Swap between **Card 01 (`Green Screamer Pro + Mod Matrix`)**, **Card 02 (`Horizon Precision Drive`)**, **Card 03 (`Fortin 33 / Grind + Zuul Gate`)**, **Card 04 (`HM-2W Swedish Chainsaw`)**, and **Card 05 (`18V Klon Centaur Boost`)**—plus live Wi-Fi control over clipping diodes (`1S1588` silicon, asymmetric, LED, clean boost) and input tight-cut capacitors.
+   * **Modular Hardware & Wing Upgrade Tiers:** Interchangeable Fixed Hardtail vs. Floating Tremolo bridges and `3A`/`3B` wings in **7075 Stealth Black**, **Solid/Forged Carbon Fiber**, **Bead-Blasted Grade-5 Titanium**, **24K Gold PVD**, and **Crimson Anodized**.
+7. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D Custom Shop Configurator & Exploded Model Viewer** with live buttons to swap pickups (`Bare Knuckle`, `EMG 81/57`, `Fishman`, `Lundgren`), swap analog drive cards (`Green Screamer`, `Precision Drive`, `Fortin 33`, `HM-2W`), and preview hardware finishes (`Titanium`, `DLC Black`, `24K Gold`, `Crimson`).
+8. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
 
 ---
 
@@ -33,18 +37,19 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
 
 | Parameter | Specification |
 | :--- | :--- |
-| **Scale Length & Frets** | `25.5"` (`647.7 mm`), **24+1 Zero-Fret** (`Jescar FW57110-S` Stainless Steel Jumbo on `6.0 mm` `Richlite Black Diamond` w/ `1.5 mm` rolled edges) |
+| **Scale Length & Frets** | `25.5"` (`647.7 mm`), **24+1 Zero-Fret** (`Jescar FW57110-S` Stainless Steel Jumbo on `6.0 mm` `Richlite Black Diamond` w/ `1.5 mm` rolled edges; optional Ebony / Roasted Maple / EVO Gold frets) |
 | **Total Length, Width & Depth** | **`721 mm` (`28.38"`)** total length \| **`43 mm`** (Nut) $\rightarrow$ **`57 mm`** (24th Fret) $\rightarrow$ **`82 mm` (`3.23"`)** max bare spine width (`232 mm / 9.1"` w/ wings) \| **`38.0 mm` (`1.50"`)** lower spine thickness |
 | **Neck Profile & Thermal Isolation** | `18.5 mm` (1st fret) $\rightarrow$ `20.0 mm` (12th fret) Asymmetric C/D profile; internal 7075 CNC lattice + 2x `4×10 mm` carbon spars + dual-action truss rod encapsulated inside a **`2.2 mm` warm-touch Carbon/Cerakote shell** |
 | **Edge Contour** | Smooth **`R6.0–R8.0 mm` continuous bullnose roundovers** + **`35°` forearm comfort bevel** (zero sharp/pointy corners) |
-| **Bridge & Tuner Protection** | **Hipshot `4HV060B`** 6-String Headless Floating Tremolo + **LowPro CNC Headpiece**, shielded at the tail by a **`82 mm` CNC Grade-5 Titanium Rear U-Guard** |
-| **Pickup, Onboard Rig & Zero-Battery Fail-Safe** | High-gain **Passive Ceramic Soapbar Humbucker** (`Lundgren M6` / `Ragnarok` / `Black Winter`) + **Omron `G6K-2F-Y` `0.0V` Normally-Closed True-Bypass Relay** (plays **100% passively with zero batteries**), plus onboard **Analog Green Screamer + Sidechain-Keyed NS-1 Gate + `NAM` Amp/Cab IR Engine + `5.8 GHz` ULL Wireless + Wi-Fi 6** powered by **2x `18650` (`7,000 mAh`, `14–22 hrs`)**, **USB-C bus power**, or **`1/4"` TRS phantom power** |
-| **Detachable Ergonomics** | **`3A` Teardrop Upper Horn** (strap lock at 12th-fret balance point) + **`3B` Curved C-Rail Leg Rest** (with `2.0 mm` Santoprene warm rubber grip strip), locked via **2x M6 red anodized quarter-turn captive pins** |
+| **Bridge & Tuner Protection** | **Hipshot `4HV060B` Floating Tremolo** or **`41100B` Fixed Hardtail** + **LowPro CNC Headpiece**, shielded at the tail by a **`82 mm` CNC Grade-5 Titanium Rear U-Guard** |
+| **Universal Hot-Swap Pickup Bay** | `71 × 39 mm` cavity + 6-pin gold quick-connect sled + CNC adapter bezels supporting **Active EMG (`81`/`57`)**, **Fishman Fluence**, **Bare Knuckle (`Ragnarok`/`Aftermath`)**, **Lundgren `M6`**, & **Seymour Duncan** with auto `9V`/`18V` active or **`0.0V` zero-battery passive** switching |
+| **Modular Analog Drive, NAM & Wireless** | Swappable analog overdrive daughterboard slot (**`Green Screamer Pro`**, **`Precision Drive`**, **`Fortin 33`**, **`HM-2W`**) + **Keyed `NS-1` / `Zuul` Noise Suppressor** + **`NAM` Amp/Cab IR Engine** + **`5.8 GHz` ULL Wireless** powered by **2x `18650` (`7,000 mAh`)**, **USB-C**, or **TRS** |
+| **Detachable Ergonomics** | **`3A` Teardrop Upper Horn** (strap lock at 12th-fret balance point) + **`3B` Curved C-Rail Leg Rest** (available in `7075` Aluminum, Forged Carbon, or Grade-5 Titanium), locked via **2x M6 red anodized quarter-turn captive pins** |
 | **1-Off Prototype Build Cost** | **`$1,137`** (passive/standard) / **`$1,276`** (with full onboard `NAM` + `Screamer` + `NS-1` + `Wireless` + `2x 18650` kit) \| **`$546`** at Qty 50 |
 
 ---
 
-## 🖼️ Complete Visual Gallery (All 46 Photos, Renderings & Blueprints)
+## 🖼️ Complete Visual Gallery (All 47 Photos, Renderings & Blueprints)
 
 ### Section 1: Real-World DSLR Photos & Smooth Rounded / Beveled Edge Studies (`images/01_dslr_and_rounded_edges/`)
 
@@ -60,12 +65,15 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
 
 ---
 
-### Section 2: 1:1 Millimeter CNC Blueprints, Onboard Battery/NAM/Screamer Cutaway & Exploded Stacks (`images/02_cnc_specs_and_blueprints/`)
+### Section 2: 1:1 Millimeter CNC Blueprints, Modular Pickups/Drive Cards & Cutaways (`images/02_cnc_specs_and_blueprints/`)
 
 #### 01. Master 4-View 1:1 Millimeter CNC Engineering Blueprint (With Dual-18650, Screamer, NS-1 Gate, NAM & Zero-Battery Relay)
 ![Master 1:1 CNC Blueprint](images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png)
 
-#### 02. Underside Dual-`18650` Battery Cradle + `NAM` / `Green Screamer` / `NS-1 Gate` Cutaway & Side Controls Macro
+#### 02. Modular Customization Ecosystem — Hot-Swap Pickups (`EMG`/`BKP`/`Fishman`), Swappable Analog Drive Cards & Hardware Upgrades
+![Modular Ecosystem Showcase](images/02_cnc_specs_and_blueprints/08_modular_custom_pickups_drive_cards_and_hardware_upgrades.jpg)
+
+#### 03. Underside Dual-`18650` Battery Cradle + `NAM` / `Green Screamer` / `NS-1 Gate` Cutaway & Side Controls Macro
 ![Onboard Battery NAM Screamer Cutaway](images/02_cnc_specs_and_blueprints/07_onboard_battery_nam_screamer_cutaway_and_controls.jpg)
 
 | 03. Photorealistic CNC Top Assembled & Internal Lattice Cutaway | 04. Narrow-Spine CNC Exploded Stack & 12th-Fret Cross-Section (`50 × 20 mm`) |

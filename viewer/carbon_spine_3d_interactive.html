@@ -66,13 +66,40 @@
     <button onclick="setCam('rear')">Rear 18650 & NAM Bay</button>
   </div>
 
+  <div class="ctrl-group" style="margin-top:12px; padding-top:10px; border-top:1px solid #1e293b;">
+    <label><span>Hot-Swap Pickup Module</span><span id="puLabel" style="color:#38bdf8">BKP Ragnarok</span></label>
+    <div class="btn-row" style="margin-top:4px;">
+      <button id="puBkp" class="active" onclick="setPickup('bkp')">Bare Knuckle (0V)</button>
+      <button id="puEmg" onclick="setPickup('emg')">EMG 81/57Chrome</button>
+      <button id="puFish" onclick="setPickup('fishman')">Fishman Modern</button>
+      <button id="puLund" onclick="setPickup('lundgren')">Lundgren M6 (0V)</button>
+    </div>
+  </div>
+
+  <div class="ctrl-group">
+    <label><span>Analog Drive / Gate Card</span><span id="drvLabel" style="color:#4ade80">Green Screamer</span></label>
+    <div class="btn-row" style="margin-top:4px;">
+      <button id="drvTs" class="active" onclick="setDriveCard('screamer')">Green Screamer</button>
+      <button id="drvPrec" onclick="setDriveCard('precision')">Precision Drive</button>
+      <button id="drvFort" onclick="setDriveCard('fortin')">Fortin 33 + Zuul</button>
+      <button id="drvHm2" onclick="setDriveCard('hm2')">HM-2W Chainsaw</button>
+    </div>
+  </div>
+
+  <div class="ctrl-group">
+    <label><span>Hardware & Wing Upgrade Tier</span><span id="hwLabel" style="color:#cbd5e1">Grade-5 Titanium</span></label>
+    <div class="btn-row" style="margin-top:4px;">
+      <button id="hwTi" class="active" onclick="setHwTier('titanium')">Bead-Blast Ti</button>
+      <button id="hwDlc" onclick="setHwTier('dlc')">Stealth Black DLC</button>
+      <button id="hwGold" onclick="setHwTier('gold')">PVD 24K Gold</button>
+      <button id="hwRed" onclick="setHwTier('red')">Crimson Anodized</button>
+    </div>
+  </div>
+
   <div class="legend">
-    <div><span class="dot" style="background:#181c22;border:1px solid #64748b"></span><b>Smooth S-Curve Spine:</b> R6mm Bullnose + 35° Comfort Bevel</div>
-    <div><span class="dot" style="background:#16a34a"></span><b>Power & Analog Bay:</b> 2x 18650 (7000mAh) + Green Screamer + NS-1 Gate + 0V Relay</div>
-    <div><span class="dot" style="background:#9333ea"></span><b>Neural & Wireless:</b> NAM Amp/Cab IR Engine + 5.8GHz ULL TX + Wi-Fi 6</div>
-    <div><span class="dot" style="background:#7c8594"></span><b>Teardrop 3A & Curved 3B:</b> Zero Sharp Points (R8mm Roundover)</div>
-    <div><span class="dot" style="background:#94a3b8"></span><b>Pillowed U-Guard:</b> R14mm Outer Corners Shielding Tuners</div>
-    <div><span class="dot" style="background:#22d3ee"></span><b>Side Markers & Controls:</b> Luminlay Dots + Vol/Push-Bypass, 3-Way, USB-C, TRS</div>
+    <div><span class="dot" style="background:#181c22;border:1px solid #64748b"></span><b>Universal 6-Pin Pickup Bay:</b> Swaps EMG/Fishman/BKP/Lundgren</div>
+    <div><span class="dot" style="background:#16a34a"></span><b>M.2 Analog Drive Slot:</b> Screamer / Precision / Fortin 33 / HM-2 + 0V Relay</div>
+    <div><span class="dot" style="background:#9333ea"></span><b>Neural & Wireless:</b> NAM Amp/Cab IR Engine + 5.8GHz ULL TX + 2x 18650</div>
   </div>
 </div>
 
@@ -508,7 +535,7 @@ const headLockMesh = new THREE.Mesh(headLockGeo, matDarkHardware);
 headLockMesh.position.y = 7.2;
 fretboardGroup.add(headLockMesh);
 
-// 5. ROUNDED-BEZEL SOAPBAR PICKUP + HIPSHOT TREMOLO + 6 STRINGS
+// 5. ROUNDED-BEZEL SOAPBAR / OPEN-COIL PICKUP + HIPSHOT TREMOLO + 6 STRINGS
 const hardwareGroup = new THREE.Group();
 root.add(hardwareGroup);
 
@@ -519,6 +546,24 @@ puGeo.rotateX(Math.PI / 2);
 const pickupMesh = new THREE.Mesh(puGeo, matPickup);
 pickupMesh.position.y = 7.8;
 hardwareGroup.add(pickupMesh);
+
+// Dual-row 12 pole pieces (for Bare Knuckle / Lundgren open-coil & battle-worn look)
+const poleGroup = new THREE.Group();
+hardwareGroup.add(poleGroup);
+const matPoles = new THREE.MeshPhysicalMaterial({ color: 0xd4af37, metalness: 0.92, roughness: 0.18 });
+for (let row of [188.5, 202.5]) {
+  for (let s = 0; s < 6; s++) {
+    const px = -25.0 + s * 10.0;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 2.2, 16), matPoles);
+    pole.position.set(px, 9.2, row);
+    poleGroup.add(pole);
+  }
+}
+// Brushed rail stripe for Fishman / EMG look (hidden by default when BKP poles are active)
+const emgLogoStripe = new THREE.Mesh(new THREE.BoxGeometry(14, 0.8, 2.2), matPoles);
+emgLogoStripe.position.set(20, 9.5, 206);
+emgLogoStripe.visible = false;
+hardwareGroup.add(emgLogoStripe);
 
 const brShape = new THREE.Shape();
 brShape.add(createRoundedRectPath(-32, 267, 64, 55, 5.0));
@@ -717,6 +762,76 @@ window.toggleMaterialMode = function() {
     matTrussRod.color.setHex(0x94a3b8);
     matGrip.color.setHex(0x0f1217);
     btn.textContent = 'Finish: Photorealistic Stealth Black & Titanium (Click for CAD Colors)';
+  }
+};
+
+window.setPickup = function(type) {
+  document.querySelectorAll('#puBkp, #puEmg, #puFish, #puLund').forEach(b => b.classList.remove('active'));
+  const lbl = document.getElementById('puLabel');
+  if (type === 'bkp') {
+    document.getElementById('puBkp').classList.add('active');
+    lbl.textContent = 'BKP Ragnarok (0V Passive)';
+    matPickup.color.setHex(0x1d222b); matPickup.metalness = 0.65; matPickup.roughness = 0.32;
+    poleGroup.visible = true; matPoles.color.setHex(0xd4af37); emgLogoStripe.visible = false;
+  } else if (type === 'emg') {
+    document.getElementById('puEmg').classList.add('active');
+    lbl.textContent = 'EMG 81/57 Black Chrome';
+    matPickup.color.setHex(0x2e3440); matPickup.metalness = 0.92; matPickup.roughness = 0.16;
+    poleGroup.visible = false; emgLogoStripe.visible = true; matPoles.color.setHex(0xe2e8f0);
+  } else if (type === 'fishman') {
+    document.getElementById('puFish').classList.add('active');
+    lbl.textContent = 'Fishman Fluence Modern';
+    matPickup.color.setHex(0x12151b); matPickup.metalness = 0.25; matPickup.roughness = 0.38;
+    poleGroup.visible = false; emgLogoStripe.visible = true; matPoles.color.setHex(0x38bdf8);
+  } else if (type === 'lundgren') {
+    document.getElementById('puLund').classList.add('active');
+    lbl.textContent = 'Lundgren M6 (0V Passive)';
+    matPickup.color.setHex(0x101318); matPickup.metalness = 0.18; matPickup.roughness = 0.42;
+    poleGroup.visible = true; matPoles.color.setHex(0x94a3b8); emgLogoStripe.visible = false;
+  }
+};
+
+window.setDriveCard = function(card) {
+  document.querySelectorAll('#drvTs, #drvPrec, #drvFort, #drvHm2').forEach(b => b.classList.remove('active'));
+  const lbl = document.getElementById('drvLabel');
+  if (card === 'screamer') {
+    document.getElementById('drvTs').classList.add('active');
+    lbl.textContent = 'Green Screamer + NS-1'; lbl.style.color = '#4ade80';
+    matScreamerPcb.color.setHex(0x15803d);
+  } else if (card === 'precision') {
+    document.getElementById('drvPrec').classList.add('active');
+    lbl.textContent = 'Horizon Precision Drive'; lbl.style.color = '#38bdf8';
+    matScreamerPcb.color.setHex(0x0284c7);
+  } else if (card === 'fortin') {
+    document.getElementById('drvFort').classList.add('active');
+    lbl.textContent = 'Fortin 33 + Zuul Gate'; lbl.style.color = '#f87171';
+    matScreamerPcb.color.setHex(0xb91c1c);
+  } else if (card === 'hm2') {
+    document.getElementById('drvHm2').classList.add('active');
+    lbl.textContent = 'HM-2W Swedish Chainsaw'; lbl.style.color = '#fb923c';
+    matScreamerPcb.color.setHex(0xea580c);
+  }
+};
+
+window.setHwTier = function(tier) {
+  document.querySelectorAll('#hwTi, #hwDlc, #hwGold, #hwRed').forEach(b => b.classList.remove('active'));
+  const lbl = document.getElementById('hwLabel');
+  if (tier === 'titanium') {
+    document.getElementById('hwTi').classList.add('active');
+    lbl.textContent = 'Grade-5 Bead-Blast Ti';
+    matTitanium.color.setHex(0x76808d); matTitanium.metalness = 0.88; matTitanium.roughness = 0.28;
+  } else if (tier === 'dlc') {
+    document.getElementById('hwDlc').classList.add('active');
+    lbl.textContent = 'Stealth Black DLC + Carbon';
+    matTitanium.color.setHex(0x1a1e26); matTitanium.metalness = 0.75; matTitanium.roughness = 0.32;
+  } else if (tier === 'gold') {
+    document.getElementById('hwGold').classList.add('active');
+    lbl.textContent = 'PVD 24K Gold Custom';
+    matTitanium.color.setHex(0xd4af37); matTitanium.metalness = 0.94; matTitanium.roughness = 0.18;
+  } else if (tier === 'red') {
+    document.getElementById('hwRed').classList.add('active');
+    lbl.textContent = 'Oxblood Crimson Anodized';
+    matTitanium.color.setHex(0x991b1b); matTitanium.metalness = 0.82; matTitanium.roughness = 0.25;
   }
 };
 
