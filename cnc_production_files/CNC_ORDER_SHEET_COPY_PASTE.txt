@@ -1,0 +1,130 @@
+================================================================================
+GUITARLANE "CARBON SPINE" 6-STRING — MASTER COPY-PASTE CNC ORDER SHEET
+For Instant Quoting at: RapidDirect.com | JLCCNC.com | PCBWay.com | Xometry.com
+================================================================================
+UNITS FOR ALL UPLOADED CAD FILES (.STL & .DXF): Millimeters (mm) — 1:1 Scale
+GENERAL TOLERANCE STANDARD: ISO 2768-f (Fine, +/- 0.05 mm)
+FILES FOLDER: Guitar_Gallery\CNC_Production_Files\
+================================================================================
+
+HOW TO USE THIS SHEET:
+1. Go to https://www.rapiddirect.com/ or https://jlccnc.com/ (Instant CNC Quote).
+2. Drag and drop the 8 files listed below from your CNC_Production_Files folder.
+3. Set Units = "Millimeters (mm)".
+4. For each file, select the Material, Finish, and Quantity listed below, and
+   COPY-PASTE the "REMARKSBOX TEXT" directly into the vendor's Notes/Remarks box.
+
+--------------------------------------------------------------------------------
+LINE ITEM 1 OF 8: CENTRAL SPINE CORE
+--------------------------------------------------------------------------------
+* File to Upload:       Part_01_Spine_Core_7075_T6.stl
+                        (Also attach Master_2D_CNC_Profiles_1to1_mm.dxf as 2D reference)
+* Bounding Box (1:1):   703.0 x 82.0 x 38.0 mm
+* Process:              5-Axis CNC Machining (3+2 Indexing)
+* Material Selection:   Aluminum 7075-T6 (Aerospace Billet, Stress-Relieved)
+* Surface Finish:       Bead Blast (Fine 120-grit, Ra 1.2 um) + Type III Hard Anodize MATTE BLACK
+* Tolerance:            ISO 2768-f (+/- 0.05 mm)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (703.0 x 82.0 x 38.0 mm). Material: 7075-T6 Aluminum. Finish: Fine glass-bead blast (Ra 1.2 um) + Type III Matte Stealth Black Anodize. Maintain +/-0.05mm flatness on top fretboard/skin bonding datum (Z=0) and H7 tolerance on the left-side open pickup cartridge slide slot (Y=141.5 to 182.5 mm) and side wing dovetail pockets. Break all sharp internal edges R0.3mm; outer body perimeter has R6.0mm bullnose roundover and 35-deg forearm bevel. Tap 4x M4x0.7 blind holes at Y=0 rear face (12mm deep) for Rear U-Guard, and 2x M5x0.8 cross-holes for quarter-turn wing lock pins."
+
+--------------------------------------------------------------------------------
+LINE ITEM 2 OF 8: REAR TUNER U-GUARD BUMPER
+--------------------------------------------------------------------------------
+* File to Upload:       Part_04_Rear_Tuner_UGuard_Ti_G5.stl
+* Bounding Box (1:1):   82.0 x 42.0 x 23.0 mm
+* Process:              CNC Milling
+* Material Selection:   Titanium Alloy Ti-6Al-4V (Grade 5)
+                        (Budget Alternative: Aluminum 7075-T6 Anodized Titanium Gray)
+* Surface Finish:       Fine Glass-Bead Blast Natural Satin Titanium (Ra 1.2 um, No Gloss)
+* Tolerance:            ISO 2768-f (+/- 0.05 mm)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (82.0 x 42.0 x 23.0 mm). Material: Grade-5 Titanium (Ti-6Al-4V). Finish: Uniform fine glass-bead blast satin natural titanium (Ra 1.2 um). All outer corners R14.0mm, inner cutout corners R8.0mm, with R4.0mm smooth bullnose edge rounding so there are zero sharp edges. Drill 4x Ø4.2mm through-holes with Ø7.5mm x 4.2mm deep counterbores on the forward mounting bosses for M4 socket head cap screws."
+
+--------------------------------------------------------------------------------
+LINE ITEM 3 OF 8: DETACHABLE UPPER HORN WING (3A — LEFT SIDE)
+--------------------------------------------------------------------------------
+* File to Upload:       Part_05A_Upper_Horn_Wing_3A_Ti_or_7075.stl
+* Bounding Box (1:1):   210.0 x 76.0 x 12.0 mm
+* Process:              CNC Milling
+* Material Selection:   Titanium Ti-6Al-4V (Grade 5) OR Aluminum 7075-T6
+* Surface Finish:       Bead Blast + Matte Black Anodize (if 7075) OR Raw Satin Bead Blast (if Ti)
+* Tolerance:            ISO 2768-f (+/- 0.05 mm)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (210.0 x 76.0 x 12.0 mm). Smooth R6.0mm full bullnose rounded outer edges (zero sharp corners). Maintain g6 sliding fit (+/-0.025mm) on the right-side dovetail tenon tab that mates into Part_01 Spine Core. Tap 1x M4x0.7 hole (10mm deep) at the forward horn tip (Y=381.8mm) for standard guitar strap lock button."
+
+--------------------------------------------------------------------------------
+LINE ITEM 4 OF 8: DETACHABLE LOWER LEG RAIL WING (3B — RIGHT SIDE)
+--------------------------------------------------------------------------------
+* File to Upload:       Part_05B_Lower_Leg_Rail_3B_Ti_or_7075.stl
+* Bounding Box (1:1):   205.0 x 98.0 x 14.0 mm
+* Process:              CNC Milling
+* Material Selection:   Titanium Ti-6Al-4V (Grade 5) OR Aluminum 7075-T6
+* Surface Finish:       Bead Blast + Matte Black Anodize (if 7075) OR Raw Satin Bead Blast (if Ti)
+* Tolerance:            ISO 2768-f (+/- 0.05 mm)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (205.0 x 98.0 x 14.0 mm). Smooth C-curve anatomical leg rail with R6.0mm full bullnose rounded edges and skeletonized weight-relief slots. Maintain g6 sliding fit (+/-0.025mm) on the left-side dovetail tenon tab that mates into Part_01 Spine Core."
+
+--------------------------------------------------------------------------------
+LINE ITEM 5 OF 8: UNIVERSAL HOT-SWAP PICKUP CARTRIDGE SLED (ORDER 4 PCS!)
+--------------------------------------------------------------------------------
+* File to Upload:       Part_07_Universal_HotSwap_Pickup_Sled.stl
+* Bounding Box (1:1):   73.0 x 40.0 x 2.5 mm (Baseplate + 12.5 mm Pickup Cradle Frame)
+* Process:              CNC Milling
+* Material Selection:   Aluminum 7075-T6
+* Surface Finish:       Bead Blast + Type III Hard Anodize Matte Black
+* Tolerance:            ISO 2768-f (+/- 0.025 mm on 60-deg dovetail rails)
+* Qty (Prototype #01):  4 pcs  (So you can pre-mount EMG 81, Fishman Modern, Bare Knuckle, and SD!)
+                        (Enter 20 pcs for Stage 2 NAMM Batch = 2 sleds per guitar)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (73.0 x 40.0 mm footprint). Material: 7075-T6 Aluminum, Matte Black Anodize. Maintain smooth g6 sliding fit on the two 60-degree longitudinal dovetail guide rails so the sled slides smoothly into the Part_01 pickup bay window. Include 4x Ø6.05mm x 2.0mm counterbored pockets for Ø6x3mm N52 magnets and 2x M3 tapped pickup mounting ear tabs."
+
+--------------------------------------------------------------------------------
+LINE ITEM 6 OF 8: 3.0 MM SOLID CARBON FIBER TOP SKIN PLATE
+--------------------------------------------------------------------------------
+* File to Upload:       Part_02_Top_Skin_3mm_Carbon.stl
+                        + Master_2D_CNC_Profiles_1to1_mm.dxf (Layers: SPINE_OUTLINE, HOTSWAP_PICKUP_BAY, TREMOLO_CAVITY)
+* Bounding Box (1:1):   219.0 x 82.0 x 3.0 mm
+* Process:              CNC Carbon Plate Routing / Waterjet
+* Material Selection:   3.0 mm Solid Autoclave Carbon Fiber Plate (Toray T700, 3K Plain/Twill or Forged)
+* Surface Finish:       100% Matte Clear Coat (5 GU Dead-Flat Stealth Satin — NO Gloss)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"Cut from 3.0mm quasi-isotropic pre-cured autoclave solid carbon fiber plate (219.0 x 82.0 x 3.0 mm). Finish top surface in dead-flat 5 GU matte satin clear; leave bottom bonding face un-coated and peel-ply/scuffed (Ra 3.2 um) for 3M DP420 epoxy bonding to Part_01."
+
+--------------------------------------------------------------------------------
+LINE ITEM 7 OF 8: 2.2 MM WARM-TOUCH CARBON NECK BACK SHELL
+--------------------------------------------------------------------------------
+* File to Upload:       Part_03_Neck_Back_Shell_Carbon.stl
+* Bounding Box (1:1):   466.0 x 57.0 x 2.2 mm (Asymmetric C/D Neck Back Profile)
+* Process:              3-Axis CNC Routing from Molded/Thick Carbon Blank (or SLS/MJF PA12-CF Carbon Nylon)
+* Material Selection:   Carbon Fiber Composite (or PA12-CF Carbon-Reinforced Nylon with Cerakote Matte Black)
+* Surface Finish:       Micro-Slick Satin Matte Black (Ra 0.8 um Warm-Touch Neck Finish)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (466.0 mm length, tapering 43.0 mm at nut to 57.0 mm at 24th fret, 2.2 mm wall thickness). Outer surface finished to silky Ra 0.8 um satin matte for guitar neck thumb glide; inner concave surface left scuffed for 3M DP420 structural epoxy bonding over the 7075 neck spine."
+
+--------------------------------------------------------------------------------
+LINE ITEM 8 OF 8: 2.5 MM CARBON FIBER REAR MAGNETIC ACCESS HATCH
+--------------------------------------------------------------------------------
+* File to Upload:       Part_06_Rear_Magnetic_Hatch_Carbon.stl
+                        + Master_2D_CNC_Profiles_1to1_mm.dxf (Layer: REAR_ELECTRONICS_BAY)
+* Bounding Box (1:1):   106.0 x 64.0 x 2.5 mm (R8.0 mm Rounded Corners)
+* Process:              CNC Carbon Plate Routing
+* Material Selection:   2.5 mm Solid Autoclave Carbon Fiber Plate (Non-Metallic RF Window Zone Included)
+* Surface Finish:       100% Matte Clear Coat (5 GU Dead-Flat Stealth Satin)
+* Qty (Prototype #01):  1 pc   (Enter 10 pcs for Stage 2 NAMM Batch)
+* COPY-PASTE INTO VENDOR REMARKS BOX:
+"1:1 mm scale (106.0 x 64.0 x 2.5 mm) with R8.0mm corner radii and fingernail lift recess on bottom edge. Counterbore 8x Ø6.05mm x 1.2mm blind pockets on inner perimeter face for Ø6x3mm N52 hatch magnets."
+
+================================================================================
+OPTIONAL LASER ENGRAVING CALLOUT (FOR THE 10 NAMM 2027 FOUNDERS EDITION GUITARS):
+================================================================================
+When ordering the 10-unit batch on December 1, 2026, add this note to Line Item 2
+(Part_04_Rear_Tuner_UGuard_Ti_G5.stl):
+"Fiber-laser engrave on rear outer face of Titanium U-Guard in 2.5mm IBM Plex Mono /
+Saira Stencil font: 'NAMM 2027 FOUNDERS EDITION — SERIAL #01 OF 10' through '#10 OF 10'."
+================================================================================
