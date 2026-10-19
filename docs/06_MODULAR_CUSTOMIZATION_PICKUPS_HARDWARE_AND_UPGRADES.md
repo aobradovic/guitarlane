@@ -15,7 +15,9 @@ To make swapping between an **active EMG 81**, a **multi-voice Fishman Fluence M
 2. **Footprint Unification (`Soapbar` vs. `Open-Coil Humbucker`):** One standardized **`74.0 × 41.0 mm` CNC Carrier Sled** with two interchangeable top bezels so both screwless active soapbars (`EMG` / `Fishman`, `70 × 38 mm`) and tabbed passive humbuckers (`Bare Knuckle` / `Lundgren` / `Seymour Duncan`, `68.5 × 37 mm`) use the exact same cartridge base.
 3. **Automatic Electrical Impedance & Voltage Switching (`25 kΩ + 9V/18V` Active vs. `500 kΩ + 0V` Passive):** A 6-pin gold **Mill-Max Pogo-Pin Array** with an **Auto-Sense ID Pin (`Pin 6`)** that automatically reconfigures the guitar's pot impedance, power rail, and `0.0V` passive fail-safe relay the instant a cartridge clicks in.
 
-![3-Second Strings-On Hot-Swap Pickup Cartridge System](../images/02_cnc_specs_and_blueprints/09_3second_strings_on_hotswap_pickup_cartridge_system.jpg)
+![True 1:1 Millimeter Engineering Blueprint — Strings-On Side-Sliding Hot-Swap Pickup Cartridge](../images/02_cnc_specs_and_blueprints/09_3second_strings_on_hotswap_pickup_cartridge_system.png)
+
+![DSLR Macro Photo — Side-Sliding Hot-Swap Pickup Cartridge Under Tensioned Strings](../images/02_cnc_specs_and_blueprints/09b_dslr_macro_hotswap_pickup_cartridge_workbench.jpg)
 
 ---
 

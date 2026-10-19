@@ -461,10 +461,13 @@ topSkinShape.lineTo(38.5, 325);
 topSkinShape.quadraticCurveTo(38.5, 334, 28.5, 334);
 topSkinShape.lineTo(-28.5, 334);
 topSkinShape.quadraticCurveTo(-38.5, 334, -38.5, 325);
-topSkinShape.lineTo(-38.5, 195);
-topSkinShape.bezierCurveTo(-38.5, 168, -28.5, 162, -27.5, 143);
+// Left-Side Open Pickup Cartridge Slot (Z = 176 to 215 open on left wall so pickup slides out!)
+topSkinShape.lineTo(-38.5, 215);
+topSkinShape.lineTo(34.5, 215);
+topSkinShape.lineTo(34.5, 177);
+topSkinShape.lineTo(-36.5, 177);
+topSkinShape.bezierCurveTo(-33.5, 164, -28.5, 158, -27.5, 143);
 
-topSkinShape.holes.push(createRoundedRectPath(-34.5, 178, 69, 36, 4.0));
 topSkinShape.holes.push(createRoundedRectPath(-32.5, 265, 65, 58, 4.0));
 
 const topSkinGeo = new THREE.ExtrudeGeometry(topSkinShape, {
@@ -474,6 +477,17 @@ topSkinGeo.rotateX(Math.PI / 2);
 const topSkinMesh = new THREE.Mesh(topSkinGeo, matCarbonSkin);
 topSkinMesh.position.y = 0.2;
 skinGroup.add(topSkinMesh);
+
+// Stationary 6-Pin Gold Pogo-Pin Dock mounted inside the Right Wall of the Pickup Cavity (X = +33.5 mm)
+const matGoldPin = new THREE.MeshPhysicalMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.12 });
+const pogoDockBlock = new THREE.Mesh(new THREE.BoxGeometry(3.2, 7.5, 34), matDarkHardware);
+pogoDockBlock.position.set(34.2, 2.5, 196);
+coreGroup.add(pogoDockBlock);
+for (let pz = 182; pz <= 210; pz += 5.6) {
+  const spPin = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 4.2, 12).rotateZ(Math.PI / 2), matGoldPin);
+  spPin.position.set(32.5, 3.2, pz);
+  coreGroup.add(spPin);
+}
 
 const backShellGeo = new THREE.CylinderGeometry(21.2, 28.2, 486, 36, 1, false, -Math.PI/2, Math.PI);
 backShellGeo.rotateX(Math.PI / 2);
@@ -547,41 +561,40 @@ root.add(hardwareGroup);
 const pickupCartridgeGroup = new THREE.Group();
 hardwareGroup.add(pickupCartridgeGroup);
 
-// CNC Carrier Sled Base + 6 Gold Pogo-Pin Contacts underneath pickup
-const sledBase = new THREE.Mesh(new THREE.BoxGeometry(70, 2.4, 37), matTitanium);
-sledBase.position.set(0, -4.2, 195.5);
+// CNC Dovetail Carrier Sled Base + 6 Gold Mating Contacts on Right Edge of Sled
+const sledBase = new THREE.Mesh(new THREE.BoxGeometry(73, 2.5, 39), matTitanium);
+sledBase.position.set(-1.5, -1.2, 196);
 pickupCartridgeGroup.add(sledBase);
 
-const matGoldPin = new THREE.MeshPhysicalMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.12 });
-for (let p = 0; p < 6; p++) {
-  const pogo = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 4.5, 12), matGoldPin);
-  pogo.position.set(-15 + p * 6, -7.2, 195.5);
-  pickupCartridgeGroup.add(pogo);
+for (let pz = 182; pz <= 210; pz += 5.6) {
+  const pad = new THREE.Mesh(new THREE.BoxGeometry(2.2, 3.2, 2.6), matGoldPin);
+  pad.position.set(34.5, 2.2, pz);
+  pickupCartridgeGroup.add(pad);
 }
 
 const puShape = new THREE.Shape();
-puShape.add(createRoundedRectPath(-34, 178, 68, 35, 5.5));
-const puGeo = new THREE.ExtrudeGeometry(puShape, { depth: 11, bevelEnabled: true, bevelThickness: 2.0, bevelSize: 1.8, bevelSegments: 5 });
+puShape.add(createRoundedRectPath(-34, 178.5, 68, 35, 5.5));
+const puGeo = new THREE.ExtrudeGeometry(puShape, { depth: 9.5, bevelEnabled: true, bevelThickness: 1.5, bevelSize: 1.5, bevelSegments: 5 });
 puGeo.rotateX(Math.PI / 2);
 const pickupMesh = new THREE.Mesh(puGeo, matPickup);
-pickupMesh.position.y = 7.8;
+pickupMesh.position.y = 6.2;
 pickupCartridgeGroup.add(pickupMesh);
 
-// Dual-row 12 pole pieces (for Bare Knuckle / Lundgren open-coil & battle-worn look)
+// Dual-row 12 pole pieces sitting visibly on top of the pickup face (Y = 7.4, directly below the strings at Y = 9.6!)
 const poleGroup = new THREE.Group();
 pickupCartridgeGroup.add(poleGroup);
 const matPoles = new THREE.MeshPhysicalMaterial({ color: 0xd4af37, metalness: 0.92, roughness: 0.18 });
-for (let row of [188.5, 202.5]) {
+for (let row of [188.5, 203.5]) {
   for (let s = 0; s < 6; s++) {
     const px = -25.0 + s * 10.0;
-    const pole = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 2.2, 16), matPoles);
-    pole.position.set(px, 9.2, row);
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 2.0, 16), matPoles);
+    pole.position.set(px, 7.2, row);
     poleGroup.add(pole);
   }
 }
 // Brushed rail stripe for Fishman / EMG look (hidden by default when BKP poles are active)
 const emgLogoStripe = new THREE.Mesh(new THREE.BoxGeometry(14, 0.8, 2.2), matPoles);
-emgLogoStripe.position.set(20, 9.5, 206);
+emgLogoStripe.position.set(20, 7.6, 207);
 emgLogoStripe.visible = false;
 pickupCartridgeGroup.add(emgLogoStripe);
 
