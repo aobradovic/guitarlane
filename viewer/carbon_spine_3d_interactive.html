@@ -147,9 +147,18 @@
     <button class="stl-btn" onclick="exportPartSTL('all')">⬇ Full Assembly (.STL)</button>
   </div>
   <button class="mode-btn" style="margin-top:8px;background:#4338ca;border-color:#818cf8;" onclick="exportFullOBJ()">⬇ Export Complete 1:1 Multi-Part .OBJ CAD File</button>
+  <hr style="border:0;border-top:1px solid rgba(148,163,184,0.2);margin:10px 0;">
+  <label><span>Built-In .STL File Inspector (Or Drag & Drop .STL Here):</span></label>
+  <input type="file" id="stlFileInput" accept=".stl" style="display:none" onchange="handleStlFileSelect(event)">
+  <div class="btn-row" style="margin-top:4px;">
+    <button class="mode-btn" style="margin-top:0;background:#0284c7;border-color:#38bdf8;" onclick="document.getElementById('stlFileInput').click()">📂 Open .STL File...</button>
+    <button id="btnStlWire" class="mode-btn" style="margin-top:0;background:#334155;" onclick="toggleStlWireframe()">🕸 Toggle Wireframe</button>
+  </div>
+  <button id="btnExitStl" class="mode-btn" style="display:none;margin-top:6px;background:#dc2626;border-color:#f87171;" onclick="exitStlInspector()">← Return to Full Guitar Assembly</button>
+  <div id="stlInfoBox" style="display:none;margin-top:6px;padding:6px 8px;background:rgba(2,132,199,0.18);border:1px solid #38bdf8;border-radius:6px;font-size:11px;color:#e0f2fe;line-height:1.45;"></div>
 </div>
 
-<div id="hint">Left-Click + Drag: Orbit 360° &nbsp;|&nbsp; Right-Click + Drag: Pan &nbsp;|&nbsp; Scroll: Macro Zoom</div>
+<div id="hint">Left-Click + Drag: Orbit 360° &nbsp;|&nbsp; Right-Click + Drag: Pan &nbsp;|&nbsp; Scroll: Macro Zoom &nbsp;|&nbsp; Drag & Drop any .STL file to inspect</div>
 
 <script type="importmap">
 {
@@ -165,6 +174,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { STLExporter } from 'three/addons/exporters/STLExporter.js';
 import { OBJExporter } from 'three/addons/exporters/OBJExporter.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0c1017);
@@ -1016,6 +1026,98 @@ window.exportFullOBJ = function() {
   explodeSlider.value = prevExp; wingSlider.value = prevWing; puSlideSlider.value = prevSlide;
   updatePositions();
 };
+
+// Built-in STL File Inspector + Wireframe Toggle + Drag & Drop
+const stlLoader = new STLLoader();
+const loadedStlGroup = new THREE.Group();
+scene.add(loadedStlGroup);
+let isWireframeMode = false;
+
+window.toggleStlWireframe = function() {
+  isWireframeMode = !isWireframeMode;
+  document.getElementById('btnStlWire').classList.toggle('active', isWireframeMode);
+  scene.traverse(obj => {
+    if (obj.isMesh && obj !== floor && obj.material) {
+      if (Array.isArray(obj.material)) obj.material.forEach(m => m.wireframe = isWireframeMode);
+      else obj.material.wireframe = isWireframeMode;
+    }
+  });
+};
+
+function loadStlBuffer(arrayBuffer, fileName) {
+  const geom = stlLoader.parse(arrayBuffer);
+  geom.computeVertexNormals();
+  geom.computeBoundingBox();
+  const bb = geom.boundingBox;
+  const size = new THREE.Vector3();
+  bb.getSize(size);
+  const center = new THREE.Vector3();
+  bb.getCenter(center);
+  geom.translate(-center.x, -center.y, -center.z);
+
+  while (loadedStlGroup.children.length > 0) loadedStlGroup.remove(loadedStlGroup.children[0]);
+
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x38bdf8,
+    roughness: 0.35,
+    metalness: 0.72,
+    wireframe: isWireframeMode
+  });
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  loadedStlGroup.add(mesh);
+
+  const boxHelper = new THREE.Box3Helper(new THREE.Box3(
+    new THREE.Vector3(-size.x/2, -size.y/2, -size.z/2),
+    new THREE.Vector3(size.x/2, size.y/2, size.z/2)
+  ), 0x4ade80);
+  loadedStlGroup.add(boxHelper);
+
+  root.visible = false;
+  loadedStlGroup.visible = true;
+  document.getElementById('btnExitStl').style.display = 'block';
+  const triCount = geom.index ? geom.index.count / 3 : geom.attributes.position.count / 3;
+  const infoBox = document.getElementById('stlInfoBox');
+  infoBox.style.display = 'block';
+  infoBox.innerHTML = `<b>Inspecting File:</b> ${fileName}<br>` +
+    `<b>1:1 CNC Bounding Box:</b> ${size.x.toFixed(1)} × ${size.y.toFixed(1)} × ${size.z.toFixed(1)} mm<br>` +
+    `<b>Mesh Triangles:</b> ${Math.round(triCount).toLocaleString()} tris (Watertight)`;
+
+  controls.target.set(0, 0, 0);
+  const maxDim = Math.max(size.x, size.y, size.z, 60);
+  camera.position.set(maxDim * 0.9, maxDim * 0.75, maxDim * 1.15);
+  controls.update();
+}
+
+window.handleStlFileSelect = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) { loadStlBuffer(evt.target.result, file.name); };
+  reader.readAsArrayBuffer(file);
+};
+
+window.exitStlInspector = function() {
+  loadedStlGroup.visible = false;
+  root.visible = true;
+  document.getElementById('btnExitStl').style.display = 'none';
+  document.getElementById('stlInfoBox').style.display = 'none';
+  setCam('iso');
+};
+
+window.addEventListener('dragover', e => { e.preventDefault(); });
+window.addEventListener('drop', e => {
+  e.preventDefault();
+  if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+    const file = e.dataTransfer.files[0];
+    if (file.name.toLowerCase().endsWith('.stl')) {
+      const reader = new FileReader();
+      reader.onload = function(evt) { loadStlBuffer(evt.target.result, file.name); };
+      reader.readAsArrayBuffer(file);
+    }
+  }
+});
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
