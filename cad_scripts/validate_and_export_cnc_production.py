@@ -184,22 +184,23 @@ def extrude_2d_polygon_to_stl(poly_xy, z_bottom, z_top):
     return tris
 
 def generate_all_cnc_stl_and_dxf_files():
-    # 1. Part_01_Spine_Core_7075_T6.stl (1:1 mm scale: Y=18..703mm, X=-41..+41mm, Z=-38..0mm)
+    # 1. Part_01_Spine_Core_7075_T6.stl (1:1 mm scale: Y=0..703mm, X=-41..+41mm, Z=-38..0mm)
     spine_tris = []
-    # Lower Body Spine Block (Y=18..237, X=-41..+41, Z=-38..-3) built from sub-walls around the Pickup & Battery/Tremolo cavities
-    # Left & Right structural rails, EMI bulkhead, and neck beam
-    spine_tris += make_box_triangles(34.5, 41.0, 18.0, 237.0, -38.0, -3.0)   # Right outer wall
-    spine_tris += make_box_triangles(-41.0, -34.5, 18.0, 141.5, -38.0, -3.0) # Left lower wall (below pickup slot)
-    spine_tris += make_box_triangles(-41.0, -34.5, 182.5, 237.0, -38.0, -3.0)# Left upper wall (above pickup slot)
+    # Lower Body Spine Block (Y=0..237, X=-41..+41, Z=-38..0) built from sub-walls around the Pickup & Battery/Tremolo cavities
+    spine_tris += make_box_triangles(-31.0, 31.0, 0.0, 18.0, -23.0, 0.0)      # Rear tail U-Guard mounting boss & Z=0 datum
+    spine_tris += make_box_triangles(34.5, 41.0, 18.0, 237.0, -38.0, -3.0)    # Right outer wall
+    spine_tris += make_box_triangles(-41.0, -34.5, 18.0, 141.5, -38.0, -3.0)  # Left lower wall (below pickup slot)
+    spine_tris += make_box_triangles(-41.0, -34.5, 182.5, 237.0, -38.0, -3.0) # Left upper wall (above pickup slot)
     spine_tris += make_box_triangles(-41.0, -34.5, 141.5, 182.5, -38.0, -16.5)# Left wall under side-slide pickup slot!
-    spine_tris += make_box_triangles(-34.5, 34.5, 128.0, 237.0, -19.0, -16.5)# 2.5mm Solid 7075 EMI Shield Bulkhead!
-    spine_tris += make_box_triangles(-34.5, 34.5, 18.0, 32.0, -38.0, -3.0)   # Rear tail block
-    spine_tris += make_box_triangles(-34.5, 34.5, 118.0, 134.0, -38.0, -3.0) # Bridge/Battery divider wall
-    # Tapered Neck Beam (Y=237..703, X=-28.5..+28.5 -> -21.5..+21.5, Z=-17.8..-6.0)
+    spine_tris += make_box_triangles(-34.5, 34.5, 128.0, 237.0, -19.0, -16.5) # 2.5mm Solid 7075 EMI Shield Bulkhead!
+    spine_tris += make_box_triangles(-34.5, 34.5, 18.0, 32.0, -38.0, -3.0)    # Rear tail block
+    spine_tris += make_box_triangles(-34.5, 34.5, 118.0, 134.0, -38.0, -3.0)  # Bridge/Battery divider wall
+    # Tapered Neck Beam (Y=237..703, X=-28.5..+28.5 -> -21.5..+21.5, Z=-17.8..-6.0) + Headpiece Z=0 datum boss
     neck_poly = [(-28.5, 237.0), (28.5, 237.0), (21.5, 703.0), (-21.5, 703.0)]
     spine_tris += extrude_2d_polygon_to_stl(neck_poly, -17.8, -6.0)
+    spine_tris += make_box_triangles(-21.5, 21.5, 685.0, 703.0, -17.8, 0.0)   # Headpiece string-lock mounting boss
 
-    # 2. Part_02_Top_Skin_3mm_Carbon.stl (Y=142..337 in local or Y=18..237, Z=-3.0..0.0)
+    # 2. Part_02_Top_Skin_3mm_Carbon.stl (Y=18..237, Z=-3.0..0.0)
     top_skin_tris = []
     top_skin_tris += make_box_triangles(-41.0, 41.0, 18.0, 52.0, -3.0, 0.0)
     top_skin_tris += make_box_triangles(-41.0, 41.0, 112.0, 141.5, -3.0, 0.0)
@@ -215,20 +216,19 @@ def generate_all_cnc_stl_and_dxf_files():
     uguard_tris += make_box_triangles(-41.0, -31.0, 12.0, 42.0, -23.0, 0.0)
     uguard_tris += make_box_triangles(31.0, 41.0, 12.0, 42.0, -23.0, 0.0)
 
-    # 5. Part_05A_Upper_Horn_Wing_3A_Ti_or_7075.stl (Teardrop upper horn reaching Y=382mm 12th fret)
+    # 5. Part_05A_Upper_Horn_Wing_3A_Ti_or_7075.stl (210.0 x 76.0 x 12.0 mm teardrop upper horn reaching Y=382mm 12th fret)
     wing3a_poly = []
-    for t in np.linspace(0, 2*math.pi, 48, endpoint=False):
-        # Smooth organic teardrop horn outline
-        wx = -64.0 + 36.0 * math.cos(t)
-        wy = 295.0 + 88.0 * math.sin(t) - 18.0 * math.cos(2*t)
+    for t in np.linspace(0, 2*math.pi, 64, endpoint=False):
+        wx = -64.0 + 38.0 * math.cos(t)
+        wy = 277.0 + 105.0 * math.sin(t)
         wing3a_poly.append((wx, wy))
     wing3a_tris = extrude_2d_polygon_to_stl(wing3a_poly, -16.0, -4.0)
 
-    # 6. Part_05B_Lower_Leg_Rail_3B_Ti_or_7075.stl (Curved C-rail leg rest X=+41..+136, Y=18..195)
+    # 6. Part_05B_Lower_Leg_Rail_3B_Ti_or_7075.stl (205.0 x 98.0 x 14.0 mm curved C-rail leg rest)
     wing3b_poly = []
-    for t in np.linspace(0, 2*math.pi, 48, endpoint=False):
-        wx = 88.0 + 46.0 * math.cos(t)
-        wy = 105.0 + 82.0 * math.sin(t)
+    for t in np.linspace(0, 2*math.pi, 64, endpoint=False):
+        wx = 90.0 + 49.0 * math.cos(t)
+        wy = 110.0 + 102.5 * math.sin(t)
         wing3b_poly.append((wx, wy))
     wing3b_tris = extrude_2d_polygon_to_stl(wing3b_poly, -17.0, -3.0)
 

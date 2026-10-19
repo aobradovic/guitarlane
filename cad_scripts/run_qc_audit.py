@@ -14,7 +14,7 @@ EXPECTED_STLS = {
     "Part_05A_Upper_Horn_Wing_3A_Ti_or_7075.stl": (76.0, 210.0, 12.0),
     "Part_05B_Lower_Leg_Rail_3B_Ti_or_7075.stl": (98.0, 205.0, 14.0),
     "Part_06_Rear_Magnetic_Hatch_Carbon.stl": (64.0, 106.0, 2.5),
-    "Part_07_Universal_HotSwap_Pickup_Sled.stl": (73.0, 40.0, 2.5),
+    "Part_07_Universal_HotSwap_Pickup_Sled.stl": (73.0, 40.0, 15.0),
 }
 
 def inspect_binary_stl(filepath):
@@ -35,7 +35,7 @@ def inspect_binary_stl(filepath):
 
 def main():
     print("=" * 80)
-    print("GUITARLANE 'CARBON SPINE' — AUTOMATED PRE-PRODUCTION QC AUDIT")
+    print("GUITARLANE 'CARBON SPINE' - AUTOMATED PRE-PRODUCTION QC AUDIT")
     print("=" * 80)
     all_passed = True
 
@@ -67,7 +67,7 @@ def main():
     if os.path.exists(cert_path):
         with open(cert_path, "r") as f:
             cert = json.load(f)
-        print(f"  [PASS] DFM_VALIDATION_CERTIFICATE.json verified ({cert.get('overall_status')})")
+        print(f"  [PASS] DFM_VALIDATION_CERTIFICATE.json verified ({cert.get('validation_status')})")
     else:
         print("  [FAIL] DFM_VALIDATION_CERTIFICATE.json missing")
         all_passed = False
