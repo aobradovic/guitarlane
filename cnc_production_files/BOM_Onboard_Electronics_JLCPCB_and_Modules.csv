@@ -1,0 +1,18 @@
+Item_ID,Board_Module,Designator,Component_Description,Manufacturer_Part_Number,JLCPCB_LCSC_Part_Number,Qty_Per_Guitar,Unit_Price_USD,Subtotal_Qty1_USD,Subtotal_Qty10_USD,Source_Vendor
+1,Mother_Dock_PCB,J_PICKUP,"6-Pin Gold Spring-Loaded Pogo Pin Connector (2.54mm pitch, 1.4mm stroke)",0906-1-15-20-75-14-11-0,C284519,1,3.80,3.80,32.00,DigiKey / Mouser / JLCPCB
+2,Mother_Dock_PCB,K_BYPASS,"Zero-Battery Fail-Safe DPDT Signal Relay (Low-Signal Gold Clad Contacts)",G6K-2F-Y-DC5,C23812,1,2.45,2.45,21.00,JLCPCB SMT (In Stock)
+3,Mother_Dock_PCB,U_IN_BUF,"Ultra-Low-Noise JFET Input Buffer / Auto-Impedance Switch (25k Active / 500k Passive)",OPA1652AIDR,C89358,1,1.15,1.15,9.50,JLCPCB SMT (In Stock)
+4,Mother_Dock_PCB,SW_LOAD,"Analog SPDT CMOS Switch (Auto-switches 25kOhm vs 500kOhm via Pin 6 Sense)",TS5A3159ADBVR,C26815,1,0.35,0.35,2.80,JLCPCB SMT (In Stock)
+5,Mother_Dock_PCB,J_M2_SLOT,"M.2 Key-E 67-Pin Gold Edge Socket (For Swappable Screamer / Fortin / Precision Drive Cards)",2199230-4,C429112,1,1.65,1.65,14.00,JLCPCB SMT (In Stock)
+6,Mother_Dock_PCB,BT_HOLDER,"Dual 18650 Low-Profile SMD Phosphor-Bronze Battery Clips (4x Single Clips)",1043P,C298541,4,0.65,2.60,22.00,JLCPCB SMT / Keystone
+7,Mother_Dock_PCB,U_BMS_CHG,"USB-C 5V 2A Li-Ion Battery Charger + Dual-Rail +9V/-9V/+5V Ultra-Low-Noise LDO",IP2312 + TPS7A4700,C283114,1,2.90,2.90,25.00,JLCPCB SMT (In Stock)
+8,Mother_Dock_PCB,BAT_CELLS,"2x Protected Samsung 35E / Molicel M35A 18650 3500mAh Li-Ion Cells (7000mAh Total)",INR18650-35E,N/A (Local Ship),2,6.50,13.00,115.00,18650BatteryStore / DigiKey
+9,Card_01_Green_Screamer,U1_TS,"Original Tube Screamer Dual Op-Amp (JRC4558D SMD SOIC-8)",NJM4558D / RC4558DR,C7076,1,0.18,0.18,1.50,JLCPCB SMT (Basic Part)
+10,Card_01_Green_Screamer,D1_D2_CLIP," Clipping Diode Matrix (2x 1N4148 Silicon + 1x BAT41 Asymmetric + 2x Red LED)",1N4148WS / LED0603,C2128,5,0.02,0.10,0.80,JLCPCB SMT (Basic Part)
+11,Card_01_Green_Screamer,Q1_Q2_BUF,"Input & Output Emitter-Follower Buffer Transistors (2SC1815 / MMBT3904)",MMBT3904LT1G,C20526,2,0.03,0.06,0.50,JLCPCB SMT (Basic Part)
+12,Card_01_Green_Screamer,U2_GATE_VCA,"NS-1 / Zuul Studio Sidechain-Keyed Low-Noise VCA IC (Keyed Directly From Raw Pickup)",THAT2181CL08-U,C132495,1,4.85,4.85,42.00,JLCPCB / Mouser
+13,Card_01_Green_Screamer,U3_GATE_RMS,"Fast RMS / Peak Sidechain Envelope Detector Op-Amp (0.4ms Attack)",TL072IDR,C6965,1,0.22,0.22,1.80,JLCPCB SMT (Basic Part)
+14,NAM_Neural_Engine,MOD_NAM,"Embedded Neural Amp Modeler (.NAM) + 1024-pt Cab IR Compute Module (Plug-in Carrier)",Daisy Seed M7 / CM4 Lite / Tank-Mini Core,N/A,1,45.00,45.00,390.00,Electro-Smith / DigiKey / Amazon
+15,Wireless_5.8GHz,MOD_RF_TX,"Pre-Certified 5.8GHz Ultra-Low-Latency (<2.2ms) Digital Audio TX Core + Paired 1/4-inch Amp RX",NUX C-5RC / Joyo JW-06 Core (FCC Certified),N/A,1,49.00,49.00,420.00,Amazon / Sweetwater / OEM
+16,Side_Controls,JACK_SW,"Neutrik Locking 1/4-inch Jack + Knurled Push-Push Volume Pot + 3-Way Preset Toggle + USB-C Port",NJ3FP6C-BAG + Bourns Push-Push,N/A,1,19.50,19.50,165.00,Mouser / DigiKey
+17,PCB_Fabrication,FAB_SMT,"JLCPCB 4-Layer ENIG Gold PCB Fabrication + Turnkey SMT Assembly Fee (Min 5 Boards Included)",JLCPCB-4L-ENIG-SMT,N/A,1,38.00,38.00,65.00,JLCPCB.com
