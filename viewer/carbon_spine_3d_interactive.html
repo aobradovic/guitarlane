@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Carbon Spine — Smooth Beveled & Rounded-Edge 3D Studio (6-String Method 2)</title>
+<style>
+  body { margin: 0; overflow: hidden; background: #0b0e14; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  #ui {
+    position: absolute; top: 16px; left: 16px; width: 360px;
+    background: rgba(13, 18, 28, 0.92); border: 1px solid #334155;
+    border-radius: 12px; padding: 18px; backdrop-filter: blur(10px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.75); z-index: 10;
+  }
+  h1 { font-size: 16px; margin: 0 0 4px 0; color: #fff; letter-spacing: 0.3px; }
+  .sub { font-size: 12px; color: #38bdf8; margin-bottom: 14px; font-weight: 600; }
+  .ctrl-group { margin-bottom: 12px; }
+  label { display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1; margin-bottom: 4px; font-weight: 500; }
+  input[type=range] { width: 100%; accent-color: #38bdf8; cursor: pointer; }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 9px; }
+  button {
+    background: #1e293b; color: #f8fafc; border: 1px solid #475569;
+    padding: 8px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 600;
+    cursor: pointer; transition: 0.15s;
+  }
+  button:hover, button.active { background: #0284c7; border-color: #38bdf8; }
+  .mode-btn { width: 100%; margin-top: 9px; background: #0f766e; border-color: #14b8a6; }
+  .mode-btn:hover { background: #0d9488; }
+  .legend { margin-top: 14px; padding-top: 12px; border-top: 1px solid #1e293b; font-size: 11.5px; color: #94a3b8; line-height: 1.55; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+  #hint {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.88); border: 1px solid #334155;
+    padding: 8px 18px; border-radius: 20px; font-size: 12px; color: #cbd5e1;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="ui">
+  <h1>6-String "Carbon Spine" — Smooth Rounded 3D</h1>
+  <div class="sub">Sculpted R6–R14mm Roundovers & Smooth S-Curve Wings</div>
+
+  <div class="ctrl-group">
+    <label><span>Explode Method 2 CNC Layers</span><span id="expVal">0%</span></label>
+    <input type="range" id="explodeSlider" min="0" max="100" value="0">
+  </div>
+
+  <div class="ctrl-group">
+    <label><span>Detach Smooth 3A & 3B Wings</span><span id="wingVal">Attached</span></label>
+    <input type="range" id="wingSlider" min="0" max="100" value="0">
+  </div>
+
+  <div class="btn-row">
+    <button id="btnAssembled" class="active" onclick="setPreset('assembled')">Assembled Studio</button>
+    <button id="btnExploded" onclick="setPreset('exploded')">Explode CNC Stack</button>
+    <button id="btnTravel" onclick="setPreset('travel')">82mm Travel Stick</button>
+    <button id="btnXray" onclick="toggleXray()">X-Ray CNC Lattice</button>
+  </div>
+
+  <button id="btnMatMode" class="mode-btn" onclick="toggleMaterialMode()">Finish: Photorealistic Stealth Black & Titanium (Click for CAD Colors)</button>
+
+  <div class="btn-row">
+    <button onclick="setCam('hero')">3/4 Studio Hero</button>
+    <button onclick="setCam('top')">Top Orthographic</button>
+    <button onclick="setCam('side')">Side Bevel Profile</button>
+    <button onclick="setCam('tail')">Rounded U-Guard</button>
+  </div>
+
+  <div class="legend">
+    <div><span class="dot" style="background:#181c22;border:1px solid #64748b"></span><b>Smooth S-Curve Spine:</b> R6mm Bullnose + 35° Comfort Bevel</div>
+    <div><span class="dot" style="background:#7c8594"></span><b>Teardrop 3A & Curved 3B:</b> Zero Sharp Points (R8mm Roundover)</div>
+    <div><span class="dot" style="background:#94a3b8"></span><b>Pillowed U-Guard:</b> R14mm Outer Corners Shielding Tuners</div>
+    <div><span class="dot" style="background:#e2e8f0"></span><b>Frets & Fretboard:</b> 1.5mm Rolled Richlite + 24 Stainless Frets</div>
+    <div><span class="dot" style="background:#22d3ee"></span><b>Side Markers:</b> 2.5mm Glowing Cyan Luminlay Dots</div>
+    <div><span class="dot" style="background:#dc2626"></span><b>Captive Pins:</b> Flush Red Anodized Quarter-Turn Plungers</div>
+  </div>
+</div>
+
+<div id="hint">Left-Click + Drag: Orbit 360° &nbsp;|&nbsp; Right-Click + Drag: Pan &nbsp;|&nbsp; Scroll: Macro Zoom</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0c1017);
+
+const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 5000);
+camera.position.set(340, 310, 460);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.18;
+document.body.appendChild(renderer.domElement);
+
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.target.set(0, 0, -20);
+
+function createMicroTexture(type) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  const img = ctx.createImageData(256, 256);
+  for (let i = 0; i < img.data.length; i += 4) {
+    let v = 128 + (Math.random() - 0.5) * (type === 'matte' ? 32 : 20);
+    img.data[i] = img.data[i+1] = img.data[i+2] = v;
+    img.data[i+3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  if (type === 'brushed') {
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    for (let y = 0; y < 256; y += 2) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(256, y); ctx.stroke();
+    }
+  }
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(6, 18);
+  return tex;
+}
+
+const matteBump = createMicroTexture('matte');
+const brushedBump = createMicroTexture('brushed');
+
+const keyLight = new THREE.DirectionalLight(0xfff8f0, 2.2);
+keyLight.position.set(280, 520, 360);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.width = 2048;
+keyLight.shadow.mapSize.height = 2048;
+keyLight.shadow.camera.near = 100;
+keyLight.shadow.camera.far = 1500;
+const d = 450;
+keyLight.shadow.camera.left = -d; keyLight.shadow.camera.right = d;
+keyLight.shadow.camera.top = d; keyLight.shadow.camera.bottom = -d;
+keyLight.shadow.bias = -0.0005;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0x93c5fd, 0.9);
+fillLight.position.set(-380, 240, -220);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0xe2e8f0, 1.35);
+rimLight.position.set(0, -320, 350);
+scene.add(rimLight);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(2400, 2400),
+  new THREE.MeshStandardMaterial({ color: 0x0e131b, roughness: 0.75, metalness: 0.15, bumpMap: matteBump, bumpScale: 0.15 })
+);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -75;
+floor.receiveShadow = true;
+scene.add(floor);
+
+const grid = new THREE.GridHelper(1000, 20, 0x1e293b, 0x141d2b);
+grid.position.y = -74.5;
+scene.add(grid);
+
+// Photorealistic PBR Materials
+const matSpineCore = new THREE.MeshPhysicalMaterial({
+  color: 0x14171c, metalness: 0.45, roughness: 0.46, clearcoat: 0.18, clearcoatRoughness: 0.55, bumpMap: matteBump, bumpScale: 0.06
+});
+const matCarbonSkin = new THREE.MeshPhysicalMaterial({
+  color: 0x181c22, metalness: 0.18, roughness: 0.48, clearcoat: 0.22, clearcoatRoughness: 0.45, bumpMap: matteBump, bumpScale: 0.08
+});
+const matRichlite = new THREE.MeshPhysicalMaterial({
+  color: 0x0d1015, metalness: 0.08, roughness: 0.30, clearcoat: 0.25, clearcoatRoughness: 0.38
+});
+const matTitanium = new THREE.MeshPhysicalMaterial({
+  color: 0x76808d, metalness: 0.88, roughness: 0.28, bumpMap: brushedBump, bumpScale: 0.05
+});
+const matDarkHardware = new THREE.MeshPhysicalMaterial({
+  color: 0x12151a, metalness: 0.82, roughness: 0.25, bumpMap: brushedBump, bumpScale: 0.04
+});
+const matPickup = new THREE.MeshPhysicalMaterial({
+  color: 0x161920, metalness: 0.25, roughness: 0.35, clearcoat: 0.2
+});
+const matFret = new THREE.MeshPhysicalMaterial({
+  color: 0xf1f5f9, metalness: 1.0, roughness: 0.06
+});
+const matCarbonSpar = new THREE.MeshPhysicalMaterial({
+  color: 0x1e242d, metalness: 0.25, roughness: 0.35
+});
+const matTrussRod = new THREE.MeshPhysicalMaterial({
+  color: 0x94a3b8, metalness: 0.9, roughness: 0.22
+});
+const matRedPin = new THREE.MeshPhysicalMaterial({
+  color: 0xdc2626, metalness: 0.82, roughness: 0.22
+});
+const matGrip = new THREE.MeshPhysicalMaterial({
+  color: 0x0f1217, metalness: 0.02, roughness: 0.92, bumpMap: matteBump, bumpScale: 0.16
+});
+const matLuminlay = new THREE.MeshStandardMaterial({
+  color: 0x22d3ee, emissive: 0x06b6d4, emissiveIntensity: 1.8, roughness: 0.2
+});
+
+const root = new THREE.Group();
+scene.add(root);
+
+function enableShadows(obj) {
+  obj.traverse(c => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } });
+}
+
+// Helper for rounded rectangle hole paths
+function createRoundedRectPath(x, z, w, h, r) {
+  const p = new THREE.Path();
+  p.moveTo(x + r, z);
+  p.lineTo(x + w - r, z);
+  p.quadraticCurveTo(x + w, z, x + w, z + r);
+  p.lineTo(x + w, z + h - r);
+  p.quadraticCurveTo(x + w, z + h, x + w - r, z + h);
+  p.lineTo(x + r, z + h);
+  p.quadraticCurveTo(x, z + h, x, z + h - r);
+  p.lineTo(x, z + r);
+  p.quadraticCurveTo(x, z, x + r, z);
+  return p;
+}
+
+// 1. SMOOTH S-CURVE & BEVELED 5-AXIS CNC SPINE CORE (Zero Sharp Corners!)
+const coreGroup = new THREE.Group();
+root.add(coreGroup);
+
+const spineShape = new THREE.Shape();
+// Start at Nut with rounded corners, flow via smooth S-curve at 24th fret into 82mm bridge section with R12mm rounded tail corners
+spineShape.moveTo(-18.5, -343);
+spineShape.lineTo(18.5, -343);
+spineShape.quadraticCurveTo(21.5, -343, 21.8, -338);
+spineShape.lineTo(28.2, 130);
+// Smooth organic S-curve transition from 57mm neck to 82mm bridge body
+spineShape.bezierCurveTo(29.0, 158, 39.5, 165, 39.5, 195);
+spineShape.lineTo(39.5, 326);
+spineShape.quadraticCurveTo(39.5, 336, 29.5, 336);
+spineShape.lineTo(-29.5, 336);
+spineShape.quadraticCurveTo(-39.5, 336, -39.5, 326);
+spineShape.lineTo(-39.5, 195);
+spineShape.bezierCurveTo(-39.5, 165, -29.0, 158, -28.2, 130);
+spineShape.lineTo(-21.8, -338);
+spineShape.quadraticCurveTo(-21.5, -343, -18.5, -343);
+
+// Smooth Rounded-Corner CNC Neck Weight-Relief Pockets
+for (let z = -305; z < 105; z += 40) {
+  const t = (z + 343) / 486;
+  const w = 4.6 + t * 4.2;
+  spineShape.holes.push(createRoundedRectPath(-11.5 - w, z, w, 26, 2.0));
+  spineShape.holes.push(createRoundedRectPath(11.5, z, w, 26, 2.0));
+}
+
+// Rounded Tremolo Cavity Route
+spineShape.holes.push(createRoundedRectPath(-22, 248, 44, 66, 5.0));
+
+// Deep 8-Segment Sculpted Bullnose/Bevel on Spine Core
+const extrudeCore = new THREE.ExtrudeGeometry(spineShape, {
+  depth: 10, bevelEnabled: true, bevelThickness: 4.5, bevelSize: 3.5, bevelSegments: 8, curveSegments: 32
+});
+extrudeCore.rotateX(Math.PI / 2);
+const coreMesh = new THREE.Mesh(extrudeCore, matSpineCore);
+coreMesh.position.y = -4.5;
+coreGroup.add(coreMesh);
+
+// Smooth Contoured Lower Bridge Spine Block (With R5mm Bevel Roundovers)
+const lowerBridgeShape = new THREE.Shape();
+lowerBridgeShape.moveTo(-26, 155);
+lowerBridgeShape.lineTo(26, 155);
+lowerBridgeShape.bezierCurveTo(32, 155, 38.5, 172, 38.5, 195);
+lowerBridgeShape.lineTo(38.5, 325);
+lowerBridgeShape.quadraticCurveTo(38.5, 335, 28.5, 335);
+lowerBridgeShape.lineTo(-28.5, 335);
+lowerBridgeShape.quadraticCurveTo(-38.5, 335, -38.5, 325);
+lowerBridgeShape.lineTo(-38.5, 195);
+lowerBridgeShape.bezierCurveTo(-38.5, 172, -32, 155, -26, 155);
+lowerBridgeShape.holes.push(createRoundedRectPath(-23, 244, 46, 72, 5.0));
+
+const lowerBridgeGeo = new THREE.ExtrudeGeometry(lowerBridgeShape, {
+  depth: 14, bevelEnabled: true, bevelThickness: 4.5, bevelSize: 3.5, bevelSegments: 8, curveSegments: 32
+});
+lowerBridgeGeo.rotateX(Math.PI / 2);
+const lowerBridgeMesh = new THREE.Mesh(lowerBridgeGeo, matSpineCore);
+lowerBridgeMesh.position.y = -18.5;
+coreGroup.add(lowerBridgeMesh);
+
+// 3 Tremolo Tension Springs inside Rear Cavity
+for (let sx of [-14, 0, 14]) {
+  const sprGeo = new THREE.CylinderGeometry(2.2, 2.2, 68, 16).rotateX(Math.PI / 2);
+  const sprMesh = new THREE.Mesh(sprGeo, matTrussRod);
+  sprMesh.position.set(sx, -23, 280);
+  coreGroup.add(sprMesh);
+}
+
+// Recessed Side Knurled Volume Thumbwheel & Flush Neutrik Jack
+const volMesh = new THREE.Mesh(new THREE.CylinderGeometry(10.5, 10.5, 4.5, 36), matDarkHardware);
+volMesh.position.set(39.8, -10, 208);
+coreGroup.add(volMesh);
+
+const jackOuter = new THREE.Mesh(new THREE.CylinderGeometry(6.5, 6.5, 4, 24).rotateZ(Math.PI / 2), matTitanium);
+jackOuter.position.set(40.2, -19, 248);
+coreGroup.add(jackOuter);
+
+// 2. INTERNAL PULTRUDED CARBON SPARS + DUAL-ACTION TRUSS ROD
+const sparGroup = new THREE.Group();
+root.add(sparGroup);
+
+const sparGeo = new THREE.BoxGeometry(4, 10, 560);
+const sparL = new THREE.Mesh(sparGeo, matCarbonSpar);
+sparL.position.set(-8.5, -6.5, -52);
+const sparR = new THREE.Mesh(sparGeo, matCarbonSpar);
+sparR.position.set(8.5, -6.5, -52);
+sparGroup.add(sparL, sparR);
+
+const trussMesh = new THREE.Mesh(new THREE.BoxGeometry(6, 9.5, 455), matTrussRod);
+trussMesh.position.set(0, -6.2, -105);
+sparGroup.add(trussMesh);
+
+const spokeWheel = new THREE.Mesh(new THREE.CylinderGeometry(4.5, 4.5, 3.5, 20).rotateX(Math.PI / 2), matTitanium);
+spokeWheel.position.set(0, -5.5, 126);
+sparGroup.add(spokeWheel);
+
+// 3. SMOOTH BEVELED 3.0MM CARBON TOP SKIN + CONTINOUS WARM-TOUCH NECK BACK SHELL
+const skinGroup = new THREE.Group();
+root.add(skinGroup);
+
+const topSkinShape = new THREE.Shape();
+topSkinShape.moveTo(-27.5, 143);
+topSkinShape.lineTo(27.5, 143);
+topSkinShape.bezierCurveTo(28.5, 162, 38.5, 168, 38.5, 195);
+topSkinShape.lineTo(38.5, 325);
+topSkinShape.quadraticCurveTo(38.5, 334, 28.5, 334);
+topSkinShape.lineTo(-28.5, 334);
+topSkinShape.quadraticCurveTo(-38.5, 334, -38.5, 325);
+topSkinShape.lineTo(-38.5, 195);
+topSkinShape.bezierCurveTo(-38.5, 168, -28.5, 162, -27.5, 143);
+
+topSkinShape.holes.push(createRoundedRectPath(-34.5, 178, 69, 36, 4.0));
+topSkinShape.holes.push(createRoundedRectPath(-32.5, 265, 65, 58, 4.0));
+
+const topSkinGeo = new THREE.ExtrudeGeometry(topSkinShape, {
+  depth: 1.8, bevelEnabled: true, bevelThickness: 1.2, bevelSize: 2.0, bevelSegments: 6, curveSegments: 32
+});
+topSkinGeo.rotateX(Math.PI / 2);
+const topSkinMesh = new THREE.Mesh(topSkinGeo, matCarbonSkin);
+topSkinMesh.position.y = 0.2;
+skinGroup.add(topSkinMesh);
+
+const backShellGeo = new THREE.CylinderGeometry(21.2, 28.2, 486, 36, 1, false, -Math.PI/2, Math.PI);
+backShellGeo.rotateX(Math.PI / 2);
+backShellGeo.scale(1, 0.36, 1);
+const backShellMesh = new THREE.Mesh(backShellGeo, matCarbonSkin);
+backShellMesh.position.set(0, -13.2, -100);
+skinGroup.add(backShellMesh);
+
+// 4. ROLLED-EDGE RICHLITE FRETBOARD + 24 ROUND-CROWNED STAINLESS FRETS + HEADPIECE
+const fretboardGroup = new THREE.Group();
+root.add(fretboardGroup);
+
+const fbShape = new THREE.Shape();
+fbShape.moveTo(-19.5, -343);
+fbShape.lineTo(19.5, -343);
+fbShape.quadraticCurveTo(21.2, -343, 21.5, -338);
+fbShape.lineTo(28.0, 139);
+fbShape.quadraticCurveTo(28.2, 143, 24.5, 143);
+fbShape.lineTo(-24.5, 143);
+fbShape.quadraticCurveTo(-28.2, 143, -28.0, 139);
+fbShape.lineTo(-21.5, -338);
+fbShape.quadraticCurveTo(-21.2, -343, -19.5, -343);
+
+const fbGeo = new THREE.ExtrudeGeometry(fbShape, {
+  depth: 4.2, bevelEnabled: true, bevelThickness: 1.8, bevelSize: 1.8, bevelSegments: 6, curveSegments: 24
+});
+fbGeo.rotateX(Math.PI / 2);
+const fbMesh = new THREE.Mesh(fbGeo, matRichlite);
+fbMesh.position.y = 5.8;
+fretboardGroup.add(fbMesh);
+
+const zNut = -343;
+const scaleLen = 647.7;
+for (let f = 0; f <= 24; f++) {
+  const fz = zNut + scaleLen * (1 - Math.pow(2, -f / 12));
+  const t = (fz - zNut) / 486;
+  const fw = 43 + (57 - 43) * t - 3.2;
+  const fretGeo = new THREE.CapsuleGeometry(0.95, fw, 8, 16);
+  fretGeo.rotateZ(Math.PI / 2);
+  const fretMesh = new THREE.Mesh(fretGeo, matFret);
+  fretMesh.position.set(0, 6.9, fz);
+  fretboardGroup.add(fretMesh);
+
+  if ([3, 5, 7, 9, 12, 15, 17, 19, 21, 24].includes(f)) {
+    const prevFz = zNut + scaleLen * (1 - Math.pow(2, -(f - 1) / 12));
+    const midZ = (fz + prevFz) / 2;
+    const midW = 43 + (57 - 43) * ((midZ - zNut) / 486);
+    const offsets = (f === 12 || f === 24) ? [-3.5, 3.5] : [0];
+    for (let dz of offsets) {
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(1.25, 16, 16), matLuminlay);
+      dot.position.set(-midW / 2 - 0.2, 3.2, midZ + dz);
+      fretboardGroup.add(dot);
+    }
+  }
+}
+
+// Rounded-Edge CNC LowPro 6-String Locking Headpiece
+const headLockShape = new THREE.Shape();
+const hlPath = createRoundedRectPath(-21.2, -361, 42.4, 18, 4.0);
+headLockShape.add(hlPath);
+const headLockGeo = new THREE.ExtrudeGeometry(headLockShape, { depth: 8, bevelEnabled: true, bevelThickness: 1.8, bevelSize: 1.6, bevelSegments: 5 });
+headLockGeo.rotateX(Math.PI / 2);
+const headLockMesh = new THREE.Mesh(headLockGeo, matDarkHardware);
+headLockMesh.position.y = 7.2;
+fretboardGroup.add(headLockMesh);
+
+// 5. ROUNDED-BEZEL SOAPBAR PICKUP + HIPSHOT TREMOLO + 6 STRINGS
+const hardwareGroup = new THREE.Group();
+root.add(hardwareGroup);
+
+const puShape = new THREE.Shape();
+puShape.add(createRoundedRectPath(-34, 178, 68, 35, 5.5));
+const puGeo = new THREE.ExtrudeGeometry(puShape, { depth: 11, bevelEnabled: true, bevelThickness: 2.0, bevelSize: 1.8, bevelSegments: 5 });
+puGeo.rotateX(Math.PI / 2);
+const pickupMesh = new THREE.Mesh(puGeo, matPickup);
+pickupMesh.position.y = 7.8;
+hardwareGroup.add(pickupMesh);
+
+const brShape = new THREE.Shape();
+brShape.add(createRoundedRectPath(-32, 267, 64, 55, 5.0));
+const brGeo = new THREE.ExtrudeGeometry(brShape, { depth: 9, bevelEnabled: true, bevelThickness: 1.6, bevelSize: 1.5, bevelSegments: 4 });
+brGeo.rotateX(Math.PI / 2);
+const bridgeBase = new THREE.Mesh(brGeo, matDarkHardware);
+bridgeBase.position.y = 6.0;
+hardwareGroup.add(bridgeBase);
+
+for (let s = 0; s < 6; s++) {
+  const sx = -26.25 + s * 10.5;
+  const nx = -17.5 + s * 7.0;
+  const sad = new THREE.Mesh(new THREE.CapsuleGeometry(2.8, 12, 8, 16).rotateX(Math.PI / 2), matTitanium);
+  sad.position.set(sx, 8.2, 282);
+  hardwareGroup.add(sad);
+
+  const tun = new THREE.Mesh(new THREE.CylinderGeometry(3.8, 3.8, 20, 24).rotateX(Math.PI / 2), matDarkHardware);
+  tun.position.set(sx, 1.2, 328);
+  hardwareGroup.add(tun);
+
+  const strPts = [new THREE.Vector3(nx, 8.2, -343), new THREE.Vector3(sx, 10.2, 282)];
+  const strGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(strPts), 4, 0.32 + (5 - s) * 0.08, 10, false);
+  hardwareGroup.add(new THREE.Mesh(strGeo, matFret));
+}
+
+const armCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(29, 5, 292),
+  new THREE.Vector3(33, 22, 290),
+  new THREE.Vector3(38, 26, 215),
+  new THREE.Vector3(26, 30, 148)
+]);
+hardwareGroup.add(new THREE.Mesh(new THREE.TubeGeometry(armCurve, 28, 2.2, 16, false), matDarkHardware));
+
+// 6. PILLOWED R14MM ROUNDED TITANIUM REAR TUNER U-GUARD (Zero Boxy Corners!)
+const uGuardGroup = new THREE.Group();
+root.add(uGuardGroup);
+
+const uShape = new THREE.Shape();
+uShape.moveTo(-40.5, 316);
+uShape.lineTo(-40.5, 342);
+uShape.quadraticCurveTo(-40.5, 358, -24.5, 358);
+uShape.lineTo(24.5, 358);
+uShape.quadraticCurveTo(40.5, 358, 40.5, 342);
+uShape.lineTo(40.5, 316);
+uShape.lineTo(31.0, 316);
+uShape.lineTo(31.0, 340);
+uShape.quadraticCurveTo(31.0, 347, 23.0, 347);
+uShape.lineTo(-23.0, 347);
+uShape.quadraticCurveTo(-31.0, 347, -31.0, 340);
+uShape.lineTo(-31.0, 316);
+uShape.closePath();
+
+const uGeo = new THREE.ExtrudeGeometry(uShape, {
+  depth: 17, bevelEnabled: true, bevelThickness: 3.5, bevelSize: 3.0, bevelSegments: 8, curveSegments: 32
+});
+uGeo.rotateX(Math.PI / 2);
+const uMesh = new THREE.Mesh(uGeo, matTitanium);
+uMesh.position.y = 2.5;
+uGuardGroup.add(uMesh);
+
+// 7. SMOOTH ORGANIC TEARDROP 3A UPPER HORN & CURVED TUBULAR 3B LEG RAIL (Zero Pointy Spikes!)
+const wing3AGroup = new THREE.Group();
+const wing3BGroup = new THREE.Group();
+root.add(wing3AGroup, wing3BGroup);
+
+// 3A Smooth Flowing S-Curve Upper Horn (No rear spike, rounded R8mm teardrop tip at 12th fret)
+const w3AShape = new THREE.Shape();
+w3AShape.moveTo(-27.5, 148);
+w3AShape.lineTo(-25.5, 86);
+// Smooth concave inner arch toward 12th fret tip
+w3AShape.bezierCurveTo(-42, 75, -72, 10, -86, -46);
+// Smooth rounded teardrop horn tip (R8mm radius, zero sharpness!)
+w3AShape.bezierCurveTo(-90, -60, -104, -56, -102, -40);
+// Smooth flowing outer S-curve back down to the spine (no pointy rear spur!)
+w3AShape.bezierCurveTo(-98, 12, -72, 95, -52, 138);
+w3AShape.quadraticCurveTo(-40, 156, -27.5, 148);
+
+const w3AGeo = new THREE.ExtrudeGeometry(w3AShape, {
+  depth: 6, bevelEnabled: true, bevelThickness: 3.5, bevelSize: 3.2, bevelSegments: 8, curveSegments: 36
+});
+w3AGeo.rotateX(Math.PI / 2);
+const w3AMesh = new THREE.Mesh(w3AGeo, matTitanium);
+w3AMesh.position.y = -4.0;
+wing3AGroup.add(w3AMesh);
+
+const strapBtn = new THREE.Mesh(new THREE.CylinderGeometry(5.5, 4.0, 8, 24).rotateZ(Math.PI / 4), matFret);
+strapBtn.position.set(-98, -7, -53);
+wing3AGroup.add(strapBtn);
+
+const pin1 = new THREE.Mesh(new THREE.CapsuleGeometry(4.2, 8, 12, 24), matRedPin);
+pin1.position.set(-30, -6.5, 114);
+wing3AGroup.add(pin1);
+
+// 3B Smooth Sweeping Anatomical C-Curve Leg Rail (Full Rounded Bullnose + Rounded Tip)
+const w3BShape = new THREE.Shape();
+w3BShape.moveTo(40, 344);
+w3BShape.bezierCurveTo(92, 342, 138, 288, 135, 212);
+w3BShape.bezierCurveTo(133, 175, 126, 152, 122, 144);
+// Smooth rounded distal tip
+w3BShape.quadraticCurveTo(115, 136, 110, 146);
+w3BShape.bezierCurveTo(116, 165, 120, 185, 121, 212);
+w3BShape.bezierCurveTo(123, 275, 84, 322, 40, 324);
+w3BShape.closePath();
+
+const w3BGeo = new THREE.ExtrudeGeometry(w3BShape, {
+  depth: 7, bevelEnabled: true, bevelThickness: 4.0, bevelSize: 3.6, bevelSegments: 8, curveSegments: 36
+});
+w3BGeo.rotateX(Math.PI / 2);
+const w3BMesh = new THREE.Mesh(w3BGeo, matTitanium);
+w3BMesh.position.y = -4.0;
+wing3BGroup.add(w3BMesh);
+
+// Smooth Santoprene Cushion Strip along outer curve of 3B
+const gripCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(76, -7.5, 336),
+  new THREE.Vector3(118, -7.5, 296),
+  new THREE.Vector3(137, -7.5, 232),
+  new THREE.Vector3(132, -7.5, 175),
+  new THREE.Vector3(122, -7.5, 146)
+]);
+const gripMesh = new THREE.Mesh(new THREE.TubeGeometry(gripCurve, 40, 3.2, 16, false), matGrip);
+wing3BGroup.add(gripMesh);
+
+const pin2 = new THREE.Mesh(new THREE.CapsuleGeometry(4.2, 10, 12, 24), matRedPin);
+pin2.position.set(46, -7.0, 334);
+wing3BGroup.add(pin2);
+
+enableShadows(root);
+
+// UI & Interactive State
+const explodeSlider = document.getElementById('explodeSlider');
+const wingSlider = document.getElementById('wingSlider');
+const expVal = document.getElementById('expVal');
+const wingVal = document.getElementById('wingVal');
+
+function updatePositions() {
+  const e = parseFloat(explodeSlider.value) / 100;
+  const w = parseFloat(wingSlider.value) / 100;
+  expVal.textContent = Math.round(e * 100) + '%';
+  wingVal.textContent = w > 0.05 ? Math.round(w * 100) + '% Detached' : 'Attached';
+
+  fretboardGroup.position.y = e * 95;
+  hardwareGroup.position.y = e * 55;
+  skinGroup.position.y = e * 24;
+  sparGroup.position.y = e * -34;
+  coreGroup.position.y = e * -68;
+  uGuardGroup.position.z = e * 65;
+
+  const wingOffset = Math.max(e * 80, w * 115);
+  wing3AGroup.position.x = -wingOffset;
+  wing3BGroup.position.x = wingOffset;
+}
+
+explodeSlider.addEventListener('input', updatePositions);
+wingSlider.addEventListener('input', updatePositions);
+
+window.setPreset = function(mode) {
+  document.querySelectorAll('#btnAssembled, #btnExploded, #btnTravel').forEach(b => b.classList.remove('active'));
+  if (mode === 'assembled') {
+    explodeSlider.value = 0; wingSlider.value = 0;
+    document.getElementById('btnAssembled').classList.add('active');
+  } else if (mode === 'exploded') {
+    explodeSlider.value = 100; wingSlider.value = 75;
+    document.getElementById('btnExploded').classList.add('active');
+  } else if (mode === 'travel') {
+    explodeSlider.value = 0; wingSlider.value = 100;
+    document.getElementById('btnTravel').classList.add('active');
+  }
+  updatePositions();
+};
+
+let isXray = false;
+window.toggleXray = function() {
+  isXray = !isXray;
+  matSpineCore.wireframe = isXray;
+  matCarbonSkin.transparent = isXray;
+  matCarbonSkin.opacity = isXray ? 0.22 : 1.0;
+  matRichlite.transparent = isXray;
+  matRichlite.opacity = isXray ? 0.30 : 1.0;
+  document.getElementById('btnXray').classList.toggle('active', isXray);
+};
+
+let isCadColorMode = false;
+window.toggleMaterialMode = function() {
+  isCadColorMode = !isCadColorMode;
+  const btn = document.getElementById('btnMatMode');
+  if (isCadColorMode) {
+    matCarbonSpar.color.setHex(0x0284c7);
+    matTrussRod.color.setHex(0xf59e0b);
+    matGrip.color.setHex(0x10b981);
+    btn.textContent = 'Finish: Color-Coded CAD Blueprint (Click for Photorealistic)';
+  } else {
+    matCarbonSpar.color.setHex(0x1e242d);
+    matTrussRod.color.setHex(0x94a3b8);
+    matGrip.color.setHex(0x0f1217);
+    btn.textContent = 'Finish: Photorealistic Stealth Black & Titanium (Click for CAD Colors)';
+  }
+};
+
+window.setCam = function(view) {
+  if (view === 'hero') { camera.position.set(340, 310, 460); controls.target.set(0, 0, 15); }
+  else if (view === 'top') { camera.position.set(0, 820, 10); controls.target.set(0, 0, 0); }
+  else if (view === 'side') { camera.position.set(660, 10, 0); controls.target.set(0, 0, 0); }
+  else if (view === 'tail') { camera.position.set(135, 125, 510); controls.target.set(0, -5, 310); }
+};
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>

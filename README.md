@@ -1,0 +1,102 @@
+# GuitarLane — The "Carbon Spine" (`MONOLITH` / `VERTEBRA`) Ultra-Compact Headless Guitar & Bass System
+
+An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7, and 8-String) and Bass (6, 7, and 8-String)** engineered for technical virtuosos and traveling metal musicians—built around a **Method 2 Turnkey 5-Axis CNC Hybrid Carbon/7075 Spine (`82 mm / 3.23"` max width, `721 mm / 28.38"` length)**, a **Grade-5 Titanium Rear Tuner U-Guard**, and **tool-free quarter-turn detachable `3A` / `3B` ergonomic wings**.
+
+![Real DSLR Photo — Smooth Rounded & Beveled 6-String Prototype on Luthiery Workbench](images/01_dslr_and_rounded_edges/01_dslr_workbench_wide_uncropped.jpg)
+
+---
+
+## 📚 Master Documentation Index
+
+1. **[`docs/01_DESIGN_AND_DISCUSSION_LOG.md`](docs/01_DESIGN_AND_DISCUSSION_LOG.md)** — Complete chronological design & engineering discussion log:
+   * Aesthetic evolution (rejecting flashy gold/forged carbon camo in favor of **Solid Matte Stealth Obsidian Black** + **Bead-Blasted Grade-5 Titanium**)
+   * Solving the tail-tuner thigh contact issue (**CNC Titanium Rear U-Guard**)
+   * 5-second tool-free modularity (**`3A` Upper Horn Blade** at 12th-fret balance point + **`3B` Skeletal Lower Leg Rail** with captive M6 quarter-turn pins)
+   * Edge ergonomics (**`R6–R8 mm` continuous bullnose roundovers** & **`35°–45°` sculpted comfort bevels**)
+   * Thermal comfort physics (why your hand and leg never touch cold metal: `2.2 mm` warm-touch carbon/Cerakote neck shell, `6 mm` rolled-edge Richlite fretboard, and `2 mm` Santoprene rubber grip strip)
+   * Manufacturing trade-offs (**Method 1 Prepreg Mold** vs. **Method 2 Turnkey 5-Axis CNC Hybrid** vs. **Method 3 Wet-Layup**) & unit cost tables (`$1,137` 1-off prototype $\rightarrow$ `$737` at Qty 10 $\rightarrow$ `$546` at Qty 50)
+   * Dual-laptop travel backpack geometry (**Path B Carbon Tube Capsule** vs. **Path A `19"` 2-Piece Take-Down** vs. **`30"` Full-Length Clamshell Pack**)
+2. **[`docs/02_ENGINEERING_SPEC_AND_BOM.md`](docs/02_ENGINEERING_SPEC_AND_BOM.md)** — Full millimeter-scale specification tables across all 6 models (`6/7/8` Guitars & `6/7/8` Multiscale Basses), OEM production tooling NRE, and retail bundle economics.
+3. **[`docs/03_STEP_BY_STEP_BUILD_GUIDE.md`](docs/03_STEP_BY_STEP_BUILD_GUIDE.md)** — Complete 6-phase step-by-step build & execution guide:
+   * Exact off-the-shelf parts shopping list with part numbers, prices, and direct supplier links (`Hipshot`, `Fishman Fluence Modern`, `Neutrik`, `StewMac`, `Rock West Composites`, `Jescar`, `Luminlay`, `McMaster-Carr`, `3M DP420 Black`)
+   * Digital caliper verification & `.STEP` CAD tolerances
+   * Copy-paste RFQ manufacturing notes for **RapidDirect / JLCCNC / PCBWay**
+   * Step-by-step 90-minute structural bonding & solderless assembly manual
+4. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D PBR Model Viewer** with sliders to explode the Method 2 CNC layers, detach the `3A`/`3B` wings, and toggle X-Ray internal lattice view.
+5. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
+
+---
+
+## ⚡ Quick-Reference Specs (6-String Prototype — Method 2 Turnkey CNC)
+
+| Parameter | Specification |
+| :--- | :--- |
+| **Scale Length & Frets** | `25.5"` (`647.7 mm`), **24+1 Zero-Fret** (`Jescar FW57110-S` Stainless Steel Jumbo on `6.0 mm` `Richlite Black Diamond` w/ `1.5 mm` rolled edges) |
+| **Total Length & Width** | **`721 mm` (`28.38"`)** total length \| **`43 mm`** (Nut) $\rightarrow$ **`57 mm`** (24th Fret) $\rightarrow$ **`82 mm` (`3.23"`)** max bare spine width (`232 mm / 9.1"` w/ wings) |
+| **Neck Profile & Thermal Isolation** | `18.5 mm` (1st fret) $\rightarrow$ `20.0 mm` (12th fret) Asymmetric C/D profile; internal 7075 CNC lattice + 2x `4×10 mm` carbon spars + dual-action truss rod encapsulated inside a **`2.2 mm` warm-touch Carbon/Cerakote shell** |
+| **Edge Contour** | Smooth **`R6.0–R8.0 mm` continuous bullnose roundovers** + **`35°` forearm comfort bevel** (zero sharp/pointy corners) |
+| **Bridge & Tuner Protection** | **Hipshot `4HV060B`** 6-String Headless Floating Tremolo + **LowPro CNC Headpiece**, shielded at the tail by a **`82 mm` CNC Grade-5 Titanium Rear U-Guard** |
+| **Pickup & Electronics** | Single **Fishman Fluence Modern Ceramic (`PRF-MHB-CB1`)** soapbar humbucker, side-mounted push-push knurled volume wheel + flush **Neutrik `NJ3FP6C-BAG`** locking jack |
+| **Detachable Ergonomics** | **`3A` Teardrop Upper Horn** (strap lock at 12th-fret balance point) + **`3B` Curved C-Rail Leg Rest** (with `2.0 mm` Santoprene warm rubber grip strip), locked via **2x M6 red anodized quarter-turn captive pins** |
+| **1-Off Prototype Build Cost** | **`$1,137`** (`~$940` w/ Tan/Nova bridge) \| **`$737`** at Qty 10 \| **`$546`** at Qty 50 (`$0` mold tooling cost, ~90 mins assembly) |
+
+---
+
+## 🖼️ Complete Visual Gallery (All 45 Photos, Renderings & Blueprints)
+
+### Section 1: Real-World DSLR Photos & Smooth Rounded / Beveled Edge Studies (`images/01_dslr_and_rounded_edges/`)
+
+| 01. Uncropped Workbench DSLR Photo (Wide) | 02. Uncropped Studio Stand DSLR Photo (Portrait) |
+| :---: | :---: |
+| ![Workbench Wide](images/01_dslr_and_rounded_edges/01_dslr_workbench_wide_uncropped.jpg) | ![Studio Stand Portrait](images/01_dslr_and_rounded_edges/02_dslr_studio_stand_portrait_uncropped.jpg) |
+| **03. Recording Studio Landscape Photo** | **04. Edge Comparison: `45°` Bevel vs. `R8mm` Bullnose Roundover** |
+| ![Recording Studio Landscape](images/01_dslr_and_rounded_edges/03_dslr_recording_studio_landscape.jpg) | ![Bevel vs Roundover](images/01_dslr_and_rounded_edges/06_edge_comparison_45deg_bevel_vs_r8mm_roundover.jpg) |
+| **05. Organic Sculpted Bevel & Teardrop Curves (v3)** | **06. Organic Sculpted Bevel & Teardrop Curves (v2)** |
+| ![Organic Sculpted v3](images/01_dslr_and_rounded_edges/07_organic_sculpted_bevel_teardrop_v3.jpg) | ![Organic Sculpted v2](images/01_dslr_and_rounded_edges/08_organic_sculpted_bevel_v2.jpg) |
+| **07. Workbench Close-Up DSLR Photo** | **08. Studio Floor Stand Photo** |
+| ![Workbench Closeup](images/01_dslr_and_rounded_edges/04_dslr_workbench_closeup.jpg) | ![Studio Floor Stand](images/01_dslr_and_rounded_edges/05_dslr_studio_floor_stand.jpg) |
+
+---
+
+### Section 2: 1:1 Millimeter CNC Blueprints, Exploded Stacks & Cutaways (`images/02_cnc_specs_and_blueprints/`)
+
+#### 01. Master 4-View 1:1 Millimeter CNC Engineering Blueprint
+![Master 1:1 CNC Blueprint](images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png)
+
+| 02. Photorealistic CNC Top Assembled & Internal Lattice Cutaway | 03. Narrow-Spine CNC Exploded Stack & 12th-Fret Cross-Section (`50 × 20 mm`) |
+| :---: | :---: |
+| ![CNC Top & Cutaway](images/02_cnc_specs_and_blueprints/02_cnc_spec_assembled_and_internal_lattice_cutaway.jpg) | ![CNC Exploded & Cross-Section](images/02_cnc_specs_and_blueprints/03_cnc_narrow_spine_exploded_and_12th_fret_section.jpg) |
+| **04. True-Scale 1:1 Backpack vs. Guitar CAD Comparison** | **05. 30-Inch Backpack 2-Half Clamshell 1:1 Engineering CAD** |
+| ![True Scale CAD Comparison](images/02_cnc_specs_and_blueprints/05_true_scale_1to1_bag_vs_guitar_cad.png) | ![30 Inch Bag CAD](images/02_cnc_specs_and_blueprints/06_bag_30_inch_engineering_scale_cad.png) |
+
+---
+
+### Section 3: 6/7/8-String Guitar & Bass Lineup, Ergonomics & Tuner U-Guard (`images/03_lineup_and_ergonomics/`)
+
+| 01. Design #1 Reference: Assembled vs. Bare `82 mm` Spine | 02. 4-Model Family Lineup (6, 7, 8-String Multiscale & Bass) |
+| :---: | :---: |
+| ![Design 1 Reference](images/03_lineup_and_ergonomics/01_design1_assembled_vs_bare_82mm_spine.jpg) | ![4-Model Lineup](images/03_lineup_and_ergonomics/04_6_7_8_string_guitar_and_bass_family_lineup.jpg) |
+| **03. 4-Model Quick-Release Disassembly Technical Layout** | **04. Playing Posture, Forearm Contour & Pack-Flat Case (v3)** |
+| ![4-Model Disassembly](images/03_lineup_and_ergonomics/08_4model_exploded_quick_release_wings_technical.jpg) | ![Ergonomics Showcase v3](images/03_lineup_and_ergonomics/05_ergonomics_playing_posture_and_case_v3.jpg) |
+| **05. Rear Tuner U-Guard Orthographic & Cutaway Sheet** | **06. Recessed Tuner Guard 7-String Concept** |
+| ![Tuner Guard Sheet](images/03_lineup_and_ergonomics/11_tuner_u_guard_orthographic_and_cutaway.jpg) | ![Recessed Tuner Guard](images/03_lineup_and_ergonomics/12_recessed_tuner_guard_7string_v2.jpg) |
+
+---
+
+### Section 4: Path B Carbon Tube Capsule, Path A Take-Down & Dual-Laptop Backpacks (`images/04_backpack_and_travel_cases/`)
+
+| 01. Path B: Self-Contained Carbon Tube Capsule & CNC Quick-Release Latches | 02. Path B: `20.5"` Dual-Laptop Backpack + Side-Mounted Carbon Tube |
+| :---: | :---: |
+| ![Path B Mechanisms](images/04_backpack_and_travel_cases/02_path_b_self_contained_tube_and_cnc_quick_release_latches.jpg) | ![Path B Backpack](images/04_backpack_and_travel_cases/01_path_b_side_mounted_carbon_tube_and_21in_backpack.jpg) |
+| **03. Path B: Universal Guitar (`29"`) & Bass (`38"`) Capsule Ecosystem** | **04. Path A: `19"` 2-Piece Take-Down Spine in Standard `21"` Backpack** |
+| ![Path B Ecosystem](images/04_backpack_and_travel_cases/03_path_b_universal_guitar_and_bass_capsule_ecosystem.jpg) | ![Path A Takedown](images/04_backpack_and_travel_cases/05_path_a_19inch_2piece_takedown_spine_in_21in_backpack.jpg) |
+| **05. `30-Inch` Tall Backpack: Worn on Body, 3 Styles & 2-Half Clamshell** | **06. Single-Guitar Narrow Sleeve & 4-Instrument Touring Flight Vault** |
+| ![30-Inch 3-Panel](images/04_backpack_and_travel_cases/07_30inch_tall_backpack_3panel_worn_and_2half_clamshell.jpg) | ![Touring Vault](images/04_backpack_and_travel_cases/11_single_guitar_sleeve_and_4instrument_touring_vault_v3.jpg) |
+
+---
+
+### Section 5: Early Concept Explorations (`images/05_early_concepts/`)
+
+| 01. Initial Forged Carbon Spine Concept (v1) | 02. Pagani / Richard Mille Hypercar Aesthetic Exploration |
+| :---: | :---: |
+| ![Early Concept v1](images/05_early_concepts/01_initial_forged_carbon_spine_concept_v1.jpg) | ![Pagani RM Concept](images/05_early_concepts/05_pagani_richard_mille_hypercar_aesthetic_exploration.jpg) |

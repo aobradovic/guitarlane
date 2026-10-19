@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Carbon Spine — Path B Engineering Spec, CAD & 3D Renders</title>
+<style>
+  :root {
+    --bg: #0b0f17;
+    --card: #131b29;
+    --border: #26334d;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --green: #4ade80;
+    --amber: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .subtitle {
+    color: var(--accent);
+    font-size: 16px;
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  h2 {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .img-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .img-card {
+    background: #090d14;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .img-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: zoom-in;
+  }
+  .img-caption {
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  .img-caption strong {
+    color: var(--text);
+    display: block;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  th {
+    background: #1e293b;
+    color: var(--accent);
+  }
+  tr:nth-child(even) {
+    background: #0f172a;
+  }
+  .highlight-row {
+    background: #172554 !important;
+    font-weight: bold;
+    color: #fff;
+  }
+  code {
+    background: #1e293b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--amber);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>"The Carbon Spine" — Master Engineering Specification, 1:1 CAD & 3D Render Suite</h1>
+  <div class="subtitle">Click any image below to open it full-screen in a new tab</div>
+
+  <div class="section">
+    <h2>0. Real-World DSLR Photos, Rounded/Beveled Edges & 1:1 CNC Master Blueprint</h2>
+    <div class="img-grid">
+      <div class="img-card">
+        <a href="../images/01_dslr_and_rounded_edges/01_dslr_workbench_wide_uncropped.jpg" target="_blank">
+          <img src="../images/01_dslr_and_rounded_edges/01_dslr_workbench_wide_uncropped.jpg" alt="Real DSLR Photo on Workbench">
+        </a>
+        <div class="img-caption">
+          <strong>Uncropped Real-World DSLR Photo on Luthiery Workbench (Smooth R6–R8mm Rounded & Beveled Edges)</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/01_dslr_and_rounded_edges/02_dslr_studio_stand_portrait_uncropped.jpg" target="_blank">
+          <img src="../images/01_dslr_and_rounded_edges/02_dslr_studio_stand_portrait_uncropped.jpg" alt="Real DSLR Photo on Studio Stand">
+        </a>
+        <div class="img-caption">
+          <strong>Full-Length Uncropped Studio Stand Portrait Photo</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/01_dslr_and_rounded_edges/06_edge_comparison_45deg_bevel_vs_r8mm_roundover.jpg" target="_blank">
+          <img src="../images/01_dslr_and_rounded_edges/06_edge_comparison_45deg_bevel_vs_r8mm_roundover.jpg" alt="Bevel vs Roundover Comparison">
+        </a>
+        <div class="img-caption">
+          <strong>Option A (45° Sculpted Comfort Bevel) vs. Option B (R8mm Continuous Bullnose Roundover)</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png" target="_blank">
+          <img src="../images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png" alt="6-String Master Engineering Blueprint">
+        </a>
+        <div class="img-caption">
+          <strong>4-View 1:1 Millimeter-Scale Engineering Blueprint (Click to Zoom Full-Res)</strong>
+          Panel 1: Assembled Top View with 3A Upper Horn, 3B Lower Leg Rail (with 2mm Santoprene warm-touch grip strip), and CNC Titanium Rear U-Guard. Panel 2: Bare 82mm-wide Travel Stick vs. X-Ray Internal CNC Lattice & Dual Carbon I-Beams. Panel 3: Side Profile Elevation (18.5mm–20mm neck, 38mm bridge depth, 0.9mm string action). Panel 4: 12th-Fret Neck Cross-Section showing the 2.2mm Warm-Touch Carbon/Cerakote Outer Shell, Richlite Fretboard with Rolled Edges, Luminlay Side Dot, Dual Carbon Spars, and Low-Profile Truss Rod.
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/02_cnc_specs_and_blueprints/02_cnc_spec_assembled_and_internal_lattice_cutaway.jpg" target="_blank">
+          <img src="../images/02_cnc_specs_and_blueprints/02_cnc_spec_assembled_and_internal_lattice_cutaway.jpg" alt="CNC Assembled and Internal Lattice Cutaway">
+        </a>
+        <div class="img-caption">
+          <strong>Photorealistic 1:1 CNC Spec Render — Assembled Guitar vs. Internal 5-Axis CNC Spine Cutaway</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/02_cnc_specs_and_blueprints/03_cnc_narrow_spine_exploded_and_12th_fret_section.jpg" target="_blank">
+          <img src="../images/02_cnc_specs_and_blueprints/03_cnc_narrow_spine_exploded_and_12th_fret_section.jpg" alt="CNC Exploded Stack and 12th Fret Section">
+        </a>
+        <div class="img-caption">
+          <strong>Narrow-Spine Method 2 CNC Exploded Stack & 12th-Fret Macro Cross-Section (50.0 × 20.0 mm)</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Path B Deep-Dive: Self-Contained Carbon Capsule, CNC Side Latch & Tool-Free Wing Click</h2>
+    <div class="img-grid">
+      <div class="img-card">
+        <a href="../images/04_backpack_and_travel_cases/02_path_b_self_contained_tube_and_cnc_quick_release_latches.jpg" target="_blank">
+          <img src="../images/04_backpack_and_travel_cases/02_path_b_self_contained_tube_and_cnc_quick_release_latches.jpg" alt="Path B Deep Dive Mechanisms">
+        </a>
+        <div class="img-caption">
+          <strong>Path B Engineering Triptych (Click to Zoom Full-Res)</strong>
+          Left: Self-contained 4" Carbon Capsule holding the 1-piece bare guitar stick in the bottom shell and the detached 3A/3B titanium wings + whammy bar in the lid foam. Center: Macro view of the CNC 7075-T6 / Titanium cam-lock side latch on the 21" backpack. Right: Tool-free captive quarter-turn pin ("CLICK") wing assembly.
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/04_backpack_and_travel_cases/04_path_b_modular_lineup_and_backpack.jpg" target="_blank">
+          <img src="../images/04_backpack_and_travel_cases/04_path_b_modular_lineup_and_backpack.jpg" alt="Path B Universal Guitar and Bass Capsule System">
+        </a>
+        <div class="img-caption">
+          <strong>Path B Universal Guitar (29.3") & Bass (38.0") Capsule Scaling</strong>
+          One universal 21" Dual-Laptop Backpack with CNC side clamps on both sides: docks the 29.3" Guitar Capsule (left), the 38.0" Bass Capsule (right), or both simultaneously.
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/04_backpack_and_travel_cases/01_path_b_side_mounted_carbon_tube_and_21in_backpack.jpg" target="_blank">
+          <img src="../images/04_backpack_and_travel_cases/01_path_b_side_mounted_carbon_tube_and_21in_backpack.jpg" alt="Path B Open Backpack and Carbon Tube">
+        </a>
+        <div class="img-caption">
+          <strong>Path B Open Backpack Loadout + Side-Clamped Carbon Tube Overview</strong>
+          Left: 21" backpack open showing 18" gaming laptop, 16" MacBook Pro, studio headphones, 3 SSDs, power bricks, and detached titanium bars alongside the open Carbon Capsule. Right: 3/4 exterior view with the Carbon Capsule latched to the side.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. True 1:1 Millimeter-Scale CAD Blueprints (Exact Real-World Proportions)</h2>
+    <div class="img-grid">
+      <div class="img-card">
+        <a href="../images/02_cnc_specs_and_blueprints/05_true_scale_1to1_bag_vs_guitar_cad.png" target="_blank">
+          <img src="../images/02_cnc_specs_and_blueprints/05_true_scale_1to1_bag_vs_guitar_cad.png" alt="True 1:1 Millimeter Scale CAD Comparison">
+        </a>
+        <div class="img-caption">
+          <strong>1:1 Millimeter-Scale CAD Comparison: Option 1 (29.5" Single Bag) vs. Option 2 (Path B Side Tube) vs. Option 3 (Path A 2-Piece Split)</strong>
+          Every item plotted at exact 1:1 millimeter scale: 18" Gaming Laptop (400x294mm), 16" MacBook Pro (356x248mm), 6-String Guitar Spine (721x82mm), Studio Headphones (210x185mm), and 3x SSDs (110x60mm).
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/02_cnc_specs_and_blueprints/06_bag_30_inch_engineering_scale_cad.png" target="_blank">
+          <img src="../images/02_cnc_specs_and_blueprints/06_bag_30_inch_engineering_scale_cad.png" alt="30-Inch Bag Human Scale and Internal CAD">
+        </a>
+        <div class="img-caption">
+          <strong>30-Inch (760 x 340 x 150 mm) Bag CAD — Human Body Fit, Internal Stacked Layout & 3 Bag Styles</strong>
+          Shows how a 30" tall x 5.9" thin bag sits from the pelvis/hip-belt to the back of the head on a 5'10" adult, and how placing the headphones + SSDs ABOVE the 400mm laptops keeps the bag 5.9" thin.
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/04_backpack_and_travel_cases/07_30inch_tall_backpack_3panel_worn_and_2half_clamshell.jpg" target="_blank">
+          <img src="../images/04_backpack_and_travel_cases/07_30inch_tall_backpack_3panel_worn_and_2half_clamshell.jpg" alt="30-Inch Backpack 3-Panel Render">
+        </a>
+        <div class="img-caption">
+          <strong>30-Inch Tall Backpack 3D Showcase (On-Body Fit, 3 Exterior Styles, and 2-Half Clamshell Interior)</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. Guitar & Bass Family Lineup, Tuner Guard & Ergonomics Renders (Design #1)</h2>
+    <div class="img-grid">
+      <div class="img-card">
+        <a href="../images/03_lineup_and_ergonomics/01_design1_assembled_vs_bare_82mm_spine.jpg" target="_blank">
+          <img src="../images/03_lineup_and_ergonomics/01_design1_assembled_vs_bare_82mm_spine.jpg" alt="Design 1 Bare Stick vs Assembled">
+        </a>
+        <div class="img-caption">
+          <strong>Locked Base Platform (Design #1): Bare Neck-Width Spine (Right) vs. With Bolt-On 3A/3B Titanium Wings (Left)</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/03_lineup_and_ergonomics/04_6_7_8_string_guitar_and_bass_family_lineup.jpg" target="_blank">
+          <img src="../images/03_lineup_and_ergonomics/04_6_7_8_string_guitar_and_bass_family_lineup.jpg" alt="4-Model Lineup">
+        </a>
+        <div class="img-caption">
+          <strong>4-Model Family Lineup on Design #1</strong>
+          Left to Right: (1) 6-String Matte Obsidian Black, (2) 7-String Satin Gunmetal w/ Black Anodized Wings, (3) 8-String Multiscale Matte Oxblood Crimson, (4) Headless Bass w/ Recessed Barrel Tuners inside Titanium U-Guard.
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/03_lineup_and_ergonomics/05_ergonomics_playing_posture_and_case_v3.jpg" target="_blank">
+          <img src="../images/03_lineup_and_ergonomics/05_ergonomics_playing_posture_and_case_v3.jpg" alt="Ergonomics and Side Controls">
+        </a>
+        <div class="img-caption">
+          <strong>Classical Shred Posture, Side-Edge Knurled Titanium Volume Wheel & Pack-Flat Case</strong>
+        </div>
+      </div>
+
+      <div class="img-card">
+        <a href="../images/03_lineup_and_ergonomics/11_tuner_u_guard_orthographic_and_cutaway.jpg" target="_blank">
+          <img src="../images/03_lineup_and_ergonomics/11_tuner_u_guard_orthographic_and_cutaway.jpg" alt="Recessed Tuner Guard Cutaway">
+        </a>
+        <div class="img-caption">
+          <strong>Isometric Cutaway of the Recessed CNC Titanium Tuner Guard Cradle</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. Complete Dimensional Specifications (All 6 Models)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Spec / Dimension</th>
+          <th>6-String Guitar</th>
+          <th>7-String Guitar</th>
+          <th>8-String Guitar (MS)</th>
+          <th>6-String Bass (MS)</th>
+          <th>7-String Bass (MS)</th>
+          <th>8-String Bass (MS)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Scale Length</strong></td>
+          <td><code>25.5"</code> (648 mm)</td>
+          <td><code>25.5"</code> or <code>26.5"</code> (673 mm)</td>
+          <td><code>26.0"–27.5"</code> (660–698 mm)</td>
+          <td><code>33.0"–35.0"</code> (838–889 mm)</td>
+          <td><code>33.5"–35.5"</code> (851–902 mm)</td>
+          <td><code>34.0"–36.0"</code> (864–914 mm)</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>Total 1-Piece Spine Length</strong></td>
+          <td>721 mm (28.38")</td>
+          <td>721–746 mm (28.4"–29.4")</td>
+          <td>777 mm (30.59")</td>
+          <td>912 mm (35.9")</td>
+          <td>925 mm (36.4")</td>
+          <td>944 mm (37.17")</td>
+        </tr>
+        <tr>
+          <td><strong>Width at Zero-Fret</strong></td>
+          <td>43.0 mm (1.69")</td>
+          <td>48.0 mm (1.89")</td>
+          <td>54.0 mm (2.13")</td>
+          <td>52.0 mm (2.05")</td>
+          <td>60.0 mm (2.36")</td>
+          <td>68.0 mm (2.68")</td>
+        </tr>
+        <tr>
+          <td><strong>Width at 24th Fret</strong></td>
+          <td>57.0 mm (2.24")</td>
+          <td>64.0 mm (2.52")</td>
+          <td>72.0 mm (2.83")</td>
+          <td>76.0 mm (2.99")</td>
+          <td>88.0 mm (3.46")</td>
+          <td>100.0 mm (3.94")</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>Max Width at Titanium U-Guard</strong></td>
+          <td>82.0 mm (3.23")</td>
+          <td>90.0 mm (3.54")</td>
+          <td>100.0 mm (3.94")</td>
+          <td>104.0 mm (4.09")</td>
+          <td>116.0 mm (4.57")</td>
+          <td>128.0 mm (5.04")</td>
+        </tr>
+        <tr>
+          <td><strong>Bare Spine Weight</strong></td>
+          <td>1.05 kg (2.31 lbs)</td>
+          <td>1.18 kg (2.60 lbs)</td>
+          <td>1.32 kg (2.91 lbs)</td>
+          <td>1.65 kg (3.64 lbs)</td>
+          <td>1.85 kg (4.08 lbs)</td>
+          <td>2.10 kg (4.63 lbs)</td>
+        </tr>
+        <tr>
+          <td><strong>Weight w/ 3A+3B Titanium Wings</strong></td>
+          <td>1.38 kg (3.04 lbs)</td>
+          <td>1.51 kg (3.33 lbs)</td>
+          <td>1.65 kg (3.64 lbs)</td>
+          <td>2.02 kg (4.45 lbs)</td>
+          <td>2.22 kg (4.89 lbs)</td>
+          <td>2.47 kg (5.45 lbs)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>5. Path B Manufacturing Cost Breakdown (Prototype vs. 50-Unit Batch vs. 250-Unit OEM)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Subsystem / Component</th>
+          <th>1-Off Prototype</th>
+          <th>Small Batch (50 Units)</th>
+          <th>OEM Production (250+ Units)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Carbon Fiber Monocoque Spine + Richlite Board + Stainless Frets + Matte Finish</strong></td>
+          <td>$420</td>
+          <td>$245</td>
+          <td>$165</td>
+        </tr>
+        <tr>
+          <td><strong>2. Headless Floating Tremolo + String Lock</strong> (Hantug / Tan / Hipshot OEM)</td>
+          <td>$380 (Retail)</td>
+          <td>$210 (OEM Tier 1)</td>
+          <td>$135 (Custom CNC OEM)</td>
+        </tr>
+        <tr>
+          <td><strong>3. Pickup + Side Thumbwheel Volume + Neutrik Locking Jack</strong> (Fishman / Lundgren)</td>
+          <td>$165</td>
+          <td>$105</td>
+          <td>$78</td>
+        </tr>
+        <tr>
+          <td><strong>4. CNC Titanium U-Guard + 3A/3B Wings + Captive Quarter-Turn Pins</strong></td>
+          <td>$340</td>
+          <td>$130</td>
+          <td>$75</td>
+        </tr>
+        <tr>
+          <td><strong>5. Final Assembly, PLEK Fret Leveling & Setup QC</strong></td>
+          <td>$150</td>
+          <td>$85</td>
+          <td>$55</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>SUBTOTAL — Guitar Only (6/7/8 Average)</td>
+          <td>$1,455</td>
+          <td>$775</td>
+          <td>$508</td>
+        </tr>
+        <tr>
+          <td><strong>6. Self-Contained Carbon Tube Capsule</strong> (745 x 105 x 82 mm w/ CNC EVA Foam)</td>
+          <td>$310</td>
+          <td>$140</td>
+          <td>$88</td>
+        </tr>
+        <tr>
+          <td><strong>7. 21" Dual-Laptop Backpack + 4x CNC Side-Latch Jaws</strong></td>
+          <td>$290</td>
+          <td>$125</td>
+          <td>$79</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>TOTAL LANDED COST (Complete Guitar + Carbon Capsule + Backpack System)</td>
+          <td>$2,055</td>
+          <td>$1,040</td>
+          <td>$675</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>6. Direct Supplier & Manufacturer Links for All Parts (Bill of Materials)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Part / Subsystem</th>
+          <th>Supplier / Manufacturer</th>
+          <th>Direct Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="5"><strong>1. Headless Guitar Tremolos & Bridges (6, 7 & 8-String)</strong></td>
+          <td>Custom Headless Floating Tremolo & NGHB Fixed Bridges (6/7/8 & Multiscale, Titanium options)</td>
+          <td>Hantug Custom Guitars & Parts</td>
+          <td><a href="https://www.hantug.com" target="_blank" style="color:#38bdf8;">https://www.hantug.com</a></td>
+        </tr>
+        <tr>
+          <td>TT6 / TT7 Ball-Bearing Headless Tremolos & TH1 Single Bridges</td>
+          <td>Tan Bridges</td>
+          <td><a href="https://www.tanbridges.com" target="_blank" style="color:#38bdf8;">https://www.tanbridges.com</a></td>
+        </tr>
+        <tr>
+          <td>6, 7 & 8-String Split-Level Headless Guitar Tremolo & Fixed Systems</td>
+          <td>Hipshot Products</td>
+          <td><a href="https://hipshotproducts.com/collections/guitar-headless" target="_blank" style="color:#38bdf8;">https://hipshotproducts.com/collections/guitar-headless</a></td>
+        </tr>
+        <tr>
+          <td>Sophia 2:92 Pro Headless-Capable Floating Tremolo (60:1 Macro-Tuners)</td>
+          <td>Sophia Tremolos (CSL)</td>
+          <td><a href="https://sophiatremolos.com" target="_blank" style="color:#38bdf8;">https://sophiatremolos.com</a></td>
+        </tr>
+        <tr>
+          <td>2300 / 7300 Top-Mount Cam Tremolos (6, 7, 8-String Guitar & 6-String Bass)</td>
+          <td>Kahler International</td>
+          <td><a href="https://kahlerusa.com" target="_blank" style="color:#38bdf8;">https://kahlerusa.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="4"><strong>2. Headless Bass Bridges (6, 7 & 8-String)</strong></td>
+          <td>ABM 3901 Single-String Brass Monorail Headless Bass Tuners & Headpieces</td>
+          <td>ABM Guitar Parts (Germany)</td>
+          <td><a href="https://abm-guitarpartsshop.com" target="_blank" style="color:#38bdf8;">https://abm-guitarpartsshop.com</a></td>
+        </tr>
+        <tr>
+          <td>6, 7 & 8-String Headless Bass Bridge Systems</td>
+          <td>Hipshot Products</td>
+          <td><a href="https://hipshotproducts.com/collections/bass-headless" target="_blank" style="color:#38bdf8;">https://hipshotproducts.com/collections/bass-headless</a></td>
+        </tr>
+        <tr>
+          <td>Modular Thrust-Bearing Headless Bass & Guitar Bridges</td>
+          <td>Nova Guitar Parts (via Ploutone)</td>
+          <td><a href="https://ploutone.com/collections/nova-guitar-parts" target="_blank" style="color:#38bdf8;">https://ploutone.com/collections/nova-guitar-parts</a></td>
+        </tr>
+        <tr>
+          <td>Submarine 3D Double-Locking Headless Bass & Multiscale Tuners</td>
+          <td>Mera Guitars</td>
+          <td><a href="https://meraguitars.com" target="_blank" style="color:#38bdf8;">https://meraguitars.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="5"><strong>3. High-Gain Pickups (6, 7 & 8-String Guitar & Bass)</strong></td>
+          <td>Fluence Modern / Stephen Carpenter / Tosin Abasi Multi-Voice Soapbars (6/7/8)</td>
+          <td>Fishman</td>
+          <td><a href="https://www.fishman.com/fluence/" target="_blank" style="color:#38bdf8;">https://www.fishman.com/fluence/</a></td>
+        </tr>
+        <tr>
+          <td>M6 / M7 / M8 High-Gain Metal Humbuckers (Soapbar & Open-Coil)</td>
+          <td>Lundgren Guitar Pickups</td>
+          <td><a href="https://lundgren.se" target="_blank" style="color:#38bdf8;">https://lundgren.se</a></td>
+        </tr>
+        <tr>
+          <td>Juggernaut / Ragnarok / Aftermath 6/7/8 Pickups (Burnt Titanium & Etched Covers)</td>
+          <td>Bare Knuckle Pickups</td>
+          <td><a href="https://www.bareknucklepickups.co.uk" target="_blank" style="color:#38bdf8;">https://www.bareknucklepickups.co.uk</a></td>
+        </tr>
+        <tr>
+          <td>Big Blademan / Big Rig 6, 7 & 8-String Soapbar Bass Pickups</td>
+          <td>Nordstrand Audio</td>
+          <td><a href="https://nordstrandaudio.com/collections/6-string-bass-pickups" target="_blank" style="color:#38bdf8;">https://nordstrandaudio.com/collections/6-string-bass-pickups</a></td>
+        </tr>
+        <tr>
+          <td>45DC / 50DCX Extended-Range Active Soapbars</td>
+          <td>EMG Pickups</td>
+          <td><a href="https://www.emgpickups.com" target="_blank" style="color:#38bdf8;">https://www.emgpickups.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="4"><strong>4. Carbon Fiber, Core & Fretboard Materials</strong></td>
+          <td>Carbon Fiber Neck D-Tubes, Pultruded I-Beams, Reinforcement Strips & Sheets</td>
+          <td>DragonPlate (Allred & Assoc.)</td>
+          <td><a href="https://dragonplate.com" target="_blank" style="color:#38bdf8;">https://dragonplate.com</a></td>
+        </tr>
+        <tr>
+          <td>Toray Prepreg Carbon Fiber, Forged Carbon Tow, Epoxy & Tooling Board</td>
+          <td>Composite Envisions</td>
+          <td><a href="https://compositeenvisions.com" target="_blank" style="color:#38bdf8;">https://compositeenvisions.com</a></td>
+        </tr>
+        <tr>
+          <td>High-Modulus Carbon Tubes, Plates & Structural Foam Cores</td>
+          <td>Rock West Composites</td>
+          <td><a href="https://www.rockwestcomposites.com" target="_blank" style="color:#38bdf8;">https://www.rockwestcomposites.com</a></td>
+        </tr>
+        <tr>
+          <td>Richlite Black Diamond Fretboard Blanks & Dual-Action Truss Rods</td>
+          <td>StewMac</td>
+          <td><a href="https://www.stewmac.com" target="_blank" style="color:#38bdf8;">https://www.stewmac.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>5. Frets & Side Markers</strong></td>
+          <td>FW57110-S Stainless Steel Jumbo Fretwire (Frets 1–24 & Zero-Fret)</td>
+          <td>Jescar Enterprises</td>
+          <td><a href="https://jescar.com/collections/fret-wire" target="_blank" style="color:#38bdf8;">https://jescar.com/collections/fret-wire</a></td>
+        </tr>
+        <tr>
+          <td>Glow-in-the-Dark Side Dots (SGY Green / SB Cyan 2.5mm)</td>
+          <td>Luminlay</td>
+          <td><a href="https://www.luminlay.com" target="_blank" style="color:#38bdf8;">https://www.luminlay.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>6. Electronics & Locking Jack</strong></td>
+          <td>NJ3FP6C-BAG Black Locking 1/4" Chassis Output Jack</td>
+          <td>Neutrik</td>
+          <td><a href="https://www.neutrik.com/en/product/nj3fp6c-bag" target="_blank" style="color:#38bdf8;">https://www.neutrik.com/en/product/nj3fp6c-bag</a></td>
+        </tr>
+        <tr>
+          <td>Low-Friction 500k Push-Push / Push-Pull Potentiometers</td>
+          <td>Bourns (via Mouser)</td>
+          <td><a href="https://www.mouser.com" target="_blank" style="color:#38bdf8;">https://www.mouser.com</a></td>
+        </tr>
+        <tr>
+          <td rowspan="5"><strong>7. CNC Titanium, Quick-Release Pins & Bag Hardware</strong></td>
+          <td>Captive Quarter-Turn Pins, Ball-Lock Pins & Grade-5 Titanium Stock</td>
+          <td>McMaster-Carr</td>
+          <td><a href="https://www.mcmaster.com/quick-release-pins/" target="_blank" style="color:#38bdf8;">https://www.mcmaster.com/quick-release-pins/</a></td>
+        </tr>
+        <tr>
+          <td>Aerospace Quarter-Turn & Detent Alignment Pins</td>
+          <td>Carr Lane Manufacturing</td>
+          <td><a href="https://www.carrlane.com/product/quick-release-pins" target="_blank" style="color:#38bdf8;">https://www.carrlane.com/product/quick-release-pins</a></td>
+        </tr>
+        <tr>
+          <td>On-Demand 5-Axis CNC Machining (Titanium U-Guard, 3A/3B Wings, 7075 Side Clamps)</td>
+          <td>Xometry / Protolabs</td>
+          <td><a href="https://www.xometry.com" target="_blank" style="color:#38bdf8;">https://www.xometry.com</a></td>
+        </tr>
+        <tr>
+          <td>S-Locks Security Guitar Strap Locks</td>
+          <td>Schaller</td>
+          <td><a href="https://schaller.info/en/s-locks/" target="_blank" style="color:#38bdf8;">https://schaller.info/en/s-locks/</a></td>
+        </tr>
+        <tr>
+          <td>Magnetic-Mechanical Quick-Release Backpack Hardware</td>
+          <td>Fidlock</td>
+          <td><a href="https://www.fidlock.com" target="_blank" style="color:#38bdf8;">https://www.fidlock.com</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
