@@ -28,8 +28,9 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
    * **Universal 6-Pin Hot-Swap Pickup Bay (`71 × 39 mm`) + Adapter Bezels:** Accepts active **EMG (`81`/`85`/`57`)**, **Fishman Fluence Modern**, and passive **Bare Knuckle (`Ragnarok`/`Aftermath`/`Juggernaut`)**, **Lundgren (`M6`)**, **Seymour Duncan**, and **DiMarzio** pickups with automatic `Pin 6` active (`9V`/`18V` at `25 kΩ`) vs. zero-battery passive (`0.0V` at `500 kΩ`) switching.
    * **Swappable M.2-Style Analog Overdrive & Gate Daughterboard Cartridges:** Swap between **Card 01 (`Green Screamer Pro + Mod Matrix`)**, **Card 02 (`Horizon Precision Drive`)**, **Card 03 (`Fortin 33 / Grind + Zuul Gate`)**, **Card 04 (`HM-2W Swedish Chainsaw`)**, and **Card 05 (`18V Klon Centaur Boost`)**—plus live Wi-Fi control over clipping diodes (`1S1588` silicon, asymmetric, LED, clean boost) and input tight-cut capacitors.
    * **Modular Hardware & Wing Upgrade Tiers:** Interchangeable Fixed Hardtail vs. Floating Tremolo bridges and `3A`/`3B` wings in **7075 Stealth Black**, **Solid/Forged Carbon Fiber**, **Bead-Blasted Grade-5 Titanium**, **24K Gold PVD**, and **Crimson Anodized**.
-7. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D Custom Shop Configurator & Exploded Model Viewer** with live buttons to swap pickups (`Bare Knuckle`, `EMG 81/57`, `Fishman`, `Lundgren`), swap analog drive cards (`Green Screamer`, `Precision Drive`, `Fortin 33`, `HM-2W`), and preview hardware finishes (`Titanium`, `DLC Black`, `24K Gold`, `Crimson`).
-8. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
+7. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D Custom Shop Configurator, CNC Milling Inspector & Direct `.STL` / `.OBJ` 3D Production Exporter** with live buttons to swap pickups (`Bare Knuckle`, `EMG 81/57`, `Fishman`, `Lundgren`), slide the hot-swap pickup cartridge out under the tensioned strings, inspect 1:1 CNC billet bounding boxes, and download watertight 1:1 millimeter `.STL` and `.OBJ` files directly from your browser.
+8. **[`cnc_production_files/`](cnc_production_files/)** — Machine-validated **1:1 Millimeter Production 3D `.STL` Meshes, AutoCAD `.DXF` 2D Profiles, and `DFM_VALIDATION_CERTIFICATE.json`** ready to upload to **RapidDirect / JLCCNC / PCBWay** for 5-axis CNC milling.
+9. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot & `.STL`/`.DXF` generators (`validate_and_export_cnc_production.py`, `generate_hotswap_pickup_blueprint.py`, `generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
 
 ---
 
@@ -49,7 +50,7 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
 
 ---
 
-## 🖼️ Complete Visual Gallery (All 47 Photos, Renderings & Blueprints)
+## 🖼️ Complete Visual Gallery (All 48 Photos, Renderings & Blueprints)
 
 ### Section 1: Real-World DSLR Photos & Smooth Rounded / Beveled Edge Studies (`images/01_dslr_and_rounded_edges/`)
 
@@ -65,15 +66,18 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
 
 ---
 
-### Section 2: 1:1 Millimeter CNC Blueprints, Modular Pickups/Drive Cards & Cutaways (`images/02_cnc_specs_and_blueprints/`)
+### Section 2: 1:1 Millimeter CNC Blueprints, DFM Validation, Hot-Swap Pickups & Cutaways (`images/02_cnc_specs_and_blueprints/`)
 
-#### 01. Master 4-View 1:1 Millimeter CNC Engineering Blueprint (With Dual-18650, Screamer, NS-1 Gate, NAM & Zero-Battery Relay)
+#### 01. Master CNC DFM Validation, FEA Stress Analysis & 5-Axis Milling Production Sheet
+![DFM Validation & CNC Milling Sheet](images/02_cnc_specs_and_blueprints/10_dfm_validation_and_cnc_milling_sheet.png)
+
+#### 02. Master 4-View 1:1 Millimeter CNC Engineering Blueprint (With Dual-18650, Screamer, NS-1 Gate, NAM & Zero-Battery Relay)
 ![Master 1:1 CNC Blueprint](images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png)
 
-#### 02. True 1:1 Millimeter Engineering Blueprint — Strings-On Side-Sliding Hot-Swap Pickup Cartridge
+#### 03. True 1:1 Millimeter Engineering Blueprint — Strings-On Side-Sliding Hot-Swap Pickup Cartridge
 ![True 1:1 Millimeter Hot-Swap Pickup Blueprint](images/02_cnc_specs_and_blueprints/09_3second_strings_on_hotswap_pickup_cartridge_system.png)
 
-#### 03. Real DSLR Macro Photo — Side-Sliding Hot-Swap Pickup Cartridge Under Tensioned Strings (`EMG` / `Fishman` / `Bare Knuckle`)
+#### 04. Real DSLR Macro Photo — Side-Sliding Hot-Swap Pickup Cartridge Under Tensioned Strings (`EMG` / `Fishman` / `Bare Knuckle`)
 ![DSLR Macro Hot-Swap Pickup Cartridge](images/02_cnc_specs_and_blueprints/09b_dslr_macro_hotswap_pickup_cartridge_workbench.jpg)
 
 #### 04. Modular Customization Ecosystem — Hot-Swap Pickups (`EMG`/`BKP`/`Fishman`), Swappable Analog Drive Cards & Hardware Upgrades

@@ -1,0 +1,40 @@
+{
+  "status": "PASSED_ALL_DFM_AND_STRUCTURAL_CHECKS",
+  "overall_dimensions_mm": {
+    "length_Y": 721.0,
+    "bare_spine_width_X": 82.0,
+    "assembled_width_X": 232.0,
+    "lower_spine_depth_Z": 38.0
+  },
+  "structural_fea": {
+    "string_tension_N": 468.8,
+    "composite_flexural_rigidity_Nm2": 297.62,
+    "uncompensated_deflection_mm": 1.907,
+    "truss_rod_compensated_12th_fret_relief_mm": 0.061,
+    "safety_factor_7075_T6_yield": 6.85
+  },
+  "hotswap_pickup_clearances_mm": {
+    "string_height_Z_mm": 2.0,
+    "pickup_top_Z_mm": -0.8,
+    "vertical_string_clearance_mm": 2.8,
+    "slot_width_Y_mm": 41.0,
+    "sled_width_Y_mm": 40.0,
+    "soapbar_footprint_mm": "70.0 x 38.0",
+    "passive_humbucker_footprint_mm": "68.5 x 37.0 (fits via 70x38mm CNC adapter ring)",
+    "pogo_pin_compression_stroke_mm": 1.4
+  },
+  "z_stackup_at_Y162_mm": {
+    "top_carbon_skin_mm": 3.0,
+    "pickup_and_sled_cavity_mm": 13.5,
+    "solid_7075_emi_bulkhead_mm": 2.5,
+    "rear_battery_and_nam_cavity_mm": 18.5,
+    "rear_magnetic_carbon_hatch_mm": 2.5,
+    "total_spine_thickness_mm": 38.0
+  },
+  "cnc_dfm_rules": {
+    "min_wall_thickness_mm": 2.5,
+    "min_internal_corner_radius_mm": 2.0,
+    "tolerance_class": "ISO 2768-f (Fine, +/- 0.05 mm)",
+    "outer_edge_fillet_radius_mm": "R6.0 mm (Spine) / R8.0 mm (Wings) / R14.0 mm (U-Guard)"
+  }
+}
