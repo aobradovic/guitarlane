@@ -1,0 +1,63 @@
+================================================================================
+GUITARLANE "CARBON SPINE" 6-STRING — BENCHTOP QC & CALIPER INSPECTION TRAVELER
+Print 1 Copy Per Guitar (Prototype #00 & NAMM 2027 Founders Edition #01 to #10)
+================================================================================
+GUITAR SERIAL NUMBER:   [ _______________________ ]  DATE: [ ______________ ]
+INSPECTOR / BUILDER:    [ _______________________ ]  BRIDGE: [ ] Trem  [ ] Hardtail
+WING MATERIAL TIER:     [ ] Grade-5 Titanium         [ ] 7075 Stealth Black
+================================================================================
+
+STAGE 1 — PRE-ORDER DIGITAL CAD & QUOTE VERIFICATION
+--------------------------------------------------------------------------------
+[ ] QC-1.1  All 8 CAD files (.STL & .DXF) uploaded in Millimeters (mm)
+[ ] QC-1.2  Part_01 Spine Core bounding box verified: 703.0 x 82.0 x 38.0 mm
+[ ] QC-1.3  Part_04 Ti Rear U-Guard bounding box verified: 82.0 x 42.0 x 23.0 mm
+[ ] QC-1.4  Part_05A (210x76x12 mm) & Part_05B (205x98x14 mm) wings verified
+[ ] QC-1.5  Part_07 Universal Pickup Sled (73.0 x 40.0 x 2.5 mm) qty verified
+[ ] QC-1.6  Copy-paste Remarks from CNC_ORDER_SHEET_COPY_PASTE.txt attached
+
+STAGE 2 — INCOMING CNC PART DIGITAL CALIPER INSPECTION (BEFORE GLUING)
+--------------------------------------------------------------------------------
+[ ] QC-2.1  Lower Spine Width (Y=0..219mm):    Target 82.00 +/-0.05 mm | Meas: ______ mm
+[ ] QC-2.2  Nut / Zero-Fret Width (Y=703mm):   Target 43.00 +/-0.05 mm | Meas: ______ mm
+[ ] QC-2.3  24th-Fret Heel Width (Y=237mm):    Target 57.00 +/-0.05 mm | Meas: ______ mm
+[ ] QC-2.4  Full Spine Stack Thickness (Z):    Target 38.00 +/-0.05 mm | Meas: ______ mm
+[ ] QC-2.5  Left Side Pickup Exit Slot Width:  Target 41.00 +0.05/0 mm | Meas: ______ mm
+[ ] QC-2.6  Part_07 Pickup Sled Width:         Target 40.00 -0.025 mm  | Meas: ______ mm
+[ ] QC-2.7  Dry-Fit Pickup Sled Slide Test:    Smooth H7/g6 horizontal slide, zero bind
+[ ] QC-2.8  Carbon Spar Slots (2x):            Target 4.10 x 10.10 mm  | Spars fit flush
+[ ] QC-2.9  Truss Rod Center Channel:          Target 6.10 x 9.20 mm   | Rod fits flush
+[ ] QC-2.10 Rear Electronics Cavity (2x18650): Target 102 x 60 x 16.5  | Cells & PCB fit
+[ ] QC-2.11 Rear Ti U-Guard Thread Check:      4x M4x0.7 bolts thread smoothly by hand
+[ ] QC-2.12 3A/3B Wing Dovetail & Pin Check:   Zero play when Ø6mm quarter-turn pins lock
+
+STAGE 3 — STRUCTURAL EPOXY BONDING & FRETWORK QC
+--------------------------------------------------------------------------------
+[ ] QC-3.1  Dry-Clamp Rehearsal Completed (Part_01 + Spars + Fretboard + Part_02/03)
+[ ] QC-3.2  Truss Rod Channel Masked (Zero 3M DP420 epoxy inside truss rod slot)
+[ ] QC-3.3  Zero-Fret to 12th Fret Crown:      Target 323.85 +/-0.05mm | Meas: ______ mm
+[ ] QC-3.4  Zero-Fret to Bridge Saddle Center: Target 647.70 +/-0.20mm | Meas: ______ mm
+[ ] QC-3.5  Fret Rocker Level Check (Frets 1-24): < 0.02 mm variance; R1.5mm rolled edges
+[ ] QC-3.6  Neck Relief @ 105.4 lbs Tension:   Target 0.040 - 0.100 mm | Meas: ______ mm
+[ ] QC-3.7  12th Fret Action (Low E / High E): Target 1.40mm / 1.00mm  | Meas: ___ / ___
+
+STAGE 4 — HOT-SWAP PICKUP, SCREAMER, NS-1 GATE, NAM & WIRELESS QC
+--------------------------------------------------------------------------------
+[ ] QC-4.1  Strings-On Pickup Hot-Swap Test:   > 2.50 mm gap below strings during slide
+[ ] QC-4.2  6-Pin Gold Pogo Contact Check:     < 0.08 Ohm per pin; +23.2 N magnetic snap
+[ ] QC-4.3  Active Cartridge (EMG/Fishman):    Pin 5 = +9.0V ON, Input Load = 25 kOhm
+[ ] QC-4.4  Passive Cartridge (Bare Knuckle):  Pin 5 = 0.0V OFF, Input Load = 500 kOhm
+[ ] QC-4.5  ZERO-BATTERY FAIL-SAFE TEST:       Remove 18650s -> 100% Passive 1/4" Output!
+[ ] QC-4.6  Green Screamer + NS-1 Keyed Gate:  < 0.5 ms mute clamp; < -95 dBu noise floor
+[ ] QC-4.7  Onboard NAM Neural + Cab IR:       Clean / Rhythm / Lead 3-way switch verified
+[ ] QC-4.8  5.8 GHz Wireless + EMI Isolation:  < 2.2 ms latency; zero RF whine in pickup
+
+STAGE 5 — FINAL WEIGHT, BALANCE & BACKPACK FIT SIGN-OFF
+--------------------------------------------------------------------------------
+[ ] QC-5.1  Bare Travel Stick Weight:          Target 1,856g +/-45g    | Meas: ______ g
+[ ] QC-5.2  Full Stage Weight (With Wings):    Target 2,046-2,121g     | Meas: ______ g
+[ ] QC-5.3  Strap Balance & Santoprene Grip:   Zero neck dive; holds 30-deg leg angle
+[ ] QC-5.4  30-Inch Dual-Laptop Backpack Fit:  Zips cleanly alongside 18" + 16" laptops
+
+FINAL QC APPROVAL SIGNATURE: ___________________________   PASS [ ]   HOLD [ ]
+================================================================================
