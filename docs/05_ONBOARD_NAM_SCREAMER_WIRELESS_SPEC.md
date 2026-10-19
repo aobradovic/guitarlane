@@ -1,83 +1,77 @@
-# Onboard Active DSP & Analog Rig Specification: Green Screamer + Keyed NS-1 Noise Gate + NAM Player + Ultra-Low-Latency Wireless + Wi-Fi Control
+# Onboard Active DSP & Battery-Free Passive Fail-Safe Specification: Green Screamer + Keyed NS-1 Noise Gate + NAM Player + Wireless/Wi-Fi + Zero-Battery True Bypass
 
-Yes — **all four systems** fit cleanly inside the `82 mm`-wide 5-axis CNC Spine Core with **zero increase in external dimensions**, turning the guitar into a self-contained, zero-cable rig that outputs a finished `Gate -> Green Screamer -> Neural Amp Modeler (NAM) -> Cab IR` signal both over **1/4" jack** and **uncompressed `< 2.0 ms` wireless**.
+All four onboard systems (**Analog Green Screamer**, **Keyed NS-1/Zuul Noise Suppressor**, **Neural Amp Modeler [`NAM`] + Cab IR**, and **5.8 GHz Ultra-Low-Latency Wireless + Wi-Fi 6**) fit cleanly inside the `20 mm`-deep lower cavity underneath the pickup (`Y = 116 mm to 212 mm`) alongside a **quick-swap Dual-18650 (`7,000 mAh`) battery cradle** — AND the guitar is engineered with a **Normally-Closed Zero-Power Mechanical Relay + High-Gain Passive Soapbar Pickup** so it **works 100% without batteries at any time**.
+
+![Underside Dual-18650 Battery Bay, NAM/Screamer/Gate Board & Side Control Panel](../images/02_cnc_specs_and_blueprints/07_onboard_battery_nam_screamer_cutaway_and_controls.jpg)
 
 ---
 
-## 1. Signal Chain Architecture (Why Putting the Gate + Screamer Inside the Guitar Is Actually Superior to External Pedals)
+## 1. How the Guitar Runs 100% WITHOUT Batteries (3 Battery-Free Operating Modes)
+
+> [!IMPORTANT]
+> **Critical Design Rule:** An active-only pickup (like a standard 9V-only pickup) goes completely dead if the battery dies or is removed for an international flight. To guarantee the guitar **always works with zero batteries installed**, we use a **High-Gain Passive Ceramic Soapbar Humbucker** (e.g., **Lundgren M6 Soapbar**, **Bare Knuckle Ragnarok Soapbar**, or **Seymour Duncan Black Winter / Nazgûl Soapbar** in a `70 × 38 mm` matte-black housing) paired with a **Normally-Closed (`NC`) Mechanical Bypass Relay (`Omron G6K-2F-Y`)**.
 
 ```mermaid
 flowchart LR
-    PU["Fishman Fluence Modern\n(Raw Dry Humbucker)"] --> SPLIT["Internal Dry Split"]
-    SPLIT -->|"Pure Dry Key Trigger"| KEY["NS-1 / Zuul Sidechain\nRMS Envelope Detector"]
-    SPLIT -->|"Audio Path"| TS["Analog SMD 'Green Screamer'\n(OPA1678 + 720Hz HPF + Si Clipping)"]
+    PU["High-Gain Passive Ceramic Humbucker\n(Lundgren M6 / BKP / Duncan Soapbar)"] --> RELAY_IN["Omron G6K-2F-Y\nNormally-Closed Fail-Safe Relay"]
+    
+    RELAY_IN -->|"NO POWER / BATTERIES REMOVED\n(0.0V Default Resting Contact)"| VOL_PASSIVE["Passive 500kΩ Master Volume\n(Dual-Gang Pot Deck A)"]
+    VOL_PASSIVE --> JACK["Neutrik 1/4\" Locking TRS Jack\n(100% Passive Guitar Output!)"]
+
+    RELAY_IN -->|"POWER PRESENT (Batteries, USB-C, or TRS)\n& Active Rig Engaged"|BUF["Ultra-Low-Noise JFET Buffer\n(1MΩ Input Impedance)"]
+    BUF -->|"Pure Dry Key Trigger"| KEY["NS-1 / Zuul Sidechain\nRMS Envelope Detector"]
+    BUF -->|"Audio Path"| TS["Analog SMD 'Green Screamer'\n(OPA1678 + 720Hz HPF + Si Clipping)"]
     TS --> VCA["THAT2181 Blackmer VCA\nNoise Suppressor Clamp"]
     KEY -->|"Zero-Lag Gate Control"| VCA
-    VCA --> ADC["24-Bit / 96kHz ADC\n(TI PCM3168A / AK4619)"]
-    ADC --> NAM["Embedded NAM + Cab IR Engine\n(CM4/CM5 or STM32H7 / RTNeural)"]
-    NAM --> DAC["24-Bit Stereo DAC\n(Line / Headphone / 1/4\" Out)"]
-    NAM -->|"Digital I2S"| ULL["5.8GHz / 2.4GHz ULL Wireless TX\n(1.8ms Uncompressed Audio to Amp/DAW)"]
-    WIFI["Onboard Wi-Fi 6 / BLE\n(WebUI App Control & .NAM Upload)"] <--> NAM
+    VCA --> NAM["Embedded NAM + Cab IR Engine\n(24-Bit / 96kHz Codec + ARM NEON)"]
+    NAM --> VOL_ACTIVE["Active Output Level\n(Dual-Gang Pot Deck B)"]
+    VOL_ACTIVE --> JACK
+    NAM -->|"Digital I2S"| ULL["5.8GHz ULL Wireless TX\n(1.8ms Uncompressed Audio)"]
 ```
 
-### The "4-Cable Method" Advantage Without Any Cables
-On a traditional pedalboard, a noise gate placed *after* a Tube Screamer struggles because the Tube Screamer boosts the pickup's noise floor. Pro metal rigs use a **keyed sidechain gate** (like a Boss NS-1X / NS-2 in 4-cable mode or a Fortin Zuul) that listens to the **raw dry guitar pickup** to open and close a VCA located *after* the overdrive pedal.
-* Because both circuits live **inside the guitar**, we tap the raw Fishman Fluence output **10 millimeters away** as the **Sidechain Key Trigger**, run the audio through the analog **Green Screamer**, and clamp the noise with a **THAT2181 VCA** right before the **NAM** input.
-* **Result:** Dead-silent djent staccato stops even with a maxed-out Green Screamer into a high-gain 5150/Rectifier `.nam` profile!
+### The 3 Ways to Play With Zero Batteries Installed in the Cradle:
+1. **Mode A — 100% Passive Analog Guitar Mode (`0 Batteries` + Standard `1/4"` Guitar Cable):**
+   * When the `18650` battery cradle is empty (or the batteries run down to `0%`, or you pull/click the Push-Push Volume Wheel to **Passive Bypass**), the **`Omron G6K-2F-Y` gold-clad mechanical relay** requires `0.0 mW` to rest on its **Normally-Closed (NC)** contacts.
+   * This routes the passive soapbar humbucker through Deck A of the `500 kΩ` volume thumbwheel straight to the `1/4"` Neutrik output jack via pure copper traces — zero electronics in the signal path.
+2. **Mode B — Battery-Free Full DSP Mode Over USB-C (`0 Batteries` + USB-C Cable):**
+   * Even with the `18650` batteries completely removed from the guitar (saving `95 grams` of weight), plugging any **USB-C cable** from a laptop, phone, tablet, or USB power bank into the side USB-C port automatically powers the **Green Screamer + NS-1 Gate + NAM Engine + 5.8 GHz Wireless** via an onboard **TI `TPS2121` Power-Path Multiplexer** (and streams 24-bit digital audio straight to your DAW over USB-C at the same time).
+3. **Mode C — Battery-Free Full DSP Mode Over `1/4"` TRS "Phantom Power" Guitar Cable (`0 Batteries` + TRS Cable):**
+   * The **Neutrik `NJ3FP6C-BAG`** jack is wired as a stereo **TRS** socket: **Tip** = Guitar Audio Output, **Ring** = `9V–12V DC` Phantom Power Input (protected by a Schottky bridge diode so plugging in a normal mono TS guitar cable safely shorts Ring to Ground without harm), **Sleeve** = Ground.
+   * With a simple passive TRS power injector box on your pedalboard or desk, your regular guitar cable powers the entire onboard **Green Screamer + NS-1 Gate + NAM** rig indefinitely with **zero batteries inside the guitar**.
 
 ---
 
-## 2. Circuit-by-Circuit Hardware & Physical Footprint (`Total Board Area: 32 mm × 85 mm`)
+## 2. Internal Spatial Layout Inside the `82.0 × 38.0 mm` CNC Spine (1:1 Millimeter Allocation)
 
-The internal electronics bay on the right side of the `82 mm` CNC spine (`Y = 105 mm to 220 mm`) plus the rear cavity pocket provides **`95 mm × 34 mm × 24 mm`** of volume — more than enough for a stacked 2-board module + flat Li-Ion battery:
+![1:1 Millimeter CNC Blueprint — Integrated Batteries, Green Screamer, NS-1 Gate, NAM & Wireless](../images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png)
 
-### Module A: Analog "Green Screamer" + Keyed NS-1 Noise Suppressor Daughterboard (`24 mm × 42 mm × 4 mm` 4-Layer SMD PCB)
-1. **Green Screamer Stage (`12 × 18 mm` section):**
-   * **Op-Amp:** Texas Instruments **`OPA1678`** (or classic **`JRC4558D`** in `SOIC-8` package) running on an internal `±9V` charge-pump rail (`LT1054`) for huge headroom.
-   * **Tone Voicing:** Classic TS808/TS9 `720 Hz` high-pass shelving filter (`0.047 µF` film cap + `4.7 kΩ` resistor) that cuts flubby sub-bass before clipping and pushes the `750 Hz–1.2 kHz` pick-attack midrange, feeding symmetrical `1N4148` silicon clipping diodes.
-   * **Metal "Tight Boost" Preset Mode:** Controlled via digital potentiometers (`MCP4261` SPI digipots) from the processor or Wi-Fi app (default metal boost setting: `Drive = 0–10%`, `Tone = 65%`, `Level = 100%`).
-2. **NS-1 / Zuul Keyed Noise Suppressor Stage (`18 × 22 mm` section):**
-   * **Detector:** Precision full-wave rectifier + dual-time-constant RMS envelope tracker driven directly by the pre-Screamer pickup signal.
-   * **Gate VCA:** **`THAT2181C`** (or `SSI2164`) studio-grade Blackmer voltage-controlled amplifier placed *after* the Green Screamer (`-95 dB` attenuation when closed, `< 0.5 ms` opening attack, smooth program-dependent decay).
-
-### Module B: Neural Amp Modeler (`NAM`) + Cab IR + Wi-Fi Control Engine (`30 mm × 55 mm × 6 mm`)
-You have **two ways** to implement the onboard NAM engine:
-
-| Approach | Hardware Module | Latency & Performance | Effort Level |
-| :--- | :--- | :--- | :--- |
-| **Option B1: Zero-Soldering Donor Board (Fastest Prototype)** | Strip the bare `36 × 60 mm` PCB out of an off-the-shelf **M-Vave Tank-Mini / Sonicake Pocket Master / Valeton GP-5** (or **IK Tonex One**) | `< 2.2 ms` latency, loads `.nam` / amp captures + Cab IRs + Bluetooth/USB app control out of the box | **Easiest (15 mins)** — costs **$45–$65**, zero custom firmware coding required! |
-| **Option B2: Custom Embedded CM4/CM5 or Radxa Zero 3W (`RK3566`) Module** | **Radxa Zero 3W** (`30 × 65 mm`, Quad-Core Cortex-A55 @ 1.8GHz + NPU + **Onboard Wi-Fi 6 & BLE 5.2**) + **TI `PCM3168A`** 24-bit/96kHz I2S Codec | **`0.67 ms` DSP buffer (`32 samples @ 48kHz`)** running full desktop **`NeuralAmpModelerCore` (Standard WaveNet)** + stereo 2048-tap Cab IR | **Custom Pro Grade** — hosts a built-in **Wi-Fi WebUI (`http://guitar.local`)** so any phone or laptop can drag-and-drop `.nam` files and tweak Screamer/Gate knobs over Wi-Fi with zero app install! |
-
-### Module C: Wireless Audio Transmitter ("Remote Signal Sender") vs. Wi-Fi Control
-> [!IMPORTANT]
-> **Why We Use Dual-Radio Architecture (Wi-Fi for Control + 5.8 GHz / 2.4 GHz ULL for Live Audio):**
-> Standard Wi-Fi (`802.11`) has variable packet jitter (`8–25 ms`), which feels laggy under your picking hand. By pairing **Wi-Fi** (for wireless preset/parameter control & `.nam` file uploads) with a dedicated **Ultra-Low-Latency (`1.8 ms`) Digital RF Audio Transmitter** for the live guitar sound, you get zero-lag playability!
-
-* **Live Guitar Audio Transmitter (`15 × 22 mm`):**
-  * **Prototype Shortcut:** Embed the tiny internal transmitter PCB from a **NUX B-8 / Boss WL-20 / Joyo JW-06 (`5.8 GHz`, `24-bit/48kHz`, `< 2.2 ms` latency)** directly onto the guitar's internal output bus, paired with its plug-in receiver on your amp/interface.
-  * **Production OEM Chip:** **Nordic `nRF5340 Audio` (`LC3plus` Ultra-Low-Latency)** or **Texas Instruments `CC8531` PurePath Wireless** (`1.6 ms` fixed latency, uncompressed `24-bit/48kHz`).
-* **Where the Antenna Goes (Solving Carbon Fiber RF Shielding):**
-  * Carbon fiber and aluminum block radio waves if the antenna is buried inside the metal spine.
-  * **Solution:** Route the miniature `50 Ω` `U.FL` coaxial pigtail `25 mm` into the pickup cavity and adhere the flat `2.4 / 5.8 GHz` FPC flex antenna **directly underneath the non-conductive plastic Fishman soapbar cover (or under the `6.0 mm` Richlite fretboard heel)**. Richlite (paper-phenolic) and ABS plastic are **100% RF-transparent**, giving full `30-meter` (`100 ft`) line-of-sight range!
+In the lower spine section between the 24th fret (`Y = 217 mm`) and the Hipshot tremolo (`Y = 86 mm`), the spine is **`82.0 mm` wide × `38.0 mm` thick**:
+* **Top `15.5 mm` (`Z = 0.0 to -15.5 mm`):** Houses the `3.0 mm` carbon top skin, the **`70 × 38 × 14 mm` Soapbar Humbucker**, the **`5.8 GHz / Wi-Fi` FPC antenna** tucked beneath the non-conductive plastic pickup bezel, and a `2.5 mm` solid CNC aluminum electromagnetic shield bulkhead (`Z = -13.0 to -15.5 mm`) that isolates the pickup from any digital switching noise.
+* **Bottom `20.0 mm` (`Z = -15.5 to -35.5 mm`, covered by a `2.5 mm` Flush Magnetic Carbon Rear Access Hatch):** Split longitudinally into two isolated CNC compartments:
+  1. **Left Compartment — Dual-`18650` Quick-Swap Battery Bay (`X = -37.0 to -1.0 mm`, `Y = 118 to 190 mm` = `72 × 36 × 20 mm`):**
+     * Holds **2x Protected `18650` Li-Ion Cells** (`Ø 18.5 × 65.2 mm` each, e.g., **Samsung `35E` or Molicel `M35A`**, `2 × 3,500 mAh = 7,000 mAh / 25.9 Wh` in parallel `1S2P` configuration) inside gold-plated spring clips + a 5-LED fuel gauge bar.
+     * You can charge the cells internally at `30W` via the side **USB-C port**, swap in two fresh `18650` cells in 5 seconds via the magnetic carbon backplate, or pop both cells out to fly or play battery-free.
+  2. **Right Compartment — Active Analog + NAM DSP Stack (`X = +1.0 to +37.0 mm`, `Y = 118 to 212 mm` = `94 × 36 × 20 mm`):**
+     * **Upper Board (`Z = -17.5 to -24.0 mm`, `32 × 66 mm` 4-Layer Shielded SMD PCB):**
+       * **Omron `G6K-2F-Y` Zero-Power Passive Bypass Relay** + **TI `TPS2121` Auto-Switching Power Mux** (`Battery` / `USB-C` / `TRS Ring DC`).
+       * **JFET High-Impedance Input Buffer (`OPA1656`)** splitting the dry pickup signal immediately into the **NS-1 / Zuul Keyed Sidechain RMS Detector** and the **Analog SMD "Green Screamer"** (`OPA1678` + `720 Hz` mid-hump high-pass filter + `1N4148` symmetrical silicon clipping + `MCP4261` digital pots) followed by the **`THAT2181C` Blackmer VCA Noise Suppressor Clamp**.
+     * **Lower Board (`Z = -26.0 to -34.0 mm`, `32 × 66 mm`):**
+       * **Embedded `NAM` (Neural Amp Modeler) + Cab IR + Wi-Fi 6 Compute Module** (`Radxa Zero 3W` / `RPi CM4/CM5` or donor `NAM` pocket engine) + **TI `PCM3168A` 24-bit/96kHz Audio Codec**, thermally coupled via a `1.5 mm` silicone pad to the internal CNC aluminum bulkhead for silent fanless cooling.
+     * **Upper Heel RF Window (`Y = 193 to 214 mm`):**
+       * **`5.8 GHz` Ultra-Low-Latency (`1.8 ms`) Uncompressed Wireless Audio Transmitter** (`TI CC8531` / `Nordic nRF5340` or embedded `NUX B-8 / Boss WL-20` TX module).
 
 ---
 
-## 3. Power Budget & Rechargeable USB-C Battery Runtime
+## 3. Side-Wall Ergonomic Control Panel (`X = +41.0 mm`, Right Spine Edge)
 
-| Subsystem | Current Draw (`@ 5V`) | Power |
-| :--- | :---: | :---: |
-| **Fishman Fluence Modern Humbucker** | `2.5 mA` | `0.01 W` |
-| **Analog SMD Green Screamer + Keyed NS-1 Gate** | `18 mA` | `0.09 W` |
-| **NAM + Cab IR DSP Engine (Low-Power RT / RK3566 1-Core)** | `240 mA` | `1.20 W` |
-| **5.8 GHz ULL Wireless Audio Transmitter (+ Wi-Fi Idle)** | `65 mA` | `0.33 W` |
-| **Total Continuous Power Consumption** | **`~325 mA`** | **`~1.63 W`** |
-
-* **Battery Cell:** 1x High-Density **`21700` (`5,000 mAh / 18.5 Wh`)** or flat pouch Li-Ion cell (`65 × 34 × 8 mm`) mounted in the CNC rear spine pocket, wired to a **USB-C PD Charging & Bypass BMS port** next to the 1/4" jack.
-* **Total Unplugged Wireless Battery Life:** **`9.5 to 11 Hours`** of continuous playing per charge (and you can play indefinitely while plugged into any USB-C power bank or laptop).
-
----
-
-## 4. External Controls on the `82 mm` Spine (Zero Clutter)
-To keep the minimalist stealth aesthetic intact, you only need **two flush controls** on the right side wall of the `82 mm` spine:
-1. **Knurled Rotary Encoder / Push-Push Volume Wheel:** Controls Master Output Volume; double-click to toggle **Bypass (Raw Pickup) vs. Active Rig (`Gate + Screamer + NAM + IR`)**.
-2. **3-Way Mini Recessed Preset Toggle (or Capacitive Touch Strip) + Status LED:** Switches instantly between **Preset 1 (Tight Rhythm: NS-1 Gate + Green Screamer + 5150 NAM)**, **Preset 2 (Searing Lead: Screamer + Delay + Lead NAM)**, and **Preset 3 (Crystal Clean NAM)** — while all deep tweaking (`Screamer Drive/Tone`, `Gate Threshold`, and `.nam` file swapping) happens wirelessly over **Wi-Fi (`http://guitar.local`)** from your phone or laptop!
+1. **Recessed Knurled Dual-Gang Volume Thumbwheel + Push-Push Switch (`Y = 164–182 mm`):**
+   * Controls output volume in both Active and Passive modes.
+   * **Push-Push Click:** Mechanically switches between **Active Rig Mode (`Gate -> Screamer -> NAM -> Cab IR + Wireless`)** and **100% Passive True-Bypass Mode** (and automatically drops to Passive True-Bypass if batteries are removed and no USB-C/TRS power is connected).
+2. **3-Way Preset Toggle Switch + Cyan/Green RGB LED (`Y = 143–154 mm`):**
+   * **Up (`RHYTHM`):** Tight Metal Chug (`NS-1 Keyed Gate [Hard]` + `Green Screamer [Drive 5%, Tone 65%, Level 100%]` + `5150 / Dual Rec NAM` + `4x12 V30 Cab IR`).
+   * **Center (`LEAD`):** Liquid Shred Lead (`NS-1 Gate [Soft]` + `Green Screamer [Drive 35%]` + `High-Gain Lead NAM` + `Stereo Delay` + `Cab IR`).
+   * **Down (`CLEAN`):** Crystal Acoustic/Clean (`Screamer Bypassed` + `Boutique Clean Tube Amp NAM` + `Chorus/Reverb`).
+3. **Waterproof USB-C Port (`Y = 122–133 mm`):**
+   * **30W Fast Battery Charging**, **Battery-Free Bus Power**, **24-Bit/96kHz Class-Compliant USB-C Audio Interface** (record straight into your laptop DAW with one USB-C cable), and `.nam` profile loading.
+4. **Flush Neutrik `NJ3FP6C-BAG` Locking `1/4"` TRS Jack (`Y = 96–112 mm`):**
+   * Works with any standard mono `1/4"` guitar cable (in both Active and Battery-Free Passive modes) or a stereo TRS cable for battery-free phantom power.

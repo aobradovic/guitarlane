@@ -62,17 +62,17 @@
   <div class="btn-row">
     <button onclick="setCam('hero')">3/4 Studio Hero</button>
     <button onclick="setCam('top')">Top Orthographic</button>
-    <button onclick="setCam('side')">Side Bevel Profile</button>
-    <button onclick="setCam('tail')">Rounded U-Guard</button>
+    <button onclick="setCam('side')">Side Controls & Bevel</button>
+    <button onclick="setCam('rear')">Rear 18650 & NAM Bay</button>
   </div>
 
   <div class="legend">
     <div><span class="dot" style="background:#181c22;border:1px solid #64748b"></span><b>Smooth S-Curve Spine:</b> R6mm Bullnose + 35° Comfort Bevel</div>
+    <div><span class="dot" style="background:#16a34a"></span><b>Power & Analog Bay:</b> 2x 18650 (7000mAh) + Green Screamer + NS-1 Gate + 0V Relay</div>
+    <div><span class="dot" style="background:#9333ea"></span><b>Neural & Wireless:</b> NAM Amp/Cab IR Engine + 5.8GHz ULL TX + Wi-Fi 6</div>
     <div><span class="dot" style="background:#7c8594"></span><b>Teardrop 3A & Curved 3B:</b> Zero Sharp Points (R8mm Roundover)</div>
     <div><span class="dot" style="background:#94a3b8"></span><b>Pillowed U-Guard:</b> R14mm Outer Corners Shielding Tuners</div>
-    <div><span class="dot" style="background:#e2e8f0"></span><b>Frets & Fretboard:</b> 1.5mm Rolled Richlite + 24 Stainless Frets</div>
-    <div><span class="dot" style="background:#22d3ee"></span><b>Side Markers:</b> 2.5mm Glowing Cyan Luminlay Dots</div>
-    <div><span class="dot" style="background:#dc2626"></span><b>Captive Pins:</b> Flush Red Anodized Quarter-Turn Plungers</div>
+    <div><span class="dot" style="background:#22d3ee"></span><b>Side Markers & Controls:</b> Luminlay Dots + Vol/Push-Bypass, 3-Way, USB-C, TRS</div>
   </div>
 </div>
 
@@ -166,12 +166,12 @@ const floor = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ color: 0x0e131b, roughness: 0.75, metalness: 0.15, bumpMap: matteBump, bumpScale: 0.15 })
 );
 floor.rotation.x = -Math.PI / 2;
-floor.position.y = -75;
+floor.position.y = -110;
 floor.receiveShadow = true;
 scene.add(floor);
 
 const grid = new THREE.GridHelper(1000, 20, 0x1e293b, 0x141d2b);
-grid.position.y = -74.5;
+grid.position.y = -109.5;
 scene.add(grid);
 
 // Photorealistic PBR Materials
@@ -210,6 +210,18 @@ const matGrip = new THREE.MeshPhysicalMaterial({
 });
 const matLuminlay = new THREE.MeshStandardMaterial({
   color: 0x22d3ee, emissive: 0x06b6d4, emissiveIntensity: 1.8, roughness: 0.2
+});
+const matBatteryCell = new THREE.MeshPhysicalMaterial({
+  color: 0x16a34a, metalness: 0.55, roughness: 0.25, clearcoat: 0.35
+});
+const matScreamerPcb = new THREE.MeshPhysicalMaterial({
+  color: 0x15803d, metalness: 0.35, roughness: 0.32
+});
+const matNamModule = new THREE.MeshPhysicalMaterial({
+  color: 0x7e22ce, metalness: 0.45, roughness: 0.30
+});
+const matWirelessTx = new THREE.MeshPhysicalMaterial({
+  color: 0x0284c7, metalness: 0.50, roughness: 0.28
 });
 
 const root = new THREE.Group();
@@ -275,21 +287,24 @@ const coreMesh = new THREE.Mesh(extrudeCore, matSpineCore);
 coreMesh.position.y = -4.5;
 coreGroup.add(coreMesh);
 
-// Smooth Contoured Lower Bridge Spine Block (With R5mm Bevel Roundovers)
+// Smooth Contoured 38mm Lower Bridge Spine Block (With Rear Battery/DSP Cavity & R5mm Bevel Roundovers)
 const lowerBridgeShape = new THREE.Shape();
-lowerBridgeShape.moveTo(-26, 155);
-lowerBridgeShape.lineTo(26, 155);
-lowerBridgeShape.bezierCurveTo(32, 155, 38.5, 172, 38.5, 195);
+lowerBridgeShape.moveTo(-26, 128);
+lowerBridgeShape.lineTo(26, 128);
+lowerBridgeShape.bezierCurveTo(32, 145, 38.5, 165, 38.5, 195);
 lowerBridgeShape.lineTo(38.5, 325);
 lowerBridgeShape.quadraticCurveTo(38.5, 335, 28.5, 335);
 lowerBridgeShape.lineTo(-28.5, 335);
 lowerBridgeShape.quadraticCurveTo(-38.5, 335, -38.5, 325);
 lowerBridgeShape.lineTo(-38.5, 195);
-lowerBridgeShape.bezierCurveTo(-38.5, 172, -32, 155, -26, 155);
+lowerBridgeShape.bezierCurveTo(-38.5, 165, -32, 145, -26, 128);
+// Rear Electronics + Dual 18650 Battery Bay Cutout (Z = 134 to 236)
+lowerBridgeShape.holes.push(createRoundedRectPath(-31, 134, 62, 102, 5.0));
+// Rear 3-Spring Tremolo Cavity Cutout (Z = 244 to 316)
 lowerBridgeShape.holes.push(createRoundedRectPath(-23, 244, 46, 72, 5.0));
 
 const lowerBridgeGeo = new THREE.ExtrudeGeometry(lowerBridgeShape, {
-  depth: 14, bevelEnabled: true, bevelThickness: 4.5, bevelSize: 3.5, bevelSegments: 8, curveSegments: 32
+  depth: 16, bevelEnabled: true, bevelThickness: 4.5, bevelSize: 3.5, bevelSegments: 8, curveSegments: 32
 });
 lowerBridgeGeo.rotateX(Math.PI / 2);
 const lowerBridgeMesh = new THREE.Mesh(lowerBridgeGeo, matSpineCore);
@@ -304,14 +319,84 @@ for (let sx of [-14, 0, 14]) {
   coreGroup.add(sprMesh);
 }
 
-// Recessed Side Knurled Volume Thumbwheel & Flush Neutrik Jack
+// 4 Right-Side Controls: Master Vol + Push-Push Bypass, 3-Way Preset Toggle, USB-C Port, Flush Neutrik TRS Jack
 const volMesh = new THREE.Mesh(new THREE.CylinderGeometry(10.5, 10.5, 4.5, 36), matDarkHardware);
-volMesh.position.set(39.8, -10, 208);
+volMesh.position.set(39.8, -11, 168);
 coreGroup.add(volMesh);
 
+const toggleBody = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 1.2, 7.5, 16).rotateZ(-Math.PI / 2.2), matTitanium);
+toggleBody.position.set(42.0, -11, 194);
+coreGroup.add(toggleBody);
+const statusLed = new THREE.Mesh(new THREE.SphereGeometry(1.3, 12, 12), matLuminlay);
+statusLed.position.set(41.2, -7.5, 194);
+coreGroup.add(statusLed);
+
+const usbPort = new THREE.Mesh(new THREE.BoxGeometry(3.5, 3.6, 9.2), matDarkHardware);
+usbPort.position.set(40.2, -13, 218);
+coreGroup.add(usbPort);
+
 const jackOuter = new THREE.Mesh(new THREE.CylinderGeometry(6.5, 6.5, 4, 24).rotateZ(Math.PI / 2), matTitanium);
-jackOuter.position.set(40.2, -19, 248);
+jackOuter.position.set(40.2, -19, 250);
 coreGroup.add(jackOuter);
+
+// 1B. ONBOARD ELECTRONICS & DUAL-18650 BATTERY GROUP (Explodes downward out of the rear bay!)
+const electronicsGroup = new THREE.Group();
+root.add(electronicsGroup);
+
+// Dual-18650 Cradle + 2x 18650 Lithium-Ion Cells (18mm dia x 65mm length)
+const cradleBase = new THREE.Mesh(new THREE.BoxGeometry(38, 4, 69), matDarkHardware);
+cradleBase.position.set(-11, -15, 172);
+electronicsGroup.add(cradleBase);
+
+for (let bx of [-20.2, -1.8]) {
+  const cellMesh = new THREE.Mesh(new THREE.CylinderGeometry(8.8, 8.8, 65, 28).rotateX(Math.PI / 2), matBatteryCell);
+  cellMesh.position.set(bx, -23.5, 172);
+  electronicsGroup.add(cellMesh);
+  const posCap = new THREE.Mesh(new THREE.CylinderGeometry(5.5, 5.5, 1.5, 20).rotateX(Math.PI / 2), matFret);
+  posCap.position.set(bx, -23.5, 139);
+  electronicsGroup.add(posCap);
+}
+
+// Green Screamer Overdrive + NS-1 Sidechain Keyed Gate + Omron G6K-2F-Y Zero-Battery Relay PCB
+const screamerPcb = new THREE.Mesh(new THREE.BoxGeometry(22, 3.2, 64), matScreamerPcb);
+screamerPcb.position.set(19, -18.5, 172);
+electronicsGroup.add(screamerPcb);
+// Omron G6K-2F-Y 0.0V Normally-Closed True-Bypass Relay block on PCB
+const omronRelay = new THREE.Mesh(new THREE.BoxGeometry(6.5, 5.2, 10.0), matDarkHardware);
+omronRelay.position.set(19, -22.2, 152);
+electronicsGroup.add(omronRelay);
+
+// NAM Neural Amp + Cab IR + Wi-Fi 6 Compute Module
+const namBoard = new THREE.Mesh(new THREE.BoxGeometry(58, 4.2, 26), matNamModule);
+namBoard.position.set(0, -25.0, 220);
+electronicsGroup.add(namBoard);
+
+// 5.8 GHz ULL Wireless Audio Transmitter Module
+const txModule = new THREE.Mesh(new THREE.BoxGeometry(22, 3.5, 16), matWirelessTx);
+txModule.position.set(19, -24.5, 192);
+electronicsGroup.add(txModule);
+
+// 1C. FLUSH MAGNETIC CARBON REAR ACCESS HATCH (Part_06)
+const rearHatchGroup = new THREE.Group();
+root.add(rearHatchGroup);
+
+const hatchShape = new THREE.Shape();
+hatchShape.add(createRoundedRectPath(-32, 132, 64, 106, 6.0));
+const hatchGeo = new THREE.ExtrudeGeometry(hatchShape, {
+  depth: 2.5, bevelEnabled: true, bevelThickness: 0.6, bevelSize: 0.6, bevelSegments: 4
+});
+hatchGeo.rotateX(Math.PI / 2);
+const hatchMesh = new THREE.Mesh(hatchGeo, matCarbonSkin);
+hatchMesh.position.y = -34.5;
+rearHatchGroup.add(hatchMesh);
+// 6x N52 Neodymium Flush Magnets on Rear Hatch
+for (let mz of [138, 185, 232]) {
+  for (let mx of [-27, 27]) {
+    const mag = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 1.5, 16), matFret);
+    mag.position.set(mx, -33.2, mz);
+    rearHatchGroup.add(mag);
+  }
+}
 
 // 2. INTERNAL PULTRUDED CARBON SPARS + DUAL-ACTION TRUSS ROD
 const sparGroup = new THREE.Group();
@@ -578,8 +663,10 @@ function updatePositions() {
   fretboardGroup.position.y = e * 95;
   hardwareGroup.position.y = e * 55;
   skinGroup.position.y = e * 24;
-  sparGroup.position.y = e * -34;
-  coreGroup.position.y = e * -68;
+  sparGroup.position.y = e * -18;
+  coreGroup.position.y = e * -38;
+  electronicsGroup.position.y = e * -68;
+  rearHatchGroup.position.y = e * -96;
   uGuardGroup.position.z = e * 65;
 
   const wingOffset = Math.max(e * 80, w * 115);
@@ -636,8 +723,11 @@ window.toggleMaterialMode = function() {
 window.setCam = function(view) {
   if (view === 'hero') { camera.position.set(340, 310, 460); controls.target.set(0, 0, 15); }
   else if (view === 'top') { camera.position.set(0, 820, 10); controls.target.set(0, 0, 0); }
-  else if (view === 'side') { camera.position.set(660, 10, 0); controls.target.set(0, 0, 0); }
-  else if (view === 'tail') { camera.position.set(135, 125, 510); controls.target.set(0, -5, 310); }
+  else if (view === 'side') { camera.position.set(420, -10, 200); controls.target.set(0, -12, 200); }
+  else if (view === 'rear') {
+    explodeSlider.value = 45; updatePositions();
+    camera.position.set(-180, -320, 290); controls.target.set(0, -35, 195);
+  }
 };
 
 window.addEventListener('resize', () => {
