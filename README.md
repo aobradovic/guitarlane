@@ -70,10 +70,13 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
 #### 01. Master 4-View 1:1 Millimeter CNC Engineering Blueprint (With Dual-18650, Screamer, NS-1 Gate, NAM & Zero-Battery Relay)
 ![Master 1:1 CNC Blueprint](images/02_cnc_specs_and_blueprints/01_master_1to1_mm_cnc_blueprint.png)
 
-#### 02. Modular Customization Ecosystem — Hot-Swap Pickups (`EMG`/`BKP`/`Fishman`), Swappable Analog Drive Cards & Hardware Upgrades
+#### 02. 3-Second "Strings-On" Hot-Swap Pickup Cartridge System (`EMG`, `Fishman Fluence`, `Bare Knuckle` & `Seymour Duncan` / `Lundgren`)
+![3-Second Strings-On Hot-Swap Pickup Cartridge System](images/02_cnc_specs_and_blueprints/09_3second_strings_on_hotswap_pickup_cartridge_system.jpg)
+
+#### 03. Modular Customization Ecosystem — Hot-Swap Pickups (`EMG`/`BKP`/`Fishman`), Swappable Analog Drive Cards & Hardware Upgrades
 ![Modular Ecosystem Showcase](images/02_cnc_specs_and_blueprints/08_modular_custom_pickups_drive_cards_and_hardware_upgrades.jpg)
 
-#### 03. Underside Dual-`18650` Battery Cradle + `NAM` / `Green Screamer` / `NS-1 Gate` Cutaway & Side Controls Macro
+#### 04. Underside Dual-`18650` Battery Cradle + `NAM` / `Green Screamer` / `NS-1 Gate` Cutaway & Side Controls Macro
 ![Onboard Battery NAM Screamer Cutaway](images/02_cnc_specs_and_blueprints/07_onboard_battery_nam_screamer_cutaway_and_controls.jpg)
 
 | 03. Photorealistic CNC Top Assembled & Internal Lattice Cutaway | 04. Narrow-Spine CNC Exploded Stack & 12th-Fret Cross-Section (`50 × 20 mm`) |

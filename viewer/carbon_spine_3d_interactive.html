@@ -50,6 +50,11 @@
     <input type="range" id="wingSlider" min="0" max="100" value="0">
   </div>
 
+  <div class="ctrl-group">
+    <label><span>Slide Out Hot-Swap Pickup (Strings On!)</span><span id="puSlideVal" style="color:#f59e0b">Locked (6-Pin)</span></label>
+    <input type="range" id="puSlideSlider" min="0" max="100" value="0">
+  </div>
+
   <div class="btn-row">
     <button id="btnAssembled" class="active" onclick="setPreset('assembled')">Assembled Studio</button>
     <button id="btnExploded" onclick="setPreset('exploded')">Explode CNC Stack</button>
@@ -535,9 +540,24 @@ const headLockMesh = new THREE.Mesh(headLockGeo, matDarkHardware);
 headLockMesh.position.y = 7.2;
 fretboardGroup.add(headLockMesh);
 
-// 5. ROUNDED-BEZEL SOAPBAR / OPEN-COIL PICKUP + HIPSHOT TREMOLO + 6 STRINGS
+// 5. ROUNDED-BEZEL HOT-SWAP PICKUP CARTRIDGE + 6 GOLD POGO PINS + HIPSHOT TREMOLO + 6 STRINGS
 const hardwareGroup = new THREE.Group();
 root.add(hardwareGroup);
+
+const pickupCartridgeGroup = new THREE.Group();
+hardwareGroup.add(pickupCartridgeGroup);
+
+// CNC Carrier Sled Base + 6 Gold Pogo-Pin Contacts underneath pickup
+const sledBase = new THREE.Mesh(new THREE.BoxGeometry(70, 2.4, 37), matTitanium);
+sledBase.position.set(0, -4.2, 195.5);
+pickupCartridgeGroup.add(sledBase);
+
+const matGoldPin = new THREE.MeshPhysicalMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.12 });
+for (let p = 0; p < 6; p++) {
+  const pogo = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 4.5, 12), matGoldPin);
+  pogo.position.set(-15 + p * 6, -7.2, 195.5);
+  pickupCartridgeGroup.add(pogo);
+}
 
 const puShape = new THREE.Shape();
 puShape.add(createRoundedRectPath(-34, 178, 68, 35, 5.5));
@@ -545,11 +565,11 @@ const puGeo = new THREE.ExtrudeGeometry(puShape, { depth: 11, bevelEnabled: true
 puGeo.rotateX(Math.PI / 2);
 const pickupMesh = new THREE.Mesh(puGeo, matPickup);
 pickupMesh.position.y = 7.8;
-hardwareGroup.add(pickupMesh);
+pickupCartridgeGroup.add(pickupMesh);
 
 // Dual-row 12 pole pieces (for Bare Knuckle / Lundgren open-coil & battle-worn look)
 const poleGroup = new THREE.Group();
-hardwareGroup.add(poleGroup);
+pickupCartridgeGroup.add(poleGroup);
 const matPoles = new THREE.MeshPhysicalMaterial({ color: 0xd4af37, metalness: 0.92, roughness: 0.18 });
 for (let row of [188.5, 202.5]) {
   for (let s = 0; s < 6; s++) {
@@ -563,7 +583,7 @@ for (let row of [188.5, 202.5]) {
 const emgLogoStripe = new THREE.Mesh(new THREE.BoxGeometry(14, 0.8, 2.2), matPoles);
 emgLogoStripe.position.set(20, 9.5, 206);
 emgLogoStripe.visible = false;
-hardwareGroup.add(emgLogoStripe);
+pickupCartridgeGroup.add(emgLogoStripe);
 
 const brShape = new THREE.Shape();
 brShape.add(createRoundedRectPath(-32, 267, 64, 55, 5.0));
@@ -696,17 +716,23 @@ enableShadows(root);
 // UI & Interactive State
 const explodeSlider = document.getElementById('explodeSlider');
 const wingSlider = document.getElementById('wingSlider');
+const puSlideSlider = document.getElementById('puSlideSlider');
 const expVal = document.getElementById('expVal');
 const wingVal = document.getElementById('wingVal');
+const puSlideVal = document.getElementById('puSlideVal');
 
 function updatePositions() {
   const e = parseFloat(explodeSlider.value) / 100;
   const w = parseFloat(wingSlider.value) / 100;
+  const ps = parseFloat(puSlideSlider.value) / 100;
   expVal.textContent = Math.round(e * 100) + '%';
   wingVal.textContent = w > 0.05 ? Math.round(w * 100) + '% Detached' : 'Attached';
+  puSlideVal.textContent = ps > 0.05 ? Math.round(ps * 100) + '% Slid Out' : 'Locked (6-Pin)';
 
   fretboardGroup.position.y = e * 95;
   hardwareGroup.position.y = e * 55;
+  pickupCartridgeGroup.position.x = -ps * 92;
+  pickupCartridgeGroup.position.y = e * 22;
   skinGroup.position.y = e * 24;
   sparGroup.position.y = e * -18;
   coreGroup.position.y = e * -38;
@@ -721,6 +747,7 @@ function updatePositions() {
 
 explodeSlider.addEventListener('input', updatePositions);
 wingSlider.addEventListener('input', updatePositions);
+puSlideSlider.addEventListener('input', updatePositions);
 
 window.setPreset = function(mode) {
   document.querySelectorAll('#btnAssembled, #btnExploded, #btnTravel').forEach(b => b.classList.remove('active'));

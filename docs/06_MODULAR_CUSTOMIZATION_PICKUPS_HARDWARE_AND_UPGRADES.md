@@ -6,40 +6,75 @@ To turn the **Carbon Spine (`UNISPAR` / `MONOSPAR`)** into a high-margin, infini
 
 ---
 
-## 1. Universal Hot-Swap Pickup Bay (`EMG` + `Bare Knuckle` + `Fishman` + `Lundgren` + `Seymour Duncan`)
+## 1. True 3-Second "Strings-On" Hot-Swap Pickup Cartridge System (`EMG` + `Fishman` + `Bare Knuckle` + `Lundgren` + `Seymour Duncan`)
 
-### 1.1 The Mechanical Secret: One `71.0 × 39.0 mm` Master Cavity + Precision CNC Adapter Bezels
+Yes—not only is it 100% possible, our **82 mm CNC aluminum-and-carbon spine** is the ideal structure on earth to do it properly because the CNC billet holds **`±0.02 mm` tolerances** that wooden guitars cannot hold.
+
+To make swapping between an **active EMG 81**, a **multi-voice Fishman Fluence Modern**, and a **passive Bare Knuckle Ragnarok / Lundgren M6** effortless **without loosening the strings and without touching a soldering iron**, the system solves **three engineering problems** simultaneously:
+1. **Mechanical Extraction With Strings At Full Tension:** A **Left-Side Sliding Dovetail Cartridge Drawer** (or **Top Drop-In Magnetic Pogo Sled**) that slides/snaps in beneath the strings in **3 seconds**.
+2. **Footprint Unification (`Soapbar` vs. `Open-Coil Humbucker`):** One standardized **`74.0 × 41.0 mm` CNC Carrier Sled** with two interchangeable top bezels so both screwless active soapbars (`EMG` / `Fishman`, `70 × 38 mm`) and tabbed passive humbuckers (`Bare Knuckle` / `Lundgren` / `Seymour Duncan`, `68.5 × 37 mm`) use the exact same cartridge base.
+3. **Automatic Electrical Impedance & Voltage Switching (`25 kΩ + 9V/18V` Active vs. `500 kΩ + 0V` Passive):** A 6-pin gold **Mill-Max Pogo-Pin Array** with an **Auto-Sense ID Pin (`Pin 6`)** that automatically reconfigures the guitar's pot impedance, power rail, and `0.0V` passive fail-safe relay the instant a cartridge clicks in.
+
+![3-Second Strings-On Hot-Swap Pickup Cartridge System](../images/02_cnc_specs_and_blueprints/09_3second_strings_on_hotswap_pickup_cartridge_system.jpg)
+
+---
+
+### 1.1 Two Mechanical Hot-Swap Loading Options (Zero String Detuning Required)
+
+Because a traditional pickup has mounting tabs underneath the strings, you normally have to slacken or remove your strings to swap pickups. Our CNC spine eliminates that with two mechanical options:
+
+* **Option 1A (Recommended — `3-Second Side-Slide Dovetail Cartridge`):**
+  * The left wall of the `82 mm` spine at the bridge pickup position (`Y = 142 mm` to `Y = 183 mm`) has a precision CNC **dovetail cartridge slot (`71.0 mm` deep × `41.0 mm` wide × `15.5 mm` tall)**.
+  * Even with all 6 strings tuned to full concert pitch (`0.9–1.2 mm` action), there is **`2.8 mm` of vertical clearance** between the top of the pickup face and the underside of the strings.
+  * You simply press a flush release button on the left side of the spine and **slide the entire pickup cartridge straight out to the left side from underneath the strings**, then slide your next pickup cartridge (`EMG`, `Fishman`, or `Bare Knuckle`) straight in until the **4x `N52` neodymium magnets + ball-detent lock** click home!
+* **Option 1B (`Top Drop-In Magnetic Pogo Sled` — Lowest Part Count):**
+  * The `71.0 × 39.0 mm` top pickup pocket has `4x Ø6×3 mm N52` neodymium magnets (`3.2 kg` total pull force) and a **6-Pin Gold Pogo-Pin Block** in the floor. With strings loosened by 2 turns (or using the Hipshot tremolo arm depressed slightly), you lift the pickup sled straight out the top with two fingers and drop the next pickup sled in.
+
+---
+
+### 1.2 How One Universal `$6` Carrier Sled Fits `EMG`, `Fishman`, `Bare Knuckle`, `Lundgren` & `Seymour Duncan`
+
 In the metal guitar world, pickups come in **two different physical footprints**:
 1. **Active / Soapbar Footprint (`70.0 × 38.0 mm` rounded rectangle, screwless exterior):** Used by **EMG** (`81`, `85`, `57`, `60`, `81X`, `707`, `808`), **Fishman Fluence Modern / Abasi / Keith Merrow**, and **Seymour Duncan Blackouts** (and optional soapbar covers from Bare Knuckle / Lundgren).
-2. **Standard Open-Coil / Covered Passive Humbucker Footprint (`68.5 × 37.0 mm` coil body with side mounting tabs):** Used by **Bare Knuckle Pickups (BKP)** (`Aftermath`, `Ragnarok`, `Juggernaut`, `Nailbomb`, `Warpig`, `Painkiller`), **Lundgren** (`M6`, `M7`, `M8`, `Black Heaven`), **Seymour Duncan** (`Nazgûl`, `Black Winter`, `Distortion`, `Alpha/Omega`), and **DiMarzio** (`D Activator`, `Titan`).
+2. **Standard Open-Coil / Covered Passive Humbucker Footprint (`68.5 × 37.0 mm` coil body with side mounting tabs):** Used by **Bare Knuckle Pickups (BKP)** (`Aftermath`, `Ragnarok`, `Juggernaut`, `Nailbomb`, `Warpig`, `Painkiller`), **Lundgren** (`M6`, `M7`, `M8`, `Black Heaven`), **Seymour Duncan** (`Nazgûl`, `Black Winter`, `Distortion`, `Alpha/Omega`, `Jupiter`), and **DiMarzio** (`D Activator`, `Titan`).
 
-**How our CNC Spine accepts 100% of both without ever modifying the guitar body:**
-* **Master CNC Pickup Cavity (`71.0 mm × 39.0 mm × 16.0 mm` deep):** Milled into the `82 mm` spine with two recessed brass `M3` threaded inserts at the standard soapbar/tab spacing plus a flush **6-Pin Gold Pogo-Pin / Quick-Connect Header** mounted in the floor of the cavity.
-* **Two Interchangeable CNC Carbon/Titanium Trim Bezels (`2.0 mm` thick):**
-  * **Bezel Type A (`Soapbar Flush Bezel`):** Drops directly around any `70 × 38 mm` **EMG** or **Fishman Fluence** soapbar.
-  * **Bezel Type B (`Open-Coil / BKP Battle-Worn Adapter Ring`):** A flush `71 × 39 mm` outer / `68.8 × 37.3 mm` inner CNC anodized aluminum or carbon trim ring with hidden countersunk pockets for the passive humbucker's side mounting ears—allowing **any standard Bare Knuckle, Lundgren, Seymour Duncan, or DiMarzio open-coil or battle-worn covered humbucker** to drop straight into the exact same `71 × 39 mm` soapbar pocket with zero gap!
+**How the Universal Pickup Cartridge Sled unifies every pickup brand on earth:**
+* Each pickup mounts once onto a **`2.5 mm` thick CNC Anodized Aluminum / Carbon Carrier Sled** (costing `~$6` to machine; players can keep 3 or 4 sleds loaded with their favorite pickups):
+  * **Sled Top A (`Soapbar Carrier`):** Fits any `70 × 38 mm` **EMG** or **Fishman Fluence** soapbar. On the underside of the sled is a pre-installed **3-Pin EMG / Fishman Quick-Connect header**—so you literally plug your stock EMG or Fishman pickup straight into the sled with its factory cable!
+  * **Sled Top B (`Open-Coil / BKP Adapter Bezel Carrier`):** Features a flush `71 × 39 mm` outer / `68.8 × 37.3 mm` inner CNC trim ring with recessed pockets underneath for a passive humbucker's brass mounting ears, plus a **4-conductor spring-clamp terminal block (`Wago 2060` SMD)** so you can attach any **Bare Knuckle, Lundgren, Seymour Duncan, or DiMarzio** pickup in 60 seconds without soldering!
+  * **Built-In Thumbwheel Height Micro-Adjusters:** Two low-profile knurled brass thumbwheels built into the sled let you pre-set the exact pickup height (`2.0 mm` for active EMG/Fishman close to strings; `3.2 mm` for passive Bare Knuckle/Lundgren) once on each sled, so every time you swap cartridges, the height is already dialed in!
 
 ---
 
-### 1.2 The Universal 6-Pin Active/Passive Quick-Connect Header & Auto-Impedance Switch
-Whether the customer chooses **Active EMG (`9V`/`18V` at `25 kΩ`)**, **Active Fishman Fluence (`9V` Multi-Voice)**, or **Passive Bare Knuckle / Lundgren (`0V` at `500 kΩ` + Coil-Split)**, every pickup clips onto a small **$4 Universal Carrier Sled** on the underside of the pickup that mates with the spine's 6-pin header:
+### 1.3 The Electrical Problem & Solution: How One Guitar Automatically Switches Between `EMG` (`25 kΩ + 9V/18V`), `Fishman` (`Multi-Voice`), and `Bare Knuckle` (`500 kΩ + 0V Zero-Battery`)
 
-| Pin | Function | Active EMG (`81` / `57`) | Active Fishman Fluence | Passive Bare Knuckle / Lundgren / SD |
+Why can't normal guitars hot-swap between **EMG / Fishman** and **Bare Knuckle / Seymour Duncan**?
+Because **active pickups (`EMG` / `Fishman`) require a `25 kΩ` volume pot and `+9V` (or `+18V`) DC power**, whereas **passive pickups (`Bare Knuckle` / `Lundgren` / `Seymour Duncan`) require a `500 kΩ` volume pot and `0.0V` (putting a passive pickup on a `25 kΩ` EMG pot kills 95% of its output and treble!)**.
+
+**Our 6-Pin Mill-Max Gold Pogo-Pin Interface (`Mill-Max 821-22-006-10-000101`) solves this 100% automatically via `Pin 6` (`Auto-ID Sense`):**
+
+| Pogo Pin | Function | Active EMG Sled (`81` / `85` / `57` / `81X`) | Active Fishman Fluence Sled (`Modern` / `Merrow` / `Abasi`) | Passive Sled (`Bare Knuckle` / `Lundgren` / `Seymour Duncan`) |
 | :---: | :--- | :--- | :--- | :--- |
-| **Pin 1** | **Hot Signal Output** | EMG Quick-Connect White | Fluence Hot | North Start (Black/Red) |
-| **Pin 2** | **Signal Ground / Shield** | EMG Braid/Ground | Fluence Ground | South Start + Bare Shield |
-| **Pin 3** | **Coil-Tap / Voice 2** | EMG `89`/`TW` Dual-Mode | Fluence Voice 2 Select | North Finish + South Finish (Series/Split Link) |
-| **Pin 4** | **Voice 3 / High-Freq Tilt** | NC | Fluence Voice 3 (Single Coil) | Passive Capacitive Partial-Split |
-| **Pin 5** | **Isolated `+9V` / `+18V` Active Pickup Rail** | `+9V` (or selectable `+18V` boost!) | `+9V` Regulated LDO (`12 mA`) | Disconnected (`0.0V` pure passive) |
-| **Pin 6** | **Sense Pin (`ID_R`)** | `10 kΩ` to GND (`Active Mode`) | `22 kΩ` to GND (`Fluence Mode`) | `Open / ∞` (`Passive 500kΩ + 0V Relay Mode`) |
+| **Pin 1** | **Hot Signal Output** | EMG Pin 3 (White Output) | Fluence Hot Output | North Start (Hot) |
+| **Pin 2** | **Star Ground / Shield** | EMG Pin 2 (Ground/Shield) | Fluence Ground + Shield | South Start + Bare Shield |
+| **Pin 3** | **Voice 2 / Coil-Split** | EMG `89`/`TW` Dual-Coil Select | **Fluence Voice 2** (Passive Alnico Voice) | Series Link (North Finish + South Finish for **Coil-Split**) |
+| **Pin 4** | **Voice 3 / High-Freq Tilt** | NC | **Fluence Voice 3** (Single-Coil / HFT) | Passive Capacitive Partial-Split Network |
+| **Pin 5** | **Isolated `+9V` / `+18V` Active Pickup Power** | **`+9V`** (or switchable **`+18V` EMG headroom rail**!) | **`+9V` Ultraclean LDO** (`TPS7A20`, `12 mA`) | **Hard-Disconnected (`0.0V`)** |
+| **Pin 6** | **Auto-ID Sense Resistor (`ID_R` to GND)** | **`10 kΩ` resistor** built into EMG Sled | **`22 kΩ` resistor** built into Fishman Sled | **`Open / ∞` (No resistor)** on Passive Sled |
 
-* **Automatic Active vs. Passive Detection (`Pin 6`):**
-  * When a **Bare Knuckle, Lundgren, or Seymour Duncan passive pickup** is plugged in (`Pin 6 = Open`), the guitar automatically enables the **`500 kΩ` passive load** and the **`Omron G6K-2F-Y` `0.0V` Zero-Battery Passive Relay**—so the guitar works **100% without batteries** and also feeds the high-impedance `1 MΩ` `OPA1656` JFET buffer when active DSP is turned on.
-  * When an **EMG (`81`/`85`/`57`)** or **Fishman Fluence** is plugged in (`Pin 6 = 10kΩ/22kΩ`), the guitar automatically switches input loading to **`25 kΩ` active voicing** and turns on the ultra-clean **`+9V` (or selectable `+18V` EMG headroom mod!) LDO regulator** powered from the Dual-`18650` cells, USB-C bus power, or TRS phantom power—plus we include a secondary snap-in `9V` alkaline backup clip inside the battery bay so even an EMG player can pop in a standard gas-station `9V` battery in an emergency!
+#### What Happens Automatically Inside the Guitar When You Snap In a Cartridge:
+1. **Snap in a `Bare Knuckle` / `Lundgren` / `Seymour Duncan` Passive Cartridge (`Pin 6 = Open`):**
+   * The **`Omron G6K-2F-Y` Normally-Closed (`0.0V`) mechanical relay** routes the pickup through the **`500 kΩ` passive volume pot deck** (in passive/zero-battery mode) and sets the active JFET buffer input impedance to **`1.0 MΩ`** (when using onboard `Green Screamer + NS-1 + NAM`).
+   * The `+9V`/`+18V` pickup power rail on `Pin 5` is completely shut off (`0.0 mA`), and the **3-way toggle / push-push switch** controls **Full Humbucker vs. Inner Coil-Split**.
+   * **Works 100% with ZERO batteries installed!**
+2. **Snap in an `EMG 81 / 85 / 57` Active Cartridge (`Pin 6 = 10 kΩ`):**
+   * The comparator detects the `10 kΩ` sense resistor on `Pin 6`, turns on the ultra-low-noise **`+9V` (or WebUI-selectable `+18V` for the famous EMG 18V headroom mod!) regulator** on `Pin 5`, and switches the input load to the exact **`25 kΩ` active EMG load impedance** via a solid-state analog switch (`TI TS5A3159A`, `0.8 Ω` $R_{ON}$).
+3. **Snap in a `Fishman Fluence Modern` Cartridge (`Pin 6 = 22 kΩ`):**
+   * The comparator detects the `22 kΩ` sense resistor, supplies regulated **`+9V` (`12 mA`)** on `Pin 5`, sets the **`25 kΩ` Fluence load impedance**, and automatically maps `Pin 3` and `Pin 4` so you can switch between **Fluence Voice 1 (`Modern Active High Output`)**, **Voice 2 (`Crisp Passive Fluidity`)**, and **Voice 3 (`Single-Coil`)**!
 
 ---
 
-### 1.3 Supported Factory & Upgrade Pickup Menu (6, 7 & 8-String)
+### 1.4 Supported Hot-Swap Pickup Cartridges (6, 7 & 8-String)
 
 | Brand | Popular Metal Models Supported | Type | Custom Shop Upgrade Price |
 | :--- | :--- | :--- | :---: |
