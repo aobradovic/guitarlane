@@ -22,8 +22,10 @@ An aerospace-grade, ultra-compact **"One-Stripe" Headless Electric Guitar (6, 7,
    * Digital caliper verification & `.STEP` CAD tolerances
    * Copy-paste RFQ manufacturing notes for **RapidDirect / JLCCNC / PCBWay**
    * Step-by-step 90-minute structural bonding & solderless assembly manual
-4. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D PBR Model Viewer** with sliders to explode the Method 2 CNC layers, detach the `3A`/`3B` wings, and toggle X-Ray internal lattice view.
-5. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
+4. **[`docs/04_USPTO_NAME_CLEARANCE_AND_DOMAINS.md`](docs/04_USPTO_NAME_CLEARANCE_AND_DOMAINS.md)** — Complete **USPTO Nice Class 015 (Musical Instruments)** & **Class 009** trademark clearance report + live Verisign RDAP `.com` domain availability (`UNISPAR`, `MONOSPAR`, `ZEROSPINE`, `SPINEBLADE`, `RACHIS`, `ESTOC`, `VEXRA`, `KRYPTAR`, `HEXASPINE`).
+5. **[`docs/05_ONBOARD_NAM_SCREAMER_WIRELESS_SPEC.md`](docs/05_ONBOARD_NAM_SCREAMER_WIRELESS_SPEC.md)** — Engineering specification for embedding an **Analog SMD Green Screamer + Sidechain-Keyed NS-1/Zuul Noise Suppressor + Neural Amp Modeler (`NAM`) & Cab IR Player + `1.8 ms` 5.8 GHz Wireless Transmitter + Wi-Fi WebUI Control** directly inside the `82 mm` CNC spine.
+6. **[`viewer/carbon_spine_3d_interactive.html`](viewer/carbon_spine_3d_interactive.html)** — Real-time interactive 360° **Three.js WebGL 3D PBR Model Viewer** with sliders to explode the Method 2 CNC layers, detach the `3A`/`3B` wings, and toggle X-Ray internal lattice view.
+7. **[`cad_scripts/`](cad_scripts/)** — Python 1:1 millimeter-scale engineering CAD plot generators (`generate_6string_guitar_blueprint.py`, `generate_cad_scale.py`, `generate_30inch_bag_cad.py`).
 
 ---
 
